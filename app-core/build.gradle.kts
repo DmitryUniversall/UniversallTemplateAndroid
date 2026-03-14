@@ -31,4 +31,8 @@ android {
     }
 }
 
-dependencies { }
+dependencies {
+    implementation(project(":core"))
+
+    implementation(libs.androidx.compose.ui.text.google.fonts)
+}

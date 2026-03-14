@@ -32,7 +32,7 @@ android {
 }
 
 dependencies {
-    implementation(project(":core"))
+    implementation(project(":modules:core"))
 
     implementation(libs.androidx.compose.ui.text.google.fonts)
 }

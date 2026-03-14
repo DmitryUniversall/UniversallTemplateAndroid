@@ -38,8 +38,8 @@ android {
 }
 
 dependencies {
-    implementation(project(":core"))
-    implementation(project(":app-core"))
+    implementation(project(":modules:core"))
+    implementation(project(":modules:app-core"))
 
     implementation(libs.androidx.activity.compose)
 }

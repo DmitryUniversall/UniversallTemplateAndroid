@@ -1,4 +1,4 @@
-package com.universall.core
+package com.universall.appcore
 
 import org.junit.Test
 

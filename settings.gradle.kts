@@ -28,3 +28,4 @@ rootProject.name = "UniversallTemplate"
 includeBuild("build-logic")
 include(":app")
 include(":core")
+include(":app-core")

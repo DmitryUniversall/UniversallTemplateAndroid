@@ -1,14 +1,20 @@
 plugins {
-    // Convention
-    alias(libs.plugins.convention.android.core)
-    alias(libs.plugins.convention.android.library)
-    alias(libs.plugins.convention.android.compose)
-    alias(libs.plugins.convention.android.hilt)
-    alias(libs.plugins.convention.android.ktor)
+    id("java-library")
+    alias(libs.plugins.jetbrains.kotlin.jvm)
 }
 
-android {
-    namespace = "com.universall.core"
+java {
+    sourceCompatibility = JavaVersion.VERSION_11
+    targetCompatibility = JavaVersion.VERSION_11
 }
 
-dependencies { }
+kotlin {
+    compilerOptions {
+        jvmTarget = org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_11
+    }
+}
+
+dependencies {
+    implementation(libs.slf4j.api)
+    implementation(libs.kotlinx.coroutines.core)
+}

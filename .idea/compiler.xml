@@ -4,6 +4,7 @@
     <bytecodeTargetLevel target="11">
       <module name="UniversallTemplate.app-core" target="21" />
       <module name="UniversallTemplate.common" target="21" />
+      <module name="UniversallTemplate.modules.app-core" target="21" />
     </bytecodeTargetLevel>
   </component>
 </project>

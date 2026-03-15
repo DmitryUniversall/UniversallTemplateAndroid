@@ -27,5 +27,11 @@ rootProject.name = "UniversallTemplate"
 
 includeBuild("build-logic")
 include(":app")
-include(":modules:core")
-include(":modules:app-core")
+
+// Core
+include(":modules:core:core")
+include(":modules:core:app-core")
+
+// Auth
+include(":modules:auth:auth-impl")
+include(":modules:auth:auth-api")

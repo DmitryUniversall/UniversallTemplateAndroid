@@ -32,8 +32,12 @@
             <option value="$PROJECT_DIR$/build-logic/convention" />
             <option value="$PROJECT_DIR$/buildSrc" />
             <option value="$PROJECT_DIR$/modules" />
-            <option value="$PROJECT_DIR$/modules/app-core" />
+            <option value="$PROJECT_DIR$/modules/auth" />
+            <option value="$PROJECT_DIR$/modules/auth/auth-api" />
+            <option value="$PROJECT_DIR$/modules/auth/auth-impl" />
             <option value="$PROJECT_DIR$/modules/core" />
+            <option value="$PROJECT_DIR$/modules/core/app-core" />
+            <option value="$PROJECT_DIR$/modules/core/core" />
           </set>
         </option>
       </GradleProjectSettings>

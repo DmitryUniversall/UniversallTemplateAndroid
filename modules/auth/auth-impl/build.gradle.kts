@@ -13,4 +13,11 @@ android {
     namespace = "com.universall.auth_impl"
 }
 
-dependencies { }
+dependencies {
+    api(project(":modules:auth:auth-api"))
+    implementation(project(":modules:core:app-core"))
+
+    implementation(libs.google.crypto.tink)
+    implementation(libs.androidx.datastore)
+    implementation(libs.androidx.datastore.preferences)
+}

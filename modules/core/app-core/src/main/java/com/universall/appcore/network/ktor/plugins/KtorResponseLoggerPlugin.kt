@@ -1,4 +1,4 @@
-package com.universall.appcore.network.plugins
+package com.universall.appcore.network.ktor.plugins
 
 import android.util.Log
 import io.ktor.client.plugins.api.createClientPlugin

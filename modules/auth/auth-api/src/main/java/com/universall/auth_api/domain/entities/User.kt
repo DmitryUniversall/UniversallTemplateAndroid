@@ -4,6 +4,6 @@ import java.time.LocalDateTime
 
 data class User(
     val id: Long,
-    val username: String,
+    val login: String,
     val createdAt: LocalDateTime
 )

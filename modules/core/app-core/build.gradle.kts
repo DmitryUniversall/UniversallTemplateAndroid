@@ -20,13 +20,13 @@ android {
 
     buildTypes {
         release {
-            val apiUrl = findLocalProperty("PRODUCTION_API_URL")
-            buildConfigField("String", "API_URL", apiUrl)
+            buildConfigField("String", "API_URL", findLocalProperty("PRODUCTION_API_URL"))
+            buildConfigField("int", "NETWORK_REQUEST_RETRY_COUNT", findLocalProperty("PRODUCTION_NETWORK_REQUEST_RETRY_COUNT"))
         }
 
         debug {
-            val apiUrl = findLocalProperty("DEBUG_API_URL")
-            buildConfigField("String", "API_URL", apiUrl)
+            buildConfigField("String", "API_URL", findLocalProperty("DEBUG_API_URL"))
+            buildConfigField("int", "NETWORK_REQUEST_RETRY_COUNT", findLocalProperty("DEBUG_NETWORK_REQUEST_RETRY_COUNT"))
         }
     }
 }

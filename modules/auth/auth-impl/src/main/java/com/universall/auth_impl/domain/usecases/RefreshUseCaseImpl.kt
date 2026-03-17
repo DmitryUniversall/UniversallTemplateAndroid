@@ -21,6 +21,8 @@ class RefreshUseCaseImpl @Inject constructor(
         private val refreshMutex = Mutex()
     }
 
+    private fun isPermanentAuthFailure(error: Throwable): Boolean = error is InvalidAuthHttpException
+
     override suspend operator fun invoke(): Result<AuthTokenPair> = runCatching {
         if (!refreshMutex.tryLock()) {  // Try to acquire lock
             // Failed. Someone already trying to refresh tokens
@@ -56,6 +58,4 @@ class RefreshUseCaseImpl @Inject constructor(
             refreshMutex.unlock()
         }
     }
-
-    private fun isPermanentAuthFailure(error: Throwable): Boolean = error is InvalidAuthHttpException
 }

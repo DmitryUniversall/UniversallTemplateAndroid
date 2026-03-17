@@ -4,6 +4,7 @@ import com.universall.auth_api.domain.entities.AuthContext
 import com.universall.auth_api.domain.entities.AuthState
 import com.universall.auth_api.domain.entities.AuthTokenPair
 import com.universall.auth_api.domain.entities.LocalAuthInfo
+import com.universall.auth_api.domain.schemas.LoginSchema
 import com.universall.auth_api.domain.schemas.RegisterSchema
 import kotlinx.coroutines.flow.StateFlow
 
@@ -13,9 +14,11 @@ interface AuthRepository {
     suspend fun setAuthState(state: AuthState, syncLocal: Boolean = true)
 
     suspend fun getLocalAuthInfo(): LocalAuthInfo?
-    suspend fun getCurrentAuthContext(accessToken: String): Result<AuthContext>
+    suspend fun setLocalAuthInfo(localAuthInfo: LocalAuthInfo)
+    suspend fun clearLocalAuthInfo()
 
-    suspend fun register(shema: RegisterSchema): Result<AuthState.Authenticated>
-    suspend fun login(email: String, password: String): Result<AuthState.Authenticated>
+    suspend fun getCurrentAuthContext(accessToken: String): Result<AuthContext>
+    suspend fun register(schema: RegisterSchema): Result<Pair<AuthContext, AuthTokenPair>>
+    suspend fun login(schema: LoginSchema): Result<Pair<AuthContext, AuthTokenPair>>
     suspend fun refresh(refreshToken: String): Result<AuthTokenPair>
 }

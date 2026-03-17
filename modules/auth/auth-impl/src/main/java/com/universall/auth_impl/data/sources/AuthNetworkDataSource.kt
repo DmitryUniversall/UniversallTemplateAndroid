@@ -1,7 +1,6 @@
 package com.universall.auth_impl.data.sources
 
 import android.os.Build
-import com.universall.appcore.network.api.CoreApiClient
 import com.universall.auth_api.domain.schemas.LoginSchema
 import com.universall.auth_api.domain.schemas.RegisterSchema
 import com.universall.auth_impl.data.dto.get_actual_auth_context.GetCurrentAuthContextResponseDTO
@@ -11,6 +10,7 @@ import com.universall.auth_impl.data.dto.refresh.RefreshRequestDTO
 import com.universall.auth_impl.data.dto.refresh.RefreshResponseDTO
 import com.universall.auth_impl.data.dto.register.RegisterRequestDTO
 import com.universall.auth_impl.data.dto.register.RegisterResponseDTO
+import com.universall.core.network.api.CoreApiClient
 import io.ktor.client.request.headers
 import io.ktor.client.request.setBody
 import io.ktor.http.HttpHeaders
@@ -18,7 +18,9 @@ import io.ktor.http.HttpMethod
 import io.ktor.http.path
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import javax.inject.Singleton
 
+@Singleton
 class AuthNetworkDataSource(  // TODO: Handle error app codes
     private val apiClient: CoreApiClient
 ) {

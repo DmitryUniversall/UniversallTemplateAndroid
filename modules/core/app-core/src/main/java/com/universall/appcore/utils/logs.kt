@@ -28,9 +28,19 @@ inline fun <reified T : Any> T.logWarn(crossinline message: () -> String) =
         Log.w(logTagFor<T>(), message())
     }
 
+inline fun <reified T : Any> T.logWarn(throwable: Throwable, crossinline message: () -> String) =
+    ifLoggable<T>(Log.WARN) {
+        Log.w(logTagFor<T>(), message(), throwable)
+    }
+
 inline fun <reified T : Any> T.logError(crossinline message: () -> String) =
     ifLoggable<T>(Log.ERROR) {
         Log.e(logTagFor<T>(), message())
+    }
+
+inline fun <reified T : Any> T.logError(throwable: Throwable, crossinline message: () -> String) =
+    ifLoggable<T>(Log.ERROR) {
+        Log.e(logTagFor<T>(), message(), throwable)
     }
 
 inline fun <reified T : Any> T.logDebugDev(crossinline message: () -> String) =
@@ -48,7 +58,17 @@ inline fun <reified T : Any> T.logWarnDev(crossinline message: () -> String) =
         Log.w(logTagFor<T>(), message())
     }
 
+inline fun <reified T : Any> T.logWarnDev(throwable: Throwable, crossinline message: () -> String) =
+    ifDebugAndLoggable<T>(Log.WARN) {
+        Log.w(logTagFor<T>(), message(), throwable)
+    }
+
 inline fun <reified T : Any> T.logErrorDev(crossinline message: () -> String) =
     ifDebugAndLoggable<T>(Log.ERROR) {
         Log.e(logTagFor<T>(), message())
+    }
+
+inline fun <reified T : Any> T.logErrorDev(throwable: Throwable, crossinline message: () -> String) =
+    ifDebugAndLoggable<T>(Log.ERROR) {
+        Log.e(logTagFor<T>(), message(), throwable)
     }

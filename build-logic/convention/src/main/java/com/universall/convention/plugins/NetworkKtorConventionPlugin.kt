@@ -9,8 +9,7 @@ import org.gradle.kotlin.dsl.dependencies
 
 class NetworkKtorConventionPlugin : Plugin<Project> {
     override fun apply(target: Project) = with(target) {
-        plugins.withId("com.android.application") { pluginSetup() }
-        plugins.withId("com.android.library") { pluginSetup() }
+        pluginSetup()
     }
 
     private fun Project.pluginSetup() {

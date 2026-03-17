@@ -1,6 +1,9 @@
 plugins {
     id("java-library")
     alias(libs.plugins.jetbrains.kotlin.jvm)
+
+    // Convention
+    alias(libs.plugins.convention.android.ktor)
 }
 
 java {

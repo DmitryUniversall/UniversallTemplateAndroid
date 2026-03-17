@@ -15,6 +15,7 @@ android {
 
 dependencies {
     api(project(":modules:auth:auth-api"))
+    implementation(project(":modules:core:core"))
     implementation(project(":modules:core:app-core"))
 
     implementation(libs.google.crypto.tink)

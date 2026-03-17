@@ -1,7 +1,7 @@
 package com.universall.appcore.policies.di
 
-import com.universall.appcore.policies.app_code.AppCodeProcessingPolicy
-import com.universall.appcore.policies.app_code.AppCodeProcessingPolicyImpl
+import com.universall.appcore.policies.impl.app_code.AppCodeProcessingPolicyImpl
+import com.universall.core.policies.app_code.AppCodeProcessingPolicy
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn

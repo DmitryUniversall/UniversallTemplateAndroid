@@ -8,7 +8,7 @@ import com.universall.auth_api.domain.usecases.GetTokenPairUseCase
 import com.universall.auth_api.domain.usecases.RefreshUseCase
 import com.universall.auth_api.domain.usecases.UpdateTokenPairUseCase
 import com.universall.core.exceptions.UnauthenticatedAppError
-import com.universall.core.network.exceptions.AuthExpiredHttpException
+import com.universall.core.network.exceptions.InvalidAuthHttpException
 import jakarta.inject.Inject
 import kotlinx.coroutines.sync.Mutex
 
@@ -57,5 +57,5 @@ class RefreshUseCaseImpl @Inject constructor(
         }
     }
 
-    private fun isPermanentAuthFailure(error: Throwable): Boolean = error is AuthExpiredHttpException
+    private fun isPermanentAuthFailure(error: Throwable): Boolean = error is InvalidAuthHttpException
 }

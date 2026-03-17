@@ -7,7 +7,7 @@ import com.universall.auth_api.domain.entities.AuthTokenPair
 import com.universall.auth_api.domain.repositories.AuthRepository
 import com.universall.auth_api.domain.usecases.RefreshUseCase
 import com.universall.auth_api.domain.usecases.RestoreAuthStateUseCase
-import com.universall.core.network.exceptions.AuthExpiredHttpException
+import com.universall.core.network.exceptions.InvalidAuthHttpException
 import jakarta.inject.Inject
 import kotlin.coroutines.cancellation.CancellationException
 
@@ -61,5 +61,5 @@ class RestoreAuthStateUseCaseImpl @Inject constructor(
             }
     }
 
-    private fun isRefreshNeeded(error: Throwable): Boolean = error is AuthExpiredHttpException
+    private fun isRefreshNeeded(error: Throwable): Boolean = error is InvalidAuthHttpException
 }

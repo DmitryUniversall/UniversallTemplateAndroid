@@ -7,7 +7,7 @@ import com.universall.auth_api.domain.usecases.RefreshUseCase
 import com.universall.core.network.api.ApiRequestContext
 import com.universall.core.network.api.ApiResponseContext
 import com.universall.core.network.api.middleware.ApiClientMiddleware
-import com.universall.core.network.exceptions.AuthExpiredHttpException
+import com.universall.core.network.exceptions.InvalidAuthHttpException
 import io.ktor.client.request.HttpRequestBuilder
 
 class AutoRefreshTokensMiddleware(
@@ -22,7 +22,7 @@ class AutoRefreshTokensMiddleware(
     ): ApiResponseContext<*> {
         return try {
             return next(input) as ApiResponseContext<*>
-        } catch (error: AuthExpiredHttpException) {
+        } catch (error: InvalidAuthHttpException) {
             this.logInfo { "Failed to perform request ${input.method} - ${input.url} because of auth error: ${error::class.simpleName}: ${error.message ?: "null"}" }
 
             tryToRefreshTokens()

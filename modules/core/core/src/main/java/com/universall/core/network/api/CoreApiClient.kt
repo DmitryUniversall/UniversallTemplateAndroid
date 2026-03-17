@@ -11,6 +11,8 @@ abstract class CoreApiClient {
         contextBuilder: ApiRequestContext.Builder? = null,
         crossinline build: HttpRequestBuilder.() -> Unit
     ): ApiResponseContext<T> {
+        // TODO: Move it to ApiClient
+        // TODO: CoreApiClient should not know about ApiResponseParseMiddleware and its requirements
         val context = (contextBuilder ?: ApiRequestContext.Builder())
             .setDefaultMeta("serializer", serializer<T>())
             .build()

@@ -1,10 +1,11 @@
 package com.universall.auth_api.domain.usecases
 
-import com.universall.auth_api.domain.entities.AuthState
+import com.universall.auth_api.domain.entities.AuthContext
+import com.universall.auth_api.domain.entities.AuthTokenPair
 import com.universall.auth_api.domain.schemas.RegisterSchema
 
 interface RegisterUseCase {
     suspend operator fun invoke(
-        shema: RegisterSchema
-    ): Result<AuthState.Authenticated>
+        schema: RegisterSchema
+    ): Result<Pair<AuthContext, AuthTokenPair>>
 }

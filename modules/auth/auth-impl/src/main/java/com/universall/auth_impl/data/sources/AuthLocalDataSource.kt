@@ -12,10 +12,11 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.flow.map
 import kotlinx.serialization.json.Json
+import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class AuthLocalDataSource(
+class AuthLocalDataSource @Inject constructor(
     private val context: Context,
     private val aead: Aead,
     private val json: Json

@@ -14,11 +14,14 @@ import javax.inject.Singleton
 class UsersNetworkDataSource @Inject constructor(
     @param:AuthenticatedApiClient private val authenticatedApiClient: CoreApiClient
 ) {
-    suspend fun fetchMe(): Result<GetMeResponseDTO> = withContext(Dispatchers.IO) {
+    private val usersPath = "/users"
+    private val getMePath = "$usersPath/me"
+
+    suspend fun getMe(): Result<GetMeResponseDTO> = withContext(Dispatchers.IO) {
         return@withContext runCatching {
             authenticatedApiClient.requestDataNotNull<GetMeResponseDTO> {
                 method = HttpMethod.Get
-                url { path("/users/me") }
+                url { path(getMePath) }
             }
         }
     }

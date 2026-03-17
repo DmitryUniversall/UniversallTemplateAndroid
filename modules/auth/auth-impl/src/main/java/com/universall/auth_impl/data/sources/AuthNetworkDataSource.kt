@@ -18,11 +18,12 @@ import io.ktor.http.HttpMethod
 import io.ktor.http.path
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class AuthNetworkDataSource(  // TODO: Handle error app codes
-    private val apiClient: CoreApiClient
+class AuthNetworkDataSource @Inject constructor(
+    private val apiClient: CoreApiClient,
 ) {
     private val authFeaturePath = "/auth"
 
@@ -34,16 +35,16 @@ class AuthNetworkDataSource(  // TODO: Handle error app codes
     private fun getDefaultClientName(): String = "${Build.MANUFACTURER}-${Build.MODEL}"
 
     suspend fun register(schema: RegisterSchema): Result<RegisterResponseDTO> = withContext(Dispatchers.IO) {
-        val requestDto = RegisterRequestDTO(
-            firstName = schema.firstName,
-            lastName = schema.lastName,
-            username = schema.username,
-            login = schema.login,
-            password = schema.password,
-            clientName = getDefaultClientName()
-        )
-
         return@withContext runCatching {
+            val requestDto = RegisterRequestDTO(
+                firstName = schema.firstName,
+                lastName = schema.lastName,
+                username = schema.username,
+                login = schema.login,
+                password = schema.password,
+                clientName = getDefaultClientName()
+            )
+
             apiClient.requestDataNotNull<RegisterResponseDTO> {
                 method = HttpMethod.Post
                 url { path(registerPath) }
@@ -53,13 +54,13 @@ class AuthNetworkDataSource(  // TODO: Handle error app codes
     }
 
     suspend fun login(schema: LoginSchema): Result<LoginResponseDTO> = withContext(Dispatchers.IO) {
-        val requestDto = LoginRequestDTO(
-            login = schema.login,
-            password = schema.password,
-            clientName = getDefaultClientName()
-        )
-
         return@withContext runCatching {
+            val requestDto = LoginRequestDTO(
+                login = schema.login,
+                password = schema.password,
+                clientName = getDefaultClientName()
+            )
+
             apiClient.requestDataNotNull<LoginResponseDTO> {
                 method = HttpMethod.Post
                 url { path(loginPath) }
@@ -69,12 +70,12 @@ class AuthNetworkDataSource(  // TODO: Handle error app codes
     }
 
     suspend fun refresh(refreshToken: String): Result<RefreshResponseDTO> = withContext(Dispatchers.IO) {
-        val requestDto = RefreshRequestDTO(
-            refreshToken = refreshToken,
-            clientName = getDefaultClientName()
-        )
-
         return@withContext runCatching {
+            val requestDto = RefreshRequestDTO(
+                refreshToken = refreshToken,
+                clientName = getDefaultClientName()
+            )
+
             apiClient.requestDataNotNull<RefreshResponseDTO> {
                 method = HttpMethod.Post
                 url { path(refreshPath) }

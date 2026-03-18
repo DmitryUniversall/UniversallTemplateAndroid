@@ -4,6 +4,7 @@ import com.universall.auth_api.domain.di.qualifiers.AuthenticatedApiClient
 import com.universall.auth_api.domain.usecases.GetActiveSessionsUseCase
 import com.universall.auth_api.domain.usecases.GetMeUseCase
 import com.universall.auth_api.domain.usecases.GetTokenPairUseCase
+import com.universall.auth_api.domain.usecases.LocalLogoutUseCase
 import com.universall.auth_api.domain.usecases.LoginUseCase
 import com.universall.auth_api.domain.usecases.LogoutUseCase
 import com.universall.auth_api.domain.usecases.RefreshUseCase
@@ -15,6 +16,7 @@ import com.universall.auth_api.domain.usecases.UpdateTokenPairUseCase
 import com.universall.auth_impl.domain.usecases.GetActiveSessionsUseCaseImpl
 import com.universall.auth_impl.domain.usecases.GetMeUseCaseImpl
 import com.universall.auth_impl.domain.usecases.GetTokenPairUseCaseImpl
+import com.universall.auth_impl.domain.usecases.LocalLogoutUseCaseImpl
 import com.universall.auth_impl.domain.usecases.LoginUseCaseImpl
 import com.universall.auth_impl.domain.usecases.LogoutUseCaseImpl
 import com.universall.auth_impl.domain.usecases.RefreshUseCaseImpl
@@ -22,6 +24,7 @@ import com.universall.auth_impl.domain.usecases.RegisterUseCaseImpl
 import com.universall.auth_impl.domain.usecases.RestoreAuthStateUseCaseImpl
 import com.universall.auth_impl.domain.usecases.RevokeAllSessionsExceptCurrentUseCaseImpl
 import com.universall.auth_impl.domain.usecases.RevokeSessionUseCaseImpl
+import com.universall.auth_impl.domain.usecases.UpdateTokenPairUseCaseImpl
 import com.universall.auth_impl.domain.utils.network.AuthenticatedApiClientImpl
 import com.universall.core.network.api.CoreApiClient
 import dagger.Binds
@@ -75,10 +78,14 @@ abstract class AuthDomainBindingModule {
 
     @Binds
     @Singleton
-    abstract fun bindUpdateTokenPairUseCase(impl: UpdateTokenPairUseCase): UpdateTokenPairUseCase
+    abstract fun bindUpdateTokenPairUseCase(impl: UpdateTokenPairUseCaseImpl): UpdateTokenPairUseCase
 
     @Binds
     @Singleton
     @AuthenticatedApiClient
     abstract fun bindAuthenticatedApiClient(impl: AuthenticatedApiClientImpl): CoreApiClient
+
+    @Binds
+    @Singleton
+    abstract fun bindLocalLogoutUseCase(impl: LocalLogoutUseCaseImpl): LocalLogoutUseCase
 }

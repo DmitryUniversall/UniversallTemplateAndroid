@@ -23,13 +23,15 @@ import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
 import javax.inject.Singleton
 
+typealias HttpClientConfigBlock = @JvmSuppressWildcards HttpClientConfig<*>.() -> Unit
+
 @Module
 @InstallIn(SingletonComponent::class)
 object CoreNetworkModule {
     @Provides
     @Singleton
     @CoreHttpClientConfig
-    fun provideCoreConfig(@CoreJson jsonCore: Json): HttpClientConfig<*>.() -> Unit {
+    fun provideCoreHttpClientConfig(@CoreJson jsonCore: Json): HttpClientConfigBlock {
         return {
             install(KtorResponseLoggerPlugin.plugin)
 
@@ -53,7 +55,7 @@ object CoreNetworkModule {
     @Provides
     @Singleton
     @CoreHttpClient
-    fun provideCoreHttpClient(@CoreHttpClientConfig config: HttpClientConfig<*>.() -> Unit): HttpClient {
+    fun provideCoreHttpClient(@CoreHttpClientConfig config: HttpClientConfigBlock): HttpClient {
         return HttpClient(config)
     }
 

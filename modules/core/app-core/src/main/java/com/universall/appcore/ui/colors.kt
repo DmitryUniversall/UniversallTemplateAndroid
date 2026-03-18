@@ -24,3 +24,7 @@ object CoreColors {
         val Neutral50 = Color(0xFFF8F9FA)
     }
 }
+
+fun Color.muted(
+    alpha: Float = 0.5f
+): Color = this.copy(alpha = alpha)

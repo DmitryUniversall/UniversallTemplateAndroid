@@ -3,8 +3,9 @@ package com.universall.appcore.policies.impl.app_code
 import com.universall.core.network.exceptions.*
 import com.universall.core.policies.app_code.AppCodeProcessingPolicy
 import io.ktor.http.HttpStatusCode
+import jakarta.inject.Inject
 
-class AppCodeProcessingPolicyImpl : AppCodeProcessingPolicy {
+class AppCodeProcessingPolicyImpl @Inject constructor() : AppCodeProcessingPolicy {
     override fun process(httpStatusCode: HttpStatusCode, appCode: Int, message: String) {
         if (appCode in 1000..1999) return
 

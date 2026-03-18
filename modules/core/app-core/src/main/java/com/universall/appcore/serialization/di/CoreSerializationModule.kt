@@ -18,4 +18,8 @@ object CoreSerializationModule {
     fun provideCoreJson(): Json {
         return CoreJsonHolder.json
     }
+
+    @Provides
+    @Singleton
+    fun provideJson(@CoreJson json: Json): Json = json
 }

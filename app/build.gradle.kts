@@ -41,7 +41,10 @@ dependencies {
     implementation(project(":modules:core:core"))
     implementation(project(":modules:core:app-core"))
 
+    implementation(project(":modules:auth:auth-api"))
     implementation(project(":modules:auth:auth-impl"))
 
     implementation(libs.androidx.activity.compose)
+    implementation(libs.phosphor.icon)
+    implementation(libs.google.crypto.tink)
 }

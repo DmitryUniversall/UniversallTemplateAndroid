@@ -10,7 +10,7 @@ import jakarta.inject.Inject
 class LoginUseCaseImpl @Inject constructor(
     private val authRepository: AuthRepository
 ) : LoginUseCase {
-    override suspend fun login(schema: LoginSchema): Result<Pair<AuthContext, AuthTokenPair>> {
+    override suspend fun invoke(schema: LoginSchema): Result<Pair<AuthContext, AuthTokenPair>> {
         return authRepository.login(schema)
     }
 }

@@ -8,6 +8,7 @@ import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
 import com.google.crypto.tink.Aead
 import com.universall.auth_api.domain.entities.LocalAuthInfo
+import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.flow.map
@@ -17,7 +18,7 @@ import javax.inject.Singleton
 
 @Singleton
 class AuthLocalDataSource @Inject constructor(
-    private val context: Context,
+    @param:ApplicationContext private val context: Context,
     private val aead: Aead,
     private val json: Json
 ) {

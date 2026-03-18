@@ -13,7 +13,7 @@ import com.universall.core.policies.app_code.AppCodeProcessingPolicy
 import io.ktor.client.HttpClient
 import kotlinx.serialization.json.Json
 
-abstract class AuthenticatedApiClient(
+class AuthenticatedApiClientImpl(
     httpClient: HttpClient,
     json: Json,
     appCodeProcessingPolicy: AppCodeProcessingPolicy,

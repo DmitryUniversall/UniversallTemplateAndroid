@@ -1,5 +1,6 @@
 package com.universall.auth_impl.domain.di
 
+import com.universall.auth_api.domain.di.qualifiers.AuthenticatedApiClient
 import com.universall.auth_api.domain.usecases.GetActiveSessionsUseCase
 import com.universall.auth_api.domain.usecases.GetMeUseCase
 import com.universall.auth_api.domain.usecases.GetTokenPairUseCase
@@ -21,6 +22,8 @@ import com.universall.auth_impl.domain.usecases.RegisterUseCaseImpl
 import com.universall.auth_impl.domain.usecases.RestoreAuthStateUseCaseImpl
 import com.universall.auth_impl.domain.usecases.RevokeAllSessionsExceptCurrentUseCaseImpl
 import com.universall.auth_impl.domain.usecases.RevokeSessionUseCaseImpl
+import com.universall.auth_impl.domain.utils.network.AuthenticatedApiClientImpl
+import com.universall.core.network.api.CoreApiClient
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -73,4 +76,9 @@ abstract class AuthDomainBindingModule {
     @Binds
     @Singleton
     abstract fun bindUpdateTokenPairUseCase(impl: UpdateTokenPairUseCase): UpdateTokenPairUseCase
+
+    @Binds
+    @Singleton
+    @AuthenticatedApiClient
+    abstract fun bindAuthenticatedApiClient(impl: AuthenticatedApiClientImpl): CoreApiClient
 }

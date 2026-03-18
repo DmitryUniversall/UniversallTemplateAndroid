@@ -96,6 +96,8 @@ val ResourceState<*>.hasError: Boolean
         is ResourceState.Refreshing -> anyErrorOrNull() != null
     }
 
+fun <T> ResourceState<T>.toIdle(): ResourceState.Idle = ResourceState.Idle
+fun <T> ResourceState<T>.toSuccess(data: T): ResourceState.Success<T> = ResourceState.Success(data)
 fun <T> ResourceState<T>.toRefreshing(): ResourceState.Refreshing<T> = ResourceState.Refreshing(lastResultState = this.currentOrPreviousResult())
 fun <T> ResourceState<T>.toLoading(): ResourceState.Loading<T> = ResourceState.Loading(lastResultState = this.currentOrPreviousResult())
 fun <T> ResourceState<T>.toError(errorMessage: String, throwable: Throwable? = null, keepOnlyLastError: Boolean = true): ResourceState.Error<T> =

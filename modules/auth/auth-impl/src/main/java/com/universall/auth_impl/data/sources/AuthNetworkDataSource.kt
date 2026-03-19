@@ -1,7 +1,7 @@
 package com.universall.auth_impl.data.sources
 
 import android.os.Build
-import com.universall.appcore.network.api.base.CoreApiClient
+import com.universall.appcore.network.api.ApiClient
 import com.universall.auth_api.domain.schemas.LoginSchema
 import com.universall.auth_api.domain.schemas.RegisterSchema
 import com.universall.auth_impl.data.dto.get_actual_auth_context.GetCurrentAuthContextResponseDTO
@@ -23,7 +23,7 @@ import javax.inject.Singleton
 
 @Singleton
 class AuthNetworkDataSource @Inject constructor(
-    private val apiClient: CoreApiClient,
+    private val apiClient: ApiClient
 ) {
     private val authFeaturePath = "/auth"
 
@@ -45,7 +45,7 @@ class AuthNetworkDataSource @Inject constructor(
                 clientName = getDefaultClientName()
             )
 
-            apiClient.requestDataNotNull<RegisterResponseDTO> {
+            apiClient.requestDataObject<RegisterResponseDTO> {
                 method = HttpMethod.Post
                 url { path(registerPath) }
                 setBody(requestDto)
@@ -61,7 +61,7 @@ class AuthNetworkDataSource @Inject constructor(
                 clientName = getDefaultClientName()
             )
 
-            apiClient.requestDataNotNull<LoginResponseDTO> {
+            apiClient.requestDataObject<LoginResponseDTO> {
                 method = HttpMethod.Post
                 url { path(loginPath) }
                 setBody(requestDto)
@@ -76,7 +76,7 @@ class AuthNetworkDataSource @Inject constructor(
                 clientName = getDefaultClientName()
             )
 
-            apiClient.requestDataNotNull<RefreshResponseDTO> {
+            apiClient.requestDataObject<RefreshResponseDTO> {
                 method = HttpMethod.Post
                 url { path(refreshPath) }
                 setBody(requestDto)
@@ -86,7 +86,7 @@ class AuthNetworkDataSource @Inject constructor(
 
     suspend fun getCurrentAuthContext(accessToken: String): Result<GetCurrentAuthContextResponseDTO> = withContext(Dispatchers.IO) {
         return@withContext runCatching {
-            apiClient.requestDataNotNull<GetCurrentAuthContextResponseDTO> {
+            apiClient.requestDataObject<GetCurrentAuthContextResponseDTO> {
                 method = HttpMethod.Get
                 url { path(fetchActualAuthContextPath) }
                 headers {

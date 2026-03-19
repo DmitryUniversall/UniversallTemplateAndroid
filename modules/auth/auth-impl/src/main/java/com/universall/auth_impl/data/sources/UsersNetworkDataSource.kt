@@ -1,6 +1,6 @@
 package com.universall.auth_impl.data.sources
 
-import com.universall.appcore.network.api.base.CoreApiClient
+import com.universall.appcore.network.api.ApiClient
 import com.universall.auth_api.domain.di.qualifiers.AuthenticatedApiClient
 import com.universall.auth_impl.data.dto.get_me.GetMeResponseDTO
 import io.ktor.http.HttpMethod
@@ -12,14 +12,14 @@ import javax.inject.Singleton
 
 @Singleton
 class UsersNetworkDataSource @Inject constructor(
-    @param:AuthenticatedApiClient private val authenticatedApiClient: CoreApiClient
+    @param:AuthenticatedApiClient private val authenticatedApiClient: ApiClient
 ) {
     private val usersPath = "/users"
     private val getMePath = "$usersPath/me"
 
     suspend fun getMe(): Result<GetMeResponseDTO> = withContext(Dispatchers.IO) {
         return@withContext runCatching {
-            authenticatedApiClient.requestDataNotNull<GetMeResponseDTO> {
+            authenticatedApiClient.requestDataObject<GetMeResponseDTO> {
                 method = HttpMethod.Get
                 url { path(getMePath) }
             }

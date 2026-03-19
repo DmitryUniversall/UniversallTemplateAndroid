@@ -24,8 +24,9 @@ class ApiResponseParseMiddleware<T>(
 
         val apiResponseJson = json.decodeFromString<ApiResponse<JsonElement>>(text)
 
-        val data: T? = apiResponseJson.data?.let {
-            val serializer = context.getFromMeta<KSerializer<T>>("serializer") ?: throw IllegalStateException("Serializer for type T not found in context")
+        val skip = context.getFromMeta<Boolean>("skipDataSerialization") ?: false
+        val data: T? = if (skip) null else apiResponseJson.data?.let {
+            val serializer = context.getFromMeta<KSerializer<T>>("dataSerializer") ?: throw IllegalStateException("dataSerializer for type T not found in request context")
             json.decodeFromJsonElement(serializer, it)
         }
 

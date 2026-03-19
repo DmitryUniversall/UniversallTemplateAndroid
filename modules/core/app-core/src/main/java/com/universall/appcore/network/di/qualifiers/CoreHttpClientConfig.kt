@@ -1,4 +1,4 @@
-package com.universall.appcore.network.di.annotations
+package com.universall.appcore.network.di.qualifiers
 
 import javax.inject.Qualifier
 

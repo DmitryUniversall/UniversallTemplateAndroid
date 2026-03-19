@@ -1,6 +1,6 @@
 package com.universall.appcore.serialization.di
 
-import com.universall.appcore.serialization.di.annotations.CoreJson
+import com.universall.appcore.serialization.di.qualifiers.CoreJson
 import com.universall.appcore.serialization.impl.CoreJsonHolder
 import dagger.Module
 import dagger.Provides

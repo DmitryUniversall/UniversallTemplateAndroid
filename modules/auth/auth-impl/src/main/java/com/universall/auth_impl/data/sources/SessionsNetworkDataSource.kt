@@ -1,6 +1,6 @@
 package com.universall.auth_impl.data.sources
 
-import com.universall.appcore.network.api.base.CoreApiClient
+import com.universall.appcore.network.api.ApiClient
 import com.universall.auth_api.domain.di.qualifiers.AuthenticatedApiClient
 import com.universall.auth_impl.data.dto.get_active_sessions.GetActiveSessionsResponseDTO
 import io.ktor.http.HttpMethod
@@ -12,7 +12,7 @@ import javax.inject.Singleton
 
 @Singleton
 class SessionsNetworkDataSource @Inject constructor(
-    @param:AuthenticatedApiClient private val authenticatedApiClient: CoreApiClient
+    @param:AuthenticatedApiClient private val authenticatedApiClient: ApiClient
 ) {
     private val authFeaturePath = "/auth"
 
@@ -23,7 +23,7 @@ class SessionsNetworkDataSource @Inject constructor(
 
     suspend fun getActiveSessions(): Result<GetActiveSessionsResponseDTO> = withContext(Dispatchers.IO) {
         return@withContext runCatching {
-            authenticatedApiClient.requestDataNotNull<GetActiveSessionsResponseDTO> {
+            authenticatedApiClient.requestDataObject<GetActiveSessionsResponseDTO> {
                 method = HttpMethod.Get
                 url { path(getActiveSessionsPath) }
             }
@@ -32,7 +32,7 @@ class SessionsNetworkDataSource @Inject constructor(
 
     suspend fun logout(): Result<Unit> = withContext(Dispatchers.IO) {
         return@withContext runCatching {
-            authenticatedApiClient.request<Unit> {
+            authenticatedApiClient.requestUnit<Unit> {
                 method = HttpMethod.Delete
                 url { path(logoutPath) }
             }
@@ -43,7 +43,7 @@ class SessionsNetworkDataSource @Inject constructor(
 
     suspend fun revokeSession(sessionUuid: String): Result<Unit> = withContext(Dispatchers.IO) {
         return@withContext runCatching {
-            authenticatedApiClient.request<Unit> {
+            authenticatedApiClient.requestUnit<Unit> {
                 method = HttpMethod.Delete
                 url { path(revokeSessionPath.format(sessionUuid)) }
             }
@@ -54,7 +54,7 @@ class SessionsNetworkDataSource @Inject constructor(
 
     suspend fun revokeAllSessionsExceptCurrent(): Result<Unit> = withContext(Dispatchers.IO) {
         return@withContext runCatching {
-            authenticatedApiClient.request<Unit> {
+            authenticatedApiClient.requestUnit<Unit> {
                 method = HttpMethod.Delete
                 url { path(revokeAllSessionsExceptCurrentPath) }
             }

@@ -1,12 +1,11 @@
 package com.universall.appcore.network.di
 
 import com.universall.appcore.BuildConfig
-import com.universall.appcore.network.di.annotations.CoreHttpClient
-import com.universall.appcore.network.di.annotations.CoreHttpClientConfig
 import com.universall.appcore.network.api.ApiClient
-import com.universall.appcore.network.api.base.CoreApiClient
+import com.universall.appcore.network.di.qualifiers.CoreHttpClient
+import com.universall.appcore.network.di.qualifiers.CoreHttpClientConfig
 import com.universall.appcore.network.impl.ktor.plugins.KtorResponseLoggerPlugin
-import com.universall.appcore.serialization.di.annotations.CoreJson
+import com.universall.appcore.serialization.di.qualifiers.CoreJson
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -60,10 +59,10 @@ object CoreNetworkModule {
 
     @Provides
     @Singleton
-    fun provideCoreApiClient(
+    fun provideApiClient(
         @CoreHttpClient httpClient: HttpClient,
         @CoreJson json: Json,
-    ): CoreApiClient {
+    ): ApiClient {
         return ApiClient(
             httpClient = httpClient,
             json = json,

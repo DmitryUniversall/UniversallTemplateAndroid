@@ -1,4 +1,4 @@
-package com.universall.appcore.serialization.di.annotations
+package com.universall.appcore.serialization.di.qualifiers
 
 import javax.inject.Qualifier
 

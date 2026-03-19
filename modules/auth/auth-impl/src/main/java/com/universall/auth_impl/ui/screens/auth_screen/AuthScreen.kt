@@ -1,10 +1,10 @@
 package com.universall.auth_impl.ui.screens.auth_screen
 
+import androidx.compose.animation.core.AnimationSpec
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.calculateEndPadding
-import androidx.compose.foundation.layout.calculateStartPadding
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.pager.HorizontalPager
@@ -16,9 +16,9 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.LayoutDirection
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.navigation.NavController
+import com.universall.appcore.ui.add
 import com.universall.appcore.ui.theme.locals.Locals
 import com.universall.auth_impl.ui.screens.auth_screen.AuthMode.LOGIN
 import com.universall.auth_impl.ui.screens.auth_screen.AuthMode.REGISTER
@@ -37,6 +37,7 @@ fun AuthScreen(
     val pagerState = rememberPagerState(pageCount = { 2 })
 
     val spacing = Locals.spacing
+    val pageSwitchAnimationSpec: AnimationSpec<Float> = tween(durationMillis = 200)
 
     // Effects
     LaunchedEffect(Unit) {
@@ -59,7 +60,10 @@ fun AuthScreen(
     // Sync ViewModel -> Pager
     LaunchedEffect(uiState.authMode) {
         val page = viewModel.authModeToPage(uiState.authMode)
-        if (page != pagerState.currentPage) pagerState.animateScrollToPage(page)
+        if (page != pagerState.currentPage) pagerState.animateScrollToPage(
+            page = page,
+            animationSpec = pageSwitchAnimationSpec
+        )
     }
 
     Column(
@@ -74,14 +78,12 @@ fun AuthScreen(
     ) {
         AuthModeSelector(
             modifier = Modifier
-                .padding(  // TODO: Make an utility to add paddings
-                    end = innerPadding.calculateEndPadding(layoutDirection = LayoutDirection.Ltr) + spacing.screenPadding,
-                    start = innerPadding.calculateStartPadding(layoutDirection = LayoutDirection.Ltr) + spacing.screenPadding
-                ),
+                .padding(innerPadding.add(horizontal = spacing.screenPadding)),
             viewModel = viewModel,
             currentMode = uiState.authMode,
             loginRequestState = uiState.loginRequestState,
-            registerRequestState = uiState.loginRequestState
+            registerRequestState = uiState.loginRequestState,
+            animationSpec = pageSwitchAnimationSpec
         )
 
         HorizontalPager(

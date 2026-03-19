@@ -1,6 +1,6 @@
 package com.universall.auth_impl.domain.utils.network.middleware
 
-import com.universall.appcore.network.impl.api.base.ApiRequestContext
+import com.universall.appcore.network.api.base.ApiRequestContext
 import com.universall.appcore.network.impl.api.base.middleware.ApiClientMiddleware
 import com.universall.auth_api.domain.usecases.GetTokenPairUseCase
 import com.universall.core.exceptions.UnauthenticatedAppError

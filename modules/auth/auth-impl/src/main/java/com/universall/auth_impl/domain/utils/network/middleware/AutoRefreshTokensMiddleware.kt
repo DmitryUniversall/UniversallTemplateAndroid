@@ -1,8 +1,8 @@
 package com.universall.auth_impl.domain.utils.network.middleware
 
 import com.universall.appcore.network.exceptions.InvalidAuthHttpException
-import com.universall.appcore.network.impl.api.base.ApiRequestContext
-import com.universall.appcore.network.impl.api.base.ApiResponseContext
+import com.universall.appcore.network.api.base.ApiRequestContext
+import com.universall.appcore.network.api.base.ApiResponseContext
 import com.universall.appcore.network.impl.api.base.middleware.ApiClientMiddleware
 import com.universall.appcore.utils.logInfo
 import com.universall.appcore.utils.logWarn

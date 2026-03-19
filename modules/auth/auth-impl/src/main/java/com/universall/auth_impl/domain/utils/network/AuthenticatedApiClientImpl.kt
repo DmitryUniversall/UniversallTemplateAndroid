@@ -1,10 +1,10 @@
 package com.universall.auth_impl.domain.utils.network
 
-import com.universall.appcore.network.impl.api.ApiClient
-import com.universall.appcore.network.impl.api.base.ApiResponseContext
-import com.universall.appcore.network.impl.api.base.middleware.ApiClientMiddlewareChain
-import com.universall.appcore.network.impl.api.middleware.AppCodeProcessingMiddleware
-import com.universall.appcore.network.impl.api.middleware.KtorExecuteMiddleware
+import com.universall.appcore.network.api.ApiClient
+import com.universall.appcore.network.api.base.ApiResponseContext
+import com.universall.appcore.network.api.base.middleware.ApiClientMiddlewareChain
+import com.universall.appcore.network.api.middleware.AppCodeProcessingMiddleware
+import com.universall.appcore.network.api.middleware.KtorExecuteMiddleware
 import com.universall.auth_api.domain.usecases.GetTokenPairUseCase
 import com.universall.auth_api.domain.usecases.RefreshUseCase
 import com.universall.auth_impl.domain.utils.network.middleware.AuthMiddleware

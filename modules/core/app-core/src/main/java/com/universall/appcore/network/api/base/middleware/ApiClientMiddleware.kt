@@ -1,6 +1,6 @@
 package com.universall.appcore.network.impl.api.base.middleware
 
-import com.universall.appcore.network.impl.api.base.ApiRequestContext
+import com.universall.appcore.network.api.base.ApiRequestContext
 
 interface ApiClientMiddleware<In, Out> {
     suspend fun proceed(

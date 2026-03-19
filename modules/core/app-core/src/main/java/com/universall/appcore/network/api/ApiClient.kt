@@ -1,12 +1,12 @@
-package com.universall.appcore.network.impl.api
+package com.universall.appcore.network.api
 
-import com.universall.appcore.network.impl.api.base.ApiResponseContext
-import com.universall.appcore.network.impl.api.base.CoreApiClient
-import com.universall.appcore.network.impl.api.base.middleware.ApiClientMiddlewareChain
-import com.universall.appcore.network.impl.api.middleware.ApiResponseParseMiddleware
-import com.universall.appcore.network.impl.api.middleware.AppCodeProcessingMiddleware
-import com.universall.appcore.network.impl.api.middleware.KtorExecuteMiddleware
-import com.universall.appcore.network.impl.api.middleware.RetryRequestMiddleware
+import com.universall.appcore.network.api.base.ApiResponseContext
+import com.universall.appcore.network.api.base.CoreApiClient
+import com.universall.appcore.network.api.base.middleware.ApiClientMiddlewareChain
+import com.universall.appcore.network.api.middleware.ApiResponseParseMiddleware
+import com.universall.appcore.network.api.middleware.AppCodeProcessingMiddleware
+import com.universall.appcore.network.api.middleware.KtorExecuteMiddleware
+import com.universall.appcore.network.api.middleware.RetryRequestMiddleware
 import io.ktor.client.HttpClient
 import kotlinx.serialization.json.Json
 

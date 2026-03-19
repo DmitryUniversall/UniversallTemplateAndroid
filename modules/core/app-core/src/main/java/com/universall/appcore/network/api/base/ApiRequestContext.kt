@@ -1,4 +1,4 @@
-package com.universall.appcore.network.impl.api.base
+package com.universall.appcore.network.api.base
 
 class ApiRequestContext private constructor(
     private val metadata: Map<String, Any> = HashMap()

@@ -1,6 +1,6 @@
 package com.universall.auth_impl.domain.di
 
-import com.universall.appcore.network.impl.api.base.CoreApiClient
+import com.universall.appcore.network.api.base.CoreApiClient
 import com.universall.auth_api.domain.di.qualifiers.AuthenticatedApiClient
 import com.universall.auth_api.domain.usecases.GetActiveSessionsUseCase
 import com.universall.auth_api.domain.usecases.GetMeUseCase

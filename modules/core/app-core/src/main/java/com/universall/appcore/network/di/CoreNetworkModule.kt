@@ -3,8 +3,8 @@ package com.universall.appcore.network.di
 import com.universall.appcore.BuildConfig
 import com.universall.appcore.network.di.annotations.CoreHttpClient
 import com.universall.appcore.network.di.annotations.CoreHttpClientConfig
-import com.universall.appcore.network.impl.api.ApiClient
-import com.universall.appcore.network.impl.api.base.CoreApiClient
+import com.universall.appcore.network.api.ApiClient
+import com.universall.appcore.network.api.base.CoreApiClient
 import com.universall.appcore.network.impl.ktor.plugins.KtorResponseLoggerPlugin
 import com.universall.appcore.serialization.di.annotations.CoreJson
 import dagger.Module

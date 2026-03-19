@@ -1,6 +1,6 @@
 package com.universall.appcore.network.exceptions
 
-import com.universall.appcore.network.impl.api.base.ApiResponseContext
+import com.universall.appcore.network.api.base.ApiResponseContext
 
 
 // GENERIC_ERRORS (2000)

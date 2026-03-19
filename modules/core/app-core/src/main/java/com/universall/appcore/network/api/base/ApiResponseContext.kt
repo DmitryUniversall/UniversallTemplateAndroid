@@ -1,4 +1,4 @@
-package com.universall.appcore.network.impl.api.base
+package com.universall.appcore.network.api.base
 
 import com.universall.core.entities.ApiResponse
 import io.ktor.client.statement.HttpResponse

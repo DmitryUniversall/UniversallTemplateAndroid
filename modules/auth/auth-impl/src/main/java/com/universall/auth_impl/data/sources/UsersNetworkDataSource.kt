@@ -1,8 +1,8 @@
 package com.universall.auth_impl.data.sources
 
+import com.universall.appcore.network.impl.api.base.CoreApiClient
 import com.universall.auth_api.domain.di.qualifiers.AuthenticatedApiClient
 import com.universall.auth_impl.data.dto.get_me.GetMeResponseDTO
-import com.universall.core.network.api.CoreApiClient
 import io.ktor.http.HttpMethod
 import io.ktor.http.path
 import jakarta.inject.Inject

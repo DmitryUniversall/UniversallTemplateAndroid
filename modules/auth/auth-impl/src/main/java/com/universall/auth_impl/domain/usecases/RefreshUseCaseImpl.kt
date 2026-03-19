@@ -1,5 +1,6 @@
 package com.universall.auth_impl.domain.usecases
 
+import com.universall.appcore.network.exceptions.InvalidAuthHttpException
 import com.universall.appcore.utils.logWarn
 import com.universall.auth_api.domain.entities.AuthState
 import com.universall.auth_api.domain.entities.AuthTokenPair
@@ -8,7 +9,6 @@ import com.universall.auth_api.domain.usecases.GetTokenPairUseCase
 import com.universall.auth_api.domain.usecases.RefreshUseCase
 import com.universall.auth_api.domain.usecases.UpdateTokenPairUseCase
 import com.universall.core.exceptions.UnauthenticatedAppError
-import com.universall.core.network.exceptions.InvalidAuthHttpException
 import jakarta.inject.Inject
 import kotlinx.coroutines.sync.Mutex
 

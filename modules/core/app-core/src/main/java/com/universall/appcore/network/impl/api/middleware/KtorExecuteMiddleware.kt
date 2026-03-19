@@ -1,7 +1,7 @@
 package com.universall.appcore.network.impl.api.middleware
 
-import com.universall.core.network.api.ApiRequestContext
-import com.universall.core.network.api.middleware.ApiClientMiddleware
+import com.universall.appcore.network.impl.api.base.ApiRequestContext
+import com.universall.appcore.network.impl.api.base.middleware.ApiClientMiddleware
 import io.ktor.client.HttpClient
 import io.ktor.client.request.HttpRequestBuilder
 import io.ktor.client.request.request

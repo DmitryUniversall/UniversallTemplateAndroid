@@ -1,5 +1,6 @@
 package com.universall.auth_impl.domain.di
 
+import com.universall.appcore.network.impl.api.base.CoreApiClient
 import com.universall.auth_api.domain.di.qualifiers.AuthenticatedApiClient
 import com.universall.auth_api.domain.usecases.GetActiveSessionsUseCase
 import com.universall.auth_api.domain.usecases.GetMeUseCase
@@ -26,7 +27,6 @@ import com.universall.auth_impl.domain.usecases.RevokeAllSessionsExceptCurrentUs
 import com.universall.auth_impl.domain.usecases.RevokeSessionUseCaseImpl
 import com.universall.auth_impl.domain.usecases.UpdateTokenPairUseCaseImpl
 import com.universall.auth_impl.domain.utils.network.AuthenticatedApiClientImpl
-import com.universall.core.network.api.CoreApiClient
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn

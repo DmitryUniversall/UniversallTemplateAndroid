@@ -1,6 +1,6 @@
-package com.universall.core.network.api
+package com.universall.appcore.network.impl.api.base
 
-import com.universall.core.network.api.middleware.ApiClientMiddlewareChain
+import com.universall.appcore.network.impl.api.base.middleware.ApiClientMiddlewareChain
 import io.ktor.client.request.HttpRequestBuilder
 import kotlinx.serialization.serializer
 

@@ -1,9 +1,9 @@
 package com.universall.auth_impl.domain.utils.network.middleware
 
+import com.universall.appcore.network.impl.api.base.ApiRequestContext
+import com.universall.appcore.network.impl.api.base.middleware.ApiClientMiddleware
 import com.universall.auth_api.domain.usecases.GetTokenPairUseCase
 import com.universall.core.exceptions.UnauthenticatedAppError
-import com.universall.core.network.api.ApiRequestContext
-import com.universall.core.network.api.middleware.ApiClientMiddleware
 import io.ktor.client.request.HttpRequestBuilder
 import io.ktor.client.request.headers
 import io.ktor.client.statement.HttpResponse

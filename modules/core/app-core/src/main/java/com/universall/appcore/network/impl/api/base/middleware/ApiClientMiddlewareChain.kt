@@ -1,6 +1,6 @@
-package com.universall.core.network.api.middleware
+package com.universall.appcore.network.impl.api.base.middleware
 
-import com.universall.core.network.api.ApiRequestContext
+import com.universall.appcore.network.impl.api.base.ApiRequestContext
 
 
 class ApiClientMiddlewareChain<FinalOut>(

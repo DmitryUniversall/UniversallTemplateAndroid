@@ -1,12 +1,12 @@
 package com.universall.auth_impl.domain.usecases
 
+import com.universall.appcore.network.exceptions.InvalidAuthHttpException
 import com.universall.appcore.utils.logInfo
 import com.universall.appcore.utils.logWarn
 import com.universall.auth_api.domain.entities.AuthState
 import com.universall.auth_api.domain.repositories.AuthRepository
 import com.universall.auth_api.domain.usecases.RefreshUseCase
 import com.universall.auth_api.domain.usecases.RestoreAuthStateUseCase
-import com.universall.core.network.exceptions.InvalidAuthHttpException
 import jakarta.inject.Inject
 import kotlin.coroutines.cancellation.CancellationException
 

@@ -42,7 +42,7 @@ fun LocalDateTime.isAfterOrEqual(date: LocalDateTime): Boolean =
     this.isAfter(date) || this.isEqual(date)
 
 fun timestampRange(start: LocalDateTime, end: LocalDateTime): Pair<Long, Long> =
-    start.asTimestampWithDefaultZone() to end.asTimestampWithDefaultZone();
+    start.asTimestampWithDefaultZone() to end.asTimestampWithDefaultZone()
 
 fun LocalDate.dayBounds(): Pair<LocalDateTime, LocalDateTime> =
     this.atStartOfDay() to this.atTime(LocalTime.MAX)

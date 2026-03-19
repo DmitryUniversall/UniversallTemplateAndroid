@@ -1,13 +1,13 @@
 package com.universall.auth_impl.domain.utils.network.middleware
 
+import com.universall.appcore.network.exceptions.InvalidAuthHttpException
+import com.universall.appcore.network.impl.api.base.ApiRequestContext
+import com.universall.appcore.network.impl.api.base.ApiResponseContext
+import com.universall.appcore.network.impl.api.base.middleware.ApiClientMiddleware
 import com.universall.appcore.utils.logInfo
 import com.universall.appcore.utils.logWarn
 import com.universall.auth_api.domain.entities.AuthTokenPair
 import com.universall.auth_api.domain.usecases.RefreshUseCase
-import com.universall.core.network.api.ApiRequestContext
-import com.universall.core.network.api.ApiResponseContext
-import com.universall.core.network.api.middleware.ApiClientMiddleware
-import com.universall.core.network.exceptions.InvalidAuthHttpException
 import io.ktor.client.request.HttpRequestBuilder
 
 class AutoRefreshTokensMiddleware(

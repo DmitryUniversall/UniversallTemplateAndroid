@@ -79,6 +79,7 @@ class InitScreenViewModel @Inject constructor(
 
     suspend fun localLogout() {
         localLogoutUseCase.invoke()
+        restoreAuthState(refresh = true)
     }
 
     fun onIntent(intent: InitIntent) {

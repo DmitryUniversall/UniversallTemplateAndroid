@@ -1,5 +1,6 @@
 package com.universall.auth_impl.ui.screens.auth_screen.components
 
+import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.AnimationSpec
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -9,6 +10,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -19,7 +21,7 @@ import com.universall.appcore.ui.paddingXS
 import com.universall.appcore.ui.slider.Slider
 import com.universall.appcore.ui.state.ResourceState
 import com.universall.appcore.ui.state.isFetching
-import com.universall.appcore.ui.text.TextHeadlineSmall
+import com.universall.appcore.ui.text.generics.components.TextHeadlineSmall
 import com.universall.appcore.ui.theme.locals.Locals
 import com.universall.appcore.ui.withShapedBackground
 import com.universall.auth_impl.R
@@ -37,6 +39,14 @@ private fun AuthModeSlider(
 ) {
     val colors = MaterialTheme.colorScheme
     val shapes = Locals.shapes
+
+    val loginTextColor by animateColorAsState(
+        targetValue = if (authMode == AuthMode.LOGIN) colors.onPrimary else colors.primary
+    )
+
+    val registerTextColor by animateColorAsState(
+        targetValue = if (authMode == AuthMode.REGISTER) colors.onPrimary else colors.primary
+    )
 
     Slider(
         modifier = modifier
@@ -67,15 +77,17 @@ private fun AuthModeSlider(
             contentAlignment = Alignment.Center
         ) {
             when (step) {
-                1 -> {
+                0 -> {
                     TextHeadlineSmall(
-                        text = stringResource(R.string.register),
+                        text = stringResource(R.string.login),
+                        color = loginTextColor
                     )
                 }
 
-                else -> {
+                1 -> {
                     TextHeadlineSmall(
-                        text = stringResource(R.string.login),
+                        text = stringResource(R.string.register),
+                        color = registerTextColor
                     )
                 }
             }

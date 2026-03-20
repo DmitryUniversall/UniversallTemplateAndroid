@@ -2,19 +2,23 @@ package com.universall.template.ui.screens.init_screen.components
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import com.universall.appcore.ui.buttons.generics.components.TertiaryButton
 import com.universall.appcore.ui.muted
 import com.universall.appcore.ui.state.ResourceState
-import com.universall.appcore.ui.text.TextBodyLarge
-import com.universall.appcore.ui.text.TextBodyMedium
-import com.universall.appcore.ui.text.TextDisplaySmall
+import com.universall.appcore.ui.text.generics.components.TextBodyLarge
+import com.universall.appcore.ui.text.generics.components.TextBodyMedium
+import com.universall.appcore.ui.text.generics.components.TextDisplaySmall
 import com.universall.appcore.ui.theme.locals.Locals
 import com.universall.template.R
+import com.universall.template.ui.screens.init_screen.InitIntent
 import com.universall.template.ui.screens.init_screen.InitScreenViewModel
 
 @Composable
@@ -38,7 +42,7 @@ fun InitErrorView(
 
         TextBodyLarge(
             text = state.errorMessage,
-            layoutOverride = {
+            styleOverride = {
                 textAlign = TextAlign.Center
             }
         )
@@ -48,11 +52,13 @@ fun InitErrorView(
             color = colors.onBackground.muted()
         )
 
-//        PrimaryGenericButton(
-//            text = stringResource(R.string.init_logout),
-//            onClick = {
-//                viewModel.onIntent(InitIntent.LocalLogout)
-//            }
-//        )
+        TertiaryButton(
+            modifier = Modifier
+                .fillMaxWidth(0.5f),
+            text = stringResource(R.string.init_logout),
+            onClick = {
+                viewModel.onIntent(InitIntent.LocalLogout)
+            }
+        )
     }
 }

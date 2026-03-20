@@ -15,10 +15,9 @@ import kotlinx.serialization.json.Json
 class AuthenticatedApiClientImpl(
     httpClient: HttpClient,
     json: Json,
-    retryCount: Int,
     private val getTokenPairUseCase: GetTokenPairUseCase,
     private val refreshUseCase: RefreshUseCase
-) : ApiClient(httpClient, json, retryCount) {
+) : ApiClient(httpClient, json) {
     override fun <T> setupMiddlewareChain(): ApiClientMiddlewareChain.Builder<ApiResponseContext<T>> {
         return super.setupMiddlewareChain<T>()
             .insertAfter(KtorExecuteMiddleware::class.java, AuthMiddleware(getTokenPairUseCase))

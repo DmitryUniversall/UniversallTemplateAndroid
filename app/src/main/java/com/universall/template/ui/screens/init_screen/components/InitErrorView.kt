@@ -7,10 +7,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import com.universall.appcore.ui.muted
 import com.universall.appcore.ui.state.ResourceState
-import com.universall.appcore.ui.text.TextBodySmall
-import com.universall.appcore.ui.text.TextHeadlineMedium
+import com.universall.appcore.ui.text.TextBodyLarge
+import com.universall.appcore.ui.text.TextBodyMedium
+import com.universall.appcore.ui.text.TextDisplaySmall
 import com.universall.appcore.ui.theme.locals.Locals
 import com.universall.template.R
 import com.universall.template.ui.screens.init_screen.InitScreenViewModel
@@ -27,14 +29,21 @@ fun InitErrorView(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(spacing.sm)
     ) {
-        TextHeadlineMedium(
-            text = "${stringResource(R.string.init_error)}: ${state.errorMessage}",
+        TextDisplaySmall(
+            text = stringResource(R.string.init_error),
             styleOverride = {
                 fontWeight = FontWeight.Bold
             }
         )
 
-        TextBodySmall(
+        TextBodyLarge(
+            text = state.errorMessage,
+            layoutOverride = {
+                textAlign = TextAlign.Center
+            }
+        )
+
+        TextBodyMedium(
             text = stringResource(R.string.init_pull_to_refresh),
             color = colors.onBackground.muted()
         )

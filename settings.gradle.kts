@@ -33,5 +33,9 @@ include(":modules:core:core")
 include(":modules:core:app-core")
 
 // Auth
-include(":modules:auth:auth-impl")
 include(":modules:auth:auth-api")
+include(":modules:auth:auth-impl")
+
+// Server tools
+include(":modules:server-tools:server-tools-api")
+include(":modules:server-tools:server-tools-impl")

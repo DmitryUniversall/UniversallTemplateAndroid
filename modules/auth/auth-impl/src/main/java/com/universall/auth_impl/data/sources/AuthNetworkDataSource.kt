@@ -15,7 +15,7 @@ import io.ktor.client.request.headers
 import io.ktor.client.request.setBody
 import io.ktor.http.HttpHeaders
 import io.ktor.http.HttpMethod
-import io.ktor.http.path
+import io.ktor.http.appendPathSegments
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
@@ -25,12 +25,12 @@ import javax.inject.Singleton
 class AuthNetworkDataSource @Inject constructor(
     private val apiClient: ApiClient
 ) {
-    private val authFeaturePath = "/auth"
+    private val authFeaturePathSegment = "/auth"
 
-    private val registerPath = "$authFeaturePath/register"
-    private val loginPath = "$authFeaturePath/login"
-    private val refreshPath = "$authFeaturePath/refresh"
-    private val fetchActualAuthContextPath = "$authFeaturePath/context"
+    private val registerPathSegment = "register"
+    private val loginPathSegment = "login"
+    private val refreshPathSegment = "refresh"
+    private val actualAuthContextPathSegment = "context"
 
     private fun getDefaultClientName(): String = "${Build.MANUFACTURER}-${Build.MODEL}"
 
@@ -47,7 +47,7 @@ class AuthNetworkDataSource @Inject constructor(
 
             apiClient.requestDataObject<RegisterResponseDTO> {
                 method = HttpMethod.Post
-                url { path(registerPath) }
+                url { appendPathSegments(authFeaturePathSegment, registerPathSegment) }
                 setBody(requestDto)
             }
         }
@@ -63,7 +63,7 @@ class AuthNetworkDataSource @Inject constructor(
 
             apiClient.requestDataObject<LoginResponseDTO> {
                 method = HttpMethod.Post
-                url { path(loginPath) }
+                url { appendPathSegments(authFeaturePathSegment, loginPathSegment) }
                 setBody(requestDto)
             }
         }
@@ -78,7 +78,7 @@ class AuthNetworkDataSource @Inject constructor(
 
             apiClient.requestDataObject<RefreshResponseDTO> {
                 method = HttpMethod.Post
-                url { path(refreshPath) }
+                url { appendPathSegments(authFeaturePathSegment, refreshPathSegment) }
                 setBody(requestDto)
             }
         }
@@ -88,7 +88,7 @@ class AuthNetworkDataSource @Inject constructor(
         return@withContext runCatching {
             apiClient.requestDataObject<GetCurrentAuthContextResponseDTO> {
                 method = HttpMethod.Get
-                url { path(fetchActualAuthContextPath) }
+                url { appendPathSegments(authFeaturePathSegment, actualAuthContextPathSegment) }
                 headers {
                     set(HttpHeaders.Authorization, "Bearer $accessToken")
                 }

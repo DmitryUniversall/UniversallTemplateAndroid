@@ -7,10 +7,13 @@ import com.universall.appcore.ui.state.toError
 import com.universall.appcore.ui.state.toLoading
 import com.universall.appcore.ui.state.toRefreshing
 import com.universall.appcore.ui.state.toSuccess
+import com.universall.appcore.utils.logError
 import com.universall.appcore.utils.logWarn
 import com.universall.auth_api.domain.usecases.LocalLogoutUseCase
 import com.universall.auth_api.domain.usecases.RestoreAuthStateUseCase
 import com.universall.auth_impl.ui.navigation.AuthDestination
+import com.universall.core.utils.messageOrDefault
+import com.universall.server_tools_api.domain.usecases.PingServerUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -23,7 +26,8 @@ import javax.inject.Inject
 @HiltViewModel
 class InitScreenViewModel @Inject constructor(
     private val restoreAuthStateUseCase: RestoreAuthStateUseCase,
-    private val localLogoutUseCase: LocalLogoutUseCase
+    private val localLogoutUseCase: LocalLogoutUseCase,
+    private val pingServerUseCase: PingServerUseCase
 ) : ViewModel() {
     private val _uiState = MutableStateFlow(InitUIState.empty())
     val uiState = _uiState.asStateFlow()
@@ -38,20 +42,39 @@ class InitScreenViewModel @Inject constructor(
 
         _uiState.update { it.copy(restoreAuthRequestState = if (refresh) it.restoreAuthRequestState.toRefreshing() else it.restoreAuthRequestState.toLoading()) }
 
-        _uiState.update { state ->
-            state.copy(
-                restoreAuthRequestState = restoreAuthStateUseCase.invoke().fold(
-                    onSuccess = {
-                        state.restoreAuthRequestState.toSuccess(Unit).also {
-                            _effects.emit(InitUIEffect.Navigate(AuthDestination))
-                        }
-                    },
-                    onFailure = { error ->
-                        state.restoreAuthRequestState.toError(error.message ?: "Unknown error during auth restore", error)
-                    }
+        pingServerUseCase.invoke().exceptionOrNull()?.let { error ->
+            this.logError(error) { "Unexpected error occurred" }
+
+            _uiState.update { state ->
+                state.copy(
+                    restoreAuthRequestState = state.restoreAuthRequestState.toError(
+                        error.messageOrDefault("Server unreachable"),  // TODO: Use string resources
+                        error
+                    )
                 )
-            )
+            }
+
+            return
         }
+
+        val restoreAuthStateResult = restoreAuthStateUseCase.invoke()
+
+        val newRestoreState = restoreAuthStateResult.fold(
+            onSuccess = {
+                _effects.emit(InitUIEffect.Navigate(AuthDestination))
+                _uiState.value.restoreAuthRequestState.toSuccess(Unit)
+            },
+            onFailure = { error ->
+                this.logError(error) { "Unexpected error occurred" }
+
+                _uiState.value.restoreAuthRequestState.toError(
+                    errorMessage = error.messageOrDefault("Unknown error during auth restore"),
+                    throwable = error
+                )
+            }
+        )
+
+        _uiState.update { it.copy(restoreAuthRequestState = newRestoreState) }
     }
 
     suspend fun localLogout() {

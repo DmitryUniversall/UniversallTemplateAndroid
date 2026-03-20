@@ -44,7 +44,13 @@ dependencies {
     implementation(project(":modules:auth:auth-api"))
     implementation(project(":modules:auth:auth-impl"))
 
+    implementation(project(":modules:server-tools:server-tools-api"))
+    implementation(project(":modules:server-tools:server-tools-impl"))
+
     implementation(libs.androidx.activity.compose)
     implementation(libs.phosphor.icon)
     implementation(libs.google.crypto.tink)
+
+    implementation(libs.slf4j.api)
+    implementation(libs.logback.android)
 }

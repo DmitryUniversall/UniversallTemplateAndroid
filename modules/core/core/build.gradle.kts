@@ -18,6 +18,6 @@ kotlin {
 }
 
 dependencies {
-    implementation(libs.slf4j.api)
+    api(libs.slf4j.api)
     implementation(libs.kotlinx.coroutines.core)
 }

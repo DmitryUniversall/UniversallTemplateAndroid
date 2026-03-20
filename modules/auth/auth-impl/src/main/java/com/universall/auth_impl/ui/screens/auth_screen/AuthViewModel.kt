@@ -6,6 +6,7 @@ import com.universall.appcore.ui.state.isFetching
 import com.universall.appcore.ui.state.toError
 import com.universall.appcore.ui.state.toLoading
 import com.universall.appcore.ui.state.toSuccess
+import com.universall.appcore.utils.logError
 import com.universall.appcore.utils.logWarn
 import com.universall.auth_api.domain.schemas.LoginSchema
 import com.universall.auth_api.domain.schemas.RegisterSchema
@@ -44,7 +45,10 @@ class AuthViewModel @Inject constructor(
                 loginRequestState = loginUseCase.invoke(schema)
                     .fold(
                         onSuccess = { state.loginRequestState.toSuccess(Unit) },
-                        onFailure = { error -> state.loginRequestState.toError(error.message ?: "Unknown auth error", error) }
+                        onFailure = { error ->
+                            this.logError(error) { "Unexpected error occurred" }
+                            state.loginRequestState.toError(error.message ?: "Unknown auth error", error)
+                        }
                     )
             )
         }
@@ -62,7 +66,10 @@ class AuthViewModel @Inject constructor(
             state.copy(
                 registerRequestState = registerUseCase.invoke(schema).fold(
                     onSuccess = { state.registerRequestState.toSuccess(Unit) },
-                    onFailure = { error -> state.registerRequestState.toError(error.message ?: "Unknown auth error", error) }
+                    onFailure = { error ->
+                        this.logError(error) { "Unexpected error occurred" }
+                        state.registerRequestState.toError(error.message ?: "Unknown auth error", error)
+                    }
                 )
             )
         }

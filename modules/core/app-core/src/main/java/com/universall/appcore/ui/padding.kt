@@ -85,6 +85,18 @@ import com.universall.appcore.ui.theme.locals.Locals
 @Composable fun Modifier.paddingHorizontalScreen() = this.padding(horizontal = Locals.spacing.screenPadding)
 @Composable fun Modifier.paddingVerticalScreen() = this.padding(vertical = Locals.spacing.screenPadding)
 
+
+@Composable
+fun PaddingValues.add(all: Dp = 0.dp): PaddingValues {
+    val layoutDirection = LocalLayoutDirection.current
+    return PaddingValues(
+        start = calculateStartPadding(layoutDirection) + all,
+        top = calculateTopPadding() + all,
+        end = calculateEndPadding(layoutDirection) + all,
+        bottom = calculateBottomPadding() + all
+    )
+}
+
 @Composable
 fun PaddingValues.add(horizontal: Dp = 0.dp, vertical: Dp = 0.dp): PaddingValues {
     val layoutDirection = LocalLayoutDirection.current

@@ -32,7 +32,7 @@ class SessionsNetworkDataSource @Inject constructor(
 
     suspend fun logout(): Result<Unit> = withContext(Dispatchers.IO) {
         return@withContext runCatching {
-            authenticatedApiClient.requestUnit<Unit> {
+            authenticatedApiClient.requestUnit {
                 method = HttpMethod.Delete
                 url { path(logoutPath) }
             }
@@ -43,7 +43,7 @@ class SessionsNetworkDataSource @Inject constructor(
 
     suspend fun revokeSession(sessionUuid: String): Result<Unit> = withContext(Dispatchers.IO) {
         return@withContext runCatching {
-            authenticatedApiClient.requestUnit<Unit> {
+            authenticatedApiClient.requestUnit {
                 method = HttpMethod.Delete
                 url { path(revokeSessionPath.format(sessionUuid)) }
             }
@@ -54,7 +54,7 @@ class SessionsNetworkDataSource @Inject constructor(
 
     suspend fun revokeAllSessionsExceptCurrent(): Result<Unit> = withContext(Dispatchers.IO) {
         return@withContext runCatching {
-            authenticatedApiClient.requestUnit<Unit> {
+            authenticatedApiClient.requestUnit {
                 method = HttpMethod.Delete
                 url { path(revokeAllSessionsExceptCurrentPath) }
             }

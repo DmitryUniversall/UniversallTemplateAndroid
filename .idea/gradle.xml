@@ -38,6 +38,9 @@
             <option value="$PROJECT_DIR$/modules/core" />
             <option value="$PROJECT_DIR$/modules/core/app-core" />
             <option value="$PROJECT_DIR$/modules/core/core" />
+            <option value="$PROJECT_DIR$/modules/server-tools" />
+            <option value="$PROJECT_DIR$/modules/server-tools/server-tools-api" />
+            <option value="$PROJECT_DIR$/modules/server-tools/server-tools-impl" />
           </set>
         </option>
       </GradleProjectSettings>

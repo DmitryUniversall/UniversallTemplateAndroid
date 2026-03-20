@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">UniversallTemplate</string>
     <string name="init_welcome">Welcome</string>
-    <string name="init_error">Error</string>
+    <string name="init_error">Unexpected error occurred</string>
     <string name="init_refresh">Refresh</string>
     <string name="init_logout">Logout</string>
     <string name="init_pull_to_refresh">Pull to refresh</string>

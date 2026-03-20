@@ -1,5 +1,6 @@
 package com.universall.appcore.network.api.middleware
 
+import com.universall.appcore.dto.ApiResponseDTO
 import com.universall.appcore.network.api.base.ApiRequestContext
 import com.universall.appcore.network.api.base.ApiResponseContext
 import com.universall.appcore.network.impl.api.base.middleware.ApiClientMiddleware
@@ -22,10 +23,10 @@ class ApiResponseParseMiddleware<T>(
         val httpResponse = next(input) as HttpResponse
         val text = httpResponse.bodyAsText()
 
-        val apiResponseJson = json.decodeFromString<ApiResponse<JsonElement>>(text)
+        val dto = json.decodeFromString<ApiResponseDTO<JsonElement>>(text)
 
         val skip = context.getFromMeta<Boolean>("skipDataSerialization") ?: false
-        val data: T? = if (skip) null else apiResponseJson.data?.let {
+        val data: T? = if (skip) null else dto.data?.let {
             val serializer = context.getFromMeta<KSerializer<T>>("dataSerializer") ?: throw IllegalStateException("dataSerializer for type T not found in request context")
             json.decodeFromJsonElement(serializer, it)
         }
@@ -33,9 +34,9 @@ class ApiResponseParseMiddleware<T>(
         return ApiResponseContext(
             httpResponse = httpResponse,
             apiResponse = ApiResponse(
-                ok = apiResponseJson.ok,
-                appCode = apiResponseJson.appCode,
-                message = apiResponseJson.message,
+                ok = dto.ok,
+                appCode = dto.appCode,
+                message = dto.message,
                 data = data
             )
         )

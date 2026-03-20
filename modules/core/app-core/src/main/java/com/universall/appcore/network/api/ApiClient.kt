@@ -8,6 +8,7 @@ import com.universall.appcore.network.api.middleware.ApiResponseParseMiddleware
 import com.universall.appcore.network.api.middleware.AppCodeProcessingMiddleware
 import com.universall.appcore.network.api.middleware.KtorExecuteMiddleware
 import com.universall.appcore.network.api.middleware.RetryRequestMiddleware
+import com.universall.appcore.network.di.qualifiers.CoreHttpClient
 import io.ktor.client.HttpClient
 import io.ktor.client.request.HttpRequestBuilder
 import kotlinx.serialization.json.Json
@@ -16,12 +17,11 @@ import kotlinx.serialization.serializer
 open class ApiClient(
     protected val httpClient: HttpClient,
     protected val json: Json,
-    protected val retryCount: Int
 ) : CoreApiClient() {
     override fun <T> setupMiddlewareChain(): ApiClientMiddlewareChain.Builder<ApiResponseContext<T>> {
         return ApiClientMiddlewareChain.Builder<ApiResponseContext<T>>()
             .add(KtorExecuteMiddleware(httpClient))
-            .add(RetryRequestMiddleware(retryCount))
+            .add(RetryRequestMiddleware())
             .add(ApiResponseParseMiddleware<T>(json))
             .add(AppCodeProcessingMiddleware())
     }
@@ -43,13 +43,13 @@ open class ApiClient(
         return requestData<T>(contextBuilder, build).apiResponse.data!!
     }
 
-    suspend inline fun <reified T> requestUnit(
+    suspend inline fun requestUnit(
         contextBuilder: ApiRequestContext.Builder? = null,
         noinline build: HttpRequestBuilder.() -> Unit
-    ): T {
+    ): ApiResponseContext<Unit> {
         val contextBuilder = (contextBuilder ?: ApiRequestContext.Builder())
-            .setDefaultMeta("skipDataSerialization", serializer<T>())
+            .setDefaultMeta("skipDataSerialization", true)
 
-        return request<T>(contextBuilder, build).apiResponse.data!!
+        return request(contextBuilder, build)
     }
 }

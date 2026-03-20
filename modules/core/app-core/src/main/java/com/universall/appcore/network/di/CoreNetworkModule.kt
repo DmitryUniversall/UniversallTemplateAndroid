@@ -4,7 +4,7 @@ import com.universall.appcore.BuildConfig
 import com.universall.appcore.network.api.ApiClient
 import com.universall.appcore.network.di.qualifiers.CoreHttpClient
 import com.universall.appcore.network.di.qualifiers.CoreHttpClientConfig
-import com.universall.appcore.network.impl.ktor.plugins.KtorResponseLoggerPlugin
+import com.universall.appcore.network.ktor.plugins.KtorResponseLoggerPlugin
 import com.universall.appcore.serialization.di.qualifiers.CoreJson
 import dagger.Module
 import dagger.Provides
@@ -38,9 +38,9 @@ object CoreNetworkModule {
             }
 
             install(HttpTimeout) {
-                requestTimeoutMillis = 30000
-                connectTimeoutMillis = 30000
-                socketTimeoutMillis = 30000
+                requestTimeoutMillis = 10_000
+                connectTimeoutMillis = 10_000
+                socketTimeoutMillis = 10_000
             }
 
             defaultRequest {
@@ -59,14 +59,19 @@ object CoreNetworkModule {
 
     @Provides
     @Singleton
+    fun provideHttpClient(@CoreHttpClient client: HttpClient): HttpClient {
+        return client
+    }
+
+    @Provides
+    @Singleton
     fun provideApiClient(
         @CoreHttpClient httpClient: HttpClient,
         @CoreJson json: Json,
     ): ApiClient {
         return ApiClient(
             httpClient = httpClient,
-            json = json,
-            retryCount = BuildConfig.NETWORK_REQUEST_RETRY_COUNT
+            json = json
         )
     }
 }

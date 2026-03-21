@@ -48,7 +48,7 @@ class InitScreenViewModel @Inject constructor(
             _uiState.update { state ->
                 state.copy(
                     restoreAuthRequestState = state.restoreAuthRequestState.toError(
-                        error.messageOrDefault("Server unreachable"),  // TODO: Use string resources
+                        error.messageOrDefault(""),
                         error
                     )
                 )
@@ -68,7 +68,7 @@ class InitScreenViewModel @Inject constructor(
                 this.logError(error) { "Unexpected error occurred" }
 
                 _uiState.value.restoreAuthRequestState.toError(
-                    errorMessage = error.messageOrDefault("Unknown error during auth restore"),
+                    errorMessage = error.messageOrDefault(""),
                     throwable = error
                 )
             }

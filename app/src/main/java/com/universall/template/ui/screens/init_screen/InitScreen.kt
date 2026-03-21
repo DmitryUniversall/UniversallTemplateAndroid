@@ -54,7 +54,7 @@ fun InitScreen(
             .fillMaxSize()
             .padding(innerPadding),
         state = pullRefreshState,
-        isRefreshing = false,
+        isRefreshing = false,  // We already have loading indicator in InitLoadingView
         onRefresh = {
             if (!uiState.restoreAuthRequestState.isFetching) viewModel.onIntent(InitIntent.Refresh)
         }

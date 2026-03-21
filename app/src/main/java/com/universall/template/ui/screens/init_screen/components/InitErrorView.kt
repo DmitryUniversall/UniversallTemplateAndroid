@@ -41,7 +41,7 @@ fun InitErrorView(
         )
 
         TextBodyLarge(
-            text = state.errorMessage,
+            text = state.errorMessage.ifEmpty { stringResource(R.string.init_unknown_error) },
             styleOverride = {
                 textAlign = TextAlign.Center
             }

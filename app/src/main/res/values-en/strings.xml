@@ -6,4 +6,5 @@
     <string name="init_logout">Logout</string>
     <string name="init_pull_to_refresh">Pull to refresh</string>
     <string name="init_success">Login successful</string>
+    <string name="init_unknown_error">Unknown error</string>
 </resources>

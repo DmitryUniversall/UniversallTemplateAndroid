@@ -11,6 +11,8 @@ sealed interface UIString {
     companion object {
         fun of(value: String): UIString = DynamicString(value)
         fun resource(@androidx.annotation.StringRes resId: Int, vararg args: Any): UIString = StringRes(resId, args.toList())
+
+        fun empty(): UIString = of("")
     }
 
     fun asString(context: Context): String {

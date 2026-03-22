@@ -2,6 +2,7 @@ package com.universall.appcore.ui.fields
 
 import com.universall.appcore.utils.UIString
 
+// TODO: Make it stable and immutable
 data class FieldState<T>(
     val value: T,
     val errorMessage: UIString? = null,

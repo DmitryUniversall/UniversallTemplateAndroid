@@ -5,6 +5,7 @@ import com.universall.appcore.utils.UIString
 private const val MAX_STATE_SEARCH_DEPTH = 32
 
 
+// TODO: Make it stable and immutable
 sealed class ResourceState<out T> {
     object Idle : ResourceState<Nothing>()
 

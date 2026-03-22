@@ -24,36 +24,9 @@ import kotlinx.coroutines.launch
 
 @HiltViewModel
 class AuthViewModel @Inject constructor(
-    private val loginUseCase: LoginUseCase,
     private val registerUseCase: RegisterUseCase
 ) : ViewModel() {
-    private val _uiState = MutableStateFlow(AuthUIState.empty())
-    val uiState = _uiState.asStateFlow()
 
-    private val _effects = MutableSharedFlow<AuthUIEffect>()
-    val effects = _effects.asSharedFlow()
-
-    private suspend fun login(schema: LoginSchema) {
-        if (_uiState.value.isFetchingAnything) {
-            this.logWarn { "Called login during fetch, ignoring" }
-            return
-        }
-
-        _uiState.update { it.copy(loginRequestState = it.loginRequestState.toLoading()) }
-
-        _uiState.update { state ->
-            state.copy(
-                loginRequestState = loginUseCase.invoke(schema)
-                    .fold(
-                        onSuccess = { state.loginRequestState.toSuccess(Unit) },
-                        onFailure = { error ->
-                            this.logError(error) { "Unexpected error occurred" }
-                            state.loginRequestState.toError(UIString.of(error.message ?: "Unknown auth error"), error)
-                        }
-                    )
-            )
-        }
-    }
 
     private suspend fun register(schema: RegisterSchema) {
         if (_uiState.value.isFetchingAnything) {

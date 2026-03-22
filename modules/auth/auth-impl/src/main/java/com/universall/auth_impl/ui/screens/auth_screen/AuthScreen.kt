@@ -92,11 +92,7 @@ fun AuthScreen(
                 top = innerPadding.calculateTopPadding() + spacing.screenPadding,
                 bottom = innerPadding.calculateBottomPadding() + spacing.screenPadding
             )
-            .pointerInput(Unit) {
-                detectTapGestures(onTap = {
-                    focusManager.clearFocus()
-                })
-            },
+            ,
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(spacing.lg)
     ) {

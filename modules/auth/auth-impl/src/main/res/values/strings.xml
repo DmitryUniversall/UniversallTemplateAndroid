@@ -13,4 +13,6 @@
     <string name="unknown_auth_error">Unknown auth error</string>
     <string name="empty_field_error">Field should not be empty</string>
     <string name="value_too_short_error">Value too short</string>
+    <string name="have_no_account">Have no account?</string>
+    <string name="sign_in_suggestion">Sign in</string>
 </resources>

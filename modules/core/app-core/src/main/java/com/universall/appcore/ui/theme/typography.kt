@@ -15,12 +15,9 @@ val provider = GoogleFont.Provider(
     certificates = R.array.com_google_android_gms_fonts_certs
 )
 
-private val MontserratFont = GoogleFont("Montserrat")
+private val AppFontName = GoogleFont("Roboto")
 private val AppFontFamily = FontFamily(
-    Font(googleFont = MontserratFont, fontProvider = provider),
-    Font(googleFont = MontserratFont, fontProvider = provider, weight = FontWeight.Bold),
-    Font(googleFont = MontserratFont, fontProvider = provider, weight = FontWeight.Medium),
-    Font(googleFont = MontserratFont, fontProvider = provider, weight = FontWeight.SemiBold),
+    Font(googleFont = AppFontName, fontProvider = provider),
 )
 
 val AppTypography = Typography(

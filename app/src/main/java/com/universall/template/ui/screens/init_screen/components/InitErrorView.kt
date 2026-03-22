@@ -17,6 +17,7 @@ import com.universall.appcore.ui.text.generics.components.TextBodyLarge
 import com.universall.appcore.ui.text.generics.components.TextBodyMedium
 import com.universall.appcore.ui.text.generics.components.TextDisplaySmall
 import com.universall.appcore.ui.theme.locals.Locals
+import com.universall.appcore.utils.asStringOrIfEmpty
 import com.universall.template.R
 import com.universall.template.ui.screens.init_screen.InitIntent
 import com.universall.template.ui.screens.init_screen.InitScreenViewModel
@@ -41,7 +42,7 @@ fun InitErrorView(
         )
 
         TextBodyLarge(
-            text = state.errorMessage.ifEmpty { stringResource(R.string.init_unknown_error) },
+            text = state.errorMessage.asStringOrIfEmpty { stringResource(R.string.init_unknown_error) },
             styleOverride = {
                 textAlign = TextAlign.Center
             }

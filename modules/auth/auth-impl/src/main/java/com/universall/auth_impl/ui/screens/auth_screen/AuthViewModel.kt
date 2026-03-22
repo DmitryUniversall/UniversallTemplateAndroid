@@ -2,16 +2,17 @@ package com.universall.auth_impl.ui.screens.auth_screen
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.universall.appcore.ui.state.isFetching
 import com.universall.appcore.ui.state.toError
 import com.universall.appcore.ui.state.toLoading
 import com.universall.appcore.ui.state.toSuccess
+import com.universall.appcore.utils.UIString
 import com.universall.appcore.utils.logError
 import com.universall.appcore.utils.logWarn
 import com.universall.auth_api.domain.schemas.LoginSchema
 import com.universall.auth_api.domain.schemas.RegisterSchema
 import com.universall.auth_api.domain.usecases.LoginUseCase
 import com.universall.auth_api.domain.usecases.RegisterUseCase
+import com.universall.auth_impl.R
 import dagger.hilt.android.lifecycle.HiltViewModel
 import jakarta.inject.Inject
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -33,7 +34,7 @@ class AuthViewModel @Inject constructor(
     val effects = _effects.asSharedFlow()
 
     private suspend fun login(schema: LoginSchema) {
-        if (_uiState.value.loginRequestState.isFetching || _uiState.value.registerRequestState.isFetching) {
+        if (_uiState.value.isFetchingAnything) {
             this.logWarn { "Called login during fetch, ignoring" }
             return
         }
@@ -47,7 +48,7 @@ class AuthViewModel @Inject constructor(
                         onSuccess = { state.loginRequestState.toSuccess(Unit) },
                         onFailure = { error ->
                             this.logError(error) { "Unexpected error occurred" }
-                            state.loginRequestState.toError(error.message ?: "Unknown auth error", error)
+                            state.loginRequestState.toError(UIString.of(error.message ?: "Unknown auth error"), error)
                         }
                     )
             )
@@ -55,7 +56,7 @@ class AuthViewModel @Inject constructor(
     }
 
     private suspend fun register(schema: RegisterSchema) {
-        if (_uiState.value.loginRequestState.isFetching || _uiState.value.registerRequestState.isFetching) {
+        if (_uiState.value.isFetchingAnything) {
             this.logWarn { "Called register during fetch, ignoring" }
             return
         }
@@ -68,20 +69,114 @@ class AuthViewModel @Inject constructor(
                     onSuccess = { state.registerRequestState.toSuccess(Unit) },
                     onFailure = { error ->
                         this.logError(error) { "Unexpected error occurred" }
-                        state.registerRequestState.toError(error.message ?: "Unknown auth error", error)
+                        state.registerRequestState.toError(UIString.of(error.message ?: "Unknown auth error"), error)
                     }
                 )
             )
         }
     }
 
+    private fun validateLoginInput(input: AuthUIState.LoginInputInfo) {
+        var hasValidationErrors = false
+
+        _uiState.update { state ->
+            state.copy(
+                loginInputInfo = AuthUIState.LoginInputInfo(
+                    login = input.login.validate {
+                        if (value.isEmpty()) {
+                            hasValidationErrors = true
+                            errorMessage = UIString.resource(R.string.empty_field_error)
+                            return@validate
+                        }
+
+                        if (value.length < 3) {
+                            hasValidationErrors = true
+                            errorMessage = UIString.resource(R.string.value_too_short_error)
+                            return@validate
+                        }
+                    },
+                    password = input.password.validate {
+                        if (value.isEmpty()) {
+                            hasValidationErrors = true
+                            errorMessage = UIString.resource(R.string.empty_field_error)
+                            return@validate
+                        }
+
+                        if (value.length < 3) {
+                            hasValidationErrors = true
+                            errorMessage = UIString.resource(R.string.value_too_short_error)
+                            return@validate
+                        }
+                    },
+                    isLoginButtonEnabled = !hasValidationErrors
+                )
+            )
+        }
+    }
+
+    private fun validateRegisterInput(input: AuthUIState.RegisterInputInfo) {
+        _uiState.update { it.copy(registerInputInfo = input) }
+    }
+
+    private fun processLoginValidateIntent(intent: AuthUIIntent.Validate.Login) {
+        when (intent) {
+            is AuthUIIntent.Validate.Login.LoginField -> _uiState.update { state ->
+                state.copy(
+                    loginInputInfo = AuthUIState.LoginInputInfo(
+                        login = intent.fieldState.validate {
+                            if (value.isEmpty()) {
+                                errorMessage = UIString.resource(R.string.empty_field_error)
+                                return@validate
+                            }
+
+                            if (value.length < 3) {
+                                errorMessage = UIString.resource(R.string.value_too_short_error)
+                                return@validate
+                            }
+                        }
+                    )
+                )
+            }
+
+            is AuthUIIntent.Validate.Login.PasswordField -> TODO()
+        }
+    }
+
+    private fun processRegisterValidateIntent(intent: AuthUIIntent.Validate.Register) {
+
+    }
+
+    private fun processValidateIntent(intent: AuthUIIntent.Validate) {
+
+    }
+
     fun onIntent(intent: AuthUIIntent) {
         when (intent) {
+            is AuthUIIntent.SetAuthMode -> _uiState.update { it.copy(authMode = intent.authMode) }
             is AuthUIIntent.InputLogin -> _uiState.update { it.copy(loginInputInfo = intent.input) }
             is AuthUIIntent.InputRegister -> _uiState.update { it.copy(registerInputInfo = intent.input) }
-            is AuthUIIntent.SendLogin -> viewModelScope.launch { login(intent.schema) }
-            is AuthUIIntent.SendRegister -> viewModelScope.launch { register(intent.schema) }
-            is AuthUIIntent.SetAuthMode -> _uiState.update { it.copy(authMode = intent.authMode) }
+            is AuthUIIntent.Validate -> processValidateIntent(intent)
+
+            is AuthUIIntent.SendLogin -> viewModelScope.launch {
+                login(
+                    schema = LoginSchema(
+                        login = intent.input.login.value,
+                        password = intent.input.password.value
+                    )
+                )
+            }
+
+            is AuthUIIntent.SendRegister -> viewModelScope.launch {
+                register(
+                    schema = RegisterSchema(
+                        login = intent.input.login.value,
+                        password = intent.input.password.value,
+                        firstName = intent.input.firstName.value,
+                        lastName = intent.input.lastName.value,
+                        username = intent.input.username.value
+                    )
+                )
+            }
         }
     }
 

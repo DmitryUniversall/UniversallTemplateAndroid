@@ -7,6 +7,7 @@ import com.universall.appcore.ui.state.toError
 import com.universall.appcore.ui.state.toLoading
 import com.universall.appcore.ui.state.toRefreshing
 import com.universall.appcore.ui.state.toSuccess
+import com.universall.appcore.utils.UIString
 import com.universall.appcore.utils.logError
 import com.universall.appcore.utils.logWarn
 import com.universall.auth_api.domain.usecases.LocalLogoutUseCase
@@ -48,7 +49,7 @@ class InitScreenViewModel @Inject constructor(
             _uiState.update { state ->
                 state.copy(
                     restoreAuthRequestState = state.restoreAuthRequestState.toError(
-                        error.messageOrDefault(""),
+                        UIString.of(error.messageOrDefault("")),
                         error
                     )
                 )
@@ -68,7 +69,7 @@ class InitScreenViewModel @Inject constructor(
                 this.logError(error) { "Unexpected error occurred" }
 
                 _uiState.value.restoreAuthRequestState.toError(
-                    errorMessage = error.messageOrDefault(""),
+                    errorMessage = UIString.of(error.messageOrDefault("")),
                     throwable = error
                 )
             }

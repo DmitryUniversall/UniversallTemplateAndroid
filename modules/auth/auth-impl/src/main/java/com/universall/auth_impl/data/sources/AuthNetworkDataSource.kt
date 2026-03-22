@@ -25,7 +25,7 @@ import javax.inject.Singleton
 class AuthNetworkDataSource @Inject constructor(
     private val apiClient: ApiClient
 ) {
-    private val authFeaturePathSegment = "/auth"
+    private val authFeaturePathSegment = "auth"
 
     private val registerPathSegment = "register"
     private val loginPathSegment = "login"

@@ -13,6 +13,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.universall.appcore.ui.muted
@@ -55,11 +56,12 @@ private fun AuthModeSlider(
                 color = colors.surface,
                 shape = shapes.roundedXS
             )
+            .then(if (!enabled) Modifier.alpha(0.7f) else Modifier)
             .paddingXS(),
         totalSteps = 2,
         selectedStep = if (authMode == AuthMode.LOGIN) 0 else 1,
         animationSpec = animationSpec,
-        sliderColor = if (enabled) colors.primary else colors.primary.muted(),
+        sliderColor = colors.primary,
         sliderShape = shapes.roundedXS
     ) { step ->
         Box(
@@ -79,7 +81,7 @@ private fun AuthModeSlider(
             when (step) {
                 0 -> {
                     TextHeadlineSmall(
-                        text = stringResource(R.string.login),
+                        text = stringResource(R.string.login_field),
                         color = loginTextColor
                     )
                 }
@@ -100,9 +102,8 @@ fun AuthModeSelector(
     modifier: Modifier = Modifier,
     viewModel: AuthViewModel,
     currentMode: AuthMode,
-    loginRequestState: ResourceState<Unit>,
-    registerRequestState: ResourceState<Unit>,
-    animationSpec: AnimationSpec<Float>
+    animationSpec: AnimationSpec<Float>,
+    inputEnabled: Boolean
 ) {
     Row(
         modifier = modifier
@@ -114,7 +115,7 @@ fun AuthModeSelector(
         AuthModeSlider(
             viewModel = viewModel,
             authMode = currentMode,
-            enabled = !(loginRequestState.isFetching || registerRequestState.isFetching),
+            enabled = inputEnabled,
             animationSpec = animationSpec
         )
     }

@@ -12,7 +12,6 @@ import com.universall.appcore.ui.text.generics.AppTextDefaults
 fun TertiaryButton(
     modifier: Modifier = Modifier,
     onClick: () -> Unit,
-    buttonStyle: AppButtonStyle = AppButtonDefaults.tertiary(),
     text: String? = null,
     enabled: Boolean = true,
     leading: (@Composable (() -> Unit))? = null,
@@ -25,7 +24,7 @@ fun TertiaryButton(
     GenericStyledButton(
         modifier = modifier,
         onClick = onClick,
-        buttonStyle = buttonStyle,
+        buttonStyle = AppButtonDefaults.tertiary(),
         text = text,
         enabled = enabled,
         leading = leading,

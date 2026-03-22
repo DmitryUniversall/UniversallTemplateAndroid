@@ -33,7 +33,7 @@ class ApiClientMiddlewareChain<FinalOut>(
         return middleware.proceed(context = context, next = nextStep, input = input)
     }
 
-    class Builder<FinalT>(  // TODO: Add <FinalT> for compile-time type-safety
+    class Builder<FinalT>(
         private val steps: MutableList<ApiClientMiddleware<*, *>> = ArrayList()
     ) {
         companion object {

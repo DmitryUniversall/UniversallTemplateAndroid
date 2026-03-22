@@ -1,5 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="login">Login</string>
+    <string name="login_field">Login</string>
     <string name="register">Register</string>
+    <string name="welcome_back">Welcome back</string>
+    <string name="log_in_to_continue">Log in to continue</string>
+    <string name="forgotPassword">Forgot password?</string>
+    <string name="password_field">Password</string>
+    <string name="first_name_field">First name</string>
+    <string name="last_name_field">Last name</string>
+    <string name="login_action">Login</string>
+    <string name="register_action">Register</string>
+    <string name="empty_field_error">Field should not be empty</string>
+    <string name="value_too_short_error">Value too short</string>
+    <string name="unknown_auth_error">Unknown auth error</string>
 </resources>

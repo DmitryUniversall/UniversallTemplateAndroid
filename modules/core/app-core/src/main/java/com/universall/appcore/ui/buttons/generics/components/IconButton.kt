@@ -1,9 +1,7 @@
 package com.universall.appcore.ui.buttons.generics.components
 
-import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Icon
 import androidx.compose.material3.LocalContentColor
 import androidx.compose.runtime.Composable
@@ -25,17 +23,15 @@ fun IconButton(
     enabled: Boolean = true,
     leading: (@Composable (() -> Unit))? = null,
     trailing: (@Composable (() -> Unit))? = null,
-    buttonStyle: AppButtonStyle = AppButtonDefaults.icon(),
     buttonStyleOverrides: (AppButtonStyle.Builder.() -> Unit)? = null,
     content: (@Composable RowScope.() -> Unit)? = null
 ) {
-    val finalButtonStyle = buttonStyleOverrides?.let { buttonStyle.override(it) } ?: buttonStyle
+    val baseButtonStyle = AppButtonDefaults.icon()
+    val finalButtonStyle = buttonStyleOverrides?.let { baseButtonStyle.override(it) } ?: baseButtonStyle
 
     AppButton(
         onClick = onClick,
-        modifier = Modifier
-            .width(IntrinsicSize.Min)
-            .then(modifier),
+        modifier = modifier,
         enabled = enabled,
         style = finalButtonStyle,
         leading = leading,

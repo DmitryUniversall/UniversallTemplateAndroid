@@ -12,7 +12,6 @@ import com.universall.appcore.ui.text.generics.AppTextDefaults
 fun PrimaryOutlinedButton(
     modifier: Modifier = Modifier,
     onClick: () -> Unit,
-    buttonStyle: AppButtonStyle = AppButtonDefaults.primaryOutlined(),
     text: String? = null,
     enabled: Boolean = true,
     leading: (@Composable (() -> Unit))? = null,
@@ -25,7 +24,7 @@ fun PrimaryOutlinedButton(
     GenericStyledButton(
         modifier = modifier,
         onClick = onClick,
-        buttonStyle = buttonStyle,
+        buttonStyle = AppButtonDefaults.primaryOutlined(),
         text = text,
         enabled = enabled,
         leading = leading,

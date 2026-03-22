@@ -1,8 +1,6 @@
 package com.universall.appcore.ui.buttons.generics.components
 
-import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.RowScope
-import androidx.compose.foundation.layout.width
 import androidx.compose.material3.ProvideTextStyle
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -15,7 +13,7 @@ import com.universall.appcore.ui.text.generics.AppTextDefaults
 import com.universall.appcore.ui.text.override
 
 @Composable
-fun GenericStyledButton(
+internal fun GenericStyledButton(
     modifier: Modifier = Modifier,
     onClick: () -> Unit,
     buttonStyle: AppButtonStyle,
@@ -34,9 +32,7 @@ fun GenericStyledButton(
     ProvideTextStyle(finalTextStyle.textStyle) {
         AppButton(
             onClick = onClick,
-            modifier = Modifier
-                .width(IntrinsicSize.Min)
-                .then(modifier),
+            modifier = modifier,
             enabled = enabled,
             style = finalButtonStyle,
             leading = leading,

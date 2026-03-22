@@ -14,14 +14,14 @@ data class UserPrivateDTO(
 
     @SerialName("email")
     val login: String,
-
-    @Contextual
-    @SerialName("createdAt")
-    val createdAt: LocalDateTime,
+//
+//    @Contextual
+//    @SerialName("createdAt")
+//    val createdAt: LocalDateTime,
 ) {
     fun toEntity(): User = User(
         id = id,
         login = login,
-        createdAt = createdAt
+        createdAt = LocalDateTime.now()  // TODO
     )
 }

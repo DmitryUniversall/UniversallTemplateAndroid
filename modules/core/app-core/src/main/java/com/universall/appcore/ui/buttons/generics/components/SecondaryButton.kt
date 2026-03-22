@@ -12,7 +12,6 @@ import com.universall.appcore.ui.text.generics.AppTextDefaults
 fun SecondaryButton(
     modifier: Modifier = Modifier,
     onClick: () -> Unit,
-    buttonStyle: AppButtonStyle = AppButtonDefaults.secondary(),
     text: String? = null,
     enabled: Boolean = true,
     leading: (@Composable (() -> Unit))? = null,
@@ -25,7 +24,7 @@ fun SecondaryButton(
     GenericStyledButton(
         modifier = modifier,
         onClick = onClick,
-        buttonStyle = buttonStyle,
+        buttonStyle = AppButtonDefaults.secondary(),
         text = text,
         enabled = enabled,
         leading = leading,

@@ -1,5 +1,7 @@
 package com.universall.appcore.ui.state
 
+import com.universall.appcore.utils.UIString
+
 private const val MAX_STATE_SEARCH_DEPTH = 32
 
 
@@ -15,7 +17,7 @@ sealed class ResourceState<out T> {
     sealed class ResultState<T> : ResourceState<T>()
     data class Success<T>(val data: T) : ResultState<T>()
     data class Error<T>(
-        val errorMessage: String,
+        val errorMessage: UIString,
         val throwable: Throwable? = null,
         val lastResultState: ResultState<T>? = null
     ) : ResultState<T>()
@@ -100,7 +102,7 @@ fun <T> ResourceState<T>.toIdle(): ResourceState.Idle = ResourceState.Idle
 fun <T> ResourceState<T>.toSuccess(data: T): ResourceState.Success<T> = ResourceState.Success(data)
 fun <T> ResourceState<T>.toRefreshing(): ResourceState.Refreshing<T> = ResourceState.Refreshing(lastResultState = this.currentOrPreviousResult())
 fun <T> ResourceState<T>.toLoading(): ResourceState.Loading<T> = ResourceState.Loading(lastResultState = this.currentOrPreviousResult())
-fun <T> ResourceState<T>.toError(errorMessage: String, throwable: Throwable? = null, keepOnlyLastError: Boolean = true): ResourceState.Error<T> =
+fun <T> ResourceState<T>.toError(errorMessage: UIString, throwable: Throwable? = null, keepOnlyLastError: Boolean = true): ResourceState.Error<T> =
     // Setting keepOnlyLastError=false will create endless(limited by MAX_STATE_SEARCH_DEPTH) chain of errors
     // If MAX_STATE_SEARCH_DEPTH overflows, Success result can be deleted (replaced by errors)
 

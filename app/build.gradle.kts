@@ -48,6 +48,7 @@ dependencies {
     implementation(project(":modules:server-tools:server-tools-impl"))
 
     implementation(libs.androidx.activity.compose)
+    implementation(libs.androidx.compose.ui.text.google.fonts)
     implementation(libs.phosphor.icon)
     implementation(libs.google.crypto.tink)
 

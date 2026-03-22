@@ -12,7 +12,6 @@ import com.universall.appcore.ui.text.generics.AppTextDefaults
 fun PrimaryButton(
     modifier: Modifier = Modifier,
     onClick: () -> Unit,
-    buttonStyle: AppButtonStyle = AppButtonDefaults.primary(),
     text: String? = null,
     enabled: Boolean = true,
     leading: (@Composable (() -> Unit))? = null,
@@ -25,7 +24,7 @@ fun PrimaryButton(
     GenericStyledButton(
         modifier = modifier,
         onClick = onClick,
-        buttonStyle = buttonStyle,
+        buttonStyle = AppButtonDefaults.primary(),
         text = text,
         enabled = enabled,
         leading = leading,

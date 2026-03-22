@@ -1,5 +1,7 @@
 package com.universall.appcore.ui.text
 
+import androidx.compose.material3.LocalContentColor
+import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -7,10 +9,10 @@ import androidx.compose.ui.graphics.Color
 
 @Composable
 fun AppText(
-    text: String,
-    style: AppTextStyle,
     modifier: Modifier = Modifier,
-    color: Color = Color.Unspecified,
+    text: String,
+    style: AppTextStyle = AppTextStyle.Builder().fromTextStyle(LocalTextStyle.current).build(),
+    color: Color = LocalContentColor.current,
     styleOverrides: (AppTextStyle.Builder.() -> Unit)? = null
 ) {
     val finalStyle = styleOverrides?.let { style.override(it) } ?: style
@@ -19,7 +21,7 @@ fun AppText(
         text = text,
         modifier = modifier,
         color = color,
-        style = style.textStyle,
+        style = finalStyle.textStyle,
         textAlign = finalStyle.textAlign,
         overflow = finalStyle.overflow,
         softWrap = finalStyle.softWrap,

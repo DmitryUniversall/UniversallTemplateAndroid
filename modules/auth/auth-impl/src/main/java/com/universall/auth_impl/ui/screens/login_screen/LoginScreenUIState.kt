@@ -12,14 +12,14 @@ internal data class LoginScreenUIState(
     val passwordFieldState: FieldState<String>,
 
     // UI
-    val isSentButtonEnabled: Boolean
+    val isSendButtonEnabled: Boolean
 ) {
     companion object {
         fun empty(): LoginScreenUIState = LoginScreenUIState(
             loginRequestState = ResourceState.Idle,
             loginFieldState = FieldState(""),
             passwordFieldState = FieldState(""),
-            isSentButtonEnabled = false
+            isSendButtonEnabled = false
         )
     }
 }

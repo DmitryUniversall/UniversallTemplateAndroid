@@ -34,8 +34,8 @@ import com.universall.appcore.ui.withShapedBackground
 
 @Composable
 internal fun AppButton(
-    onClick: () -> Unit,
     modifier: Modifier,
+    onClick: () -> Unit,
     enabled: Boolean,
     style: AppButtonStyle,
     leading: (@Composable (() -> Unit))?,

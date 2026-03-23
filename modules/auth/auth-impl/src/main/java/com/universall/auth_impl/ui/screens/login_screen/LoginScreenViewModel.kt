@@ -2,6 +2,7 @@ package com.universall.auth_impl.ui.screens.login_screen
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.universall.appcore.ui.fields.validators.validateStringLength
 import com.universall.appcore.ui.state.isFetching
 import com.universall.appcore.ui.state.toError
 import com.universall.appcore.ui.state.toLoading
@@ -11,7 +12,8 @@ import com.universall.appcore.utils.logError
 import com.universall.appcore.utils.logWarn
 import com.universall.auth_api.domain.schemas.LoginSchema
 import com.universall.auth_api.domain.usecases.LoginUseCase
-import com.universall.auth_impl.R
+import com.universall.auth_impl.ui.navigation.AuthDestination
+import com.universall.auth_impl.ui.navigation.PasswordRecoveryDestination
 import com.universall.auth_impl.ui.navigation.RegisterDestination
 import com.universall.core.utils.messageOrDefault
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -62,72 +64,49 @@ internal class LoginScreenViewModel @Inject constructor(
     }
 
     private fun processValidateIntent(intent: LoginScreenUIIntent.Validate) {
-        var hasValidationErrors = false
-
         when (intent) {
-            is LoginScreenUIIntent.Validate.ValidateLoginField -> {
-                _uiState.update {
-                    it.copy(
-                        loginFieldState = intent.fieldState.validate {
-                            if (value.isEmpty()) {
-                                hasValidationErrors = true
-                                errorMessage = UIString.resource(R.string.empty_field_error)
-                                return@validate
-                            }
-
-                            if (value.length < 3) {
-                                hasValidationErrors = true
-                                errorMessage = UIString.resource(R.string.value_too_short_error)
-                                return@validate
-                            }
-
-                            errorMessage = UIString.empty()
-                        },
-                        isSentButtonEnabled = !hasValidationErrors
-                    )
-                }
+            is LoginScreenUIIntent.Validate.ValidateLoginField -> _uiState.update { state ->
+                state.copy(
+                    loginFieldState = state.loginFieldState.validate {
+                        errorMessage = validateStringLength(minLength = 3, maxLength = 100) ?: UIString.empty()
+                    }
+                )
             }
 
-            is LoginScreenUIIntent.Validate.ValidatePasswordField -> {
-                _uiState.update {
-                    it.copy(
-                        loginFieldState = intent.fieldState.validate {
-                            if (value.isEmpty()) {
-                                hasValidationErrors = true
-                                errorMessage = UIString.resource(R.string.empty_field_error)
-                                return@validate
-                            }
-
-                            if (value.length < 3) {
-                                hasValidationErrors = true
-                                errorMessage = UIString.resource(R.string.value_too_short_error)
-                                return@validate
-                            }
-
-                            errorMessage = UIString.empty()
-                        },
-                        isSentButtonEnabled = !hasValidationErrors
-                    )
-                }
+            is LoginScreenUIIntent.Validate.ValidatePasswordField -> _uiState.update { state ->
+                state.copy(
+                    passwordFieldState = state.passwordFieldState.validate {
+                        errorMessage = validateStringLength(minLength = 8, maxLength = 100) ?: UIString.empty()
+                    }
+                )
             }
         }
     }
 
     private fun processInputIntent(intent: LoginScreenUIIntent.Input) {
         when (intent) {
-            is LoginScreenUIIntent.Input.InputLogin -> _uiState.update { it.copy(loginFieldState = it.loginFieldState.copy(value = intent.value)) }
-            is LoginScreenUIIntent.Input.InputPassword -> _uiState.update { it.copy(passwordFieldState = it.passwordFieldState.copy(value = intent.value)) }
+            is LoginScreenUIIntent.Input.InputLogin -> _uiState.update { it.copy(loginFieldState = it.loginFieldState.setNewValue(intent.value)) }
+            is LoginScreenUIIntent.Input.InputPassword -> _uiState.update { it.copy(passwordFieldState = it.passwordFieldState.setNewValue(intent.value)) }
         }
     }
 
+    fun isSendButtonEnabled(): Boolean =
+        _uiState.value.loginFieldState.isOk() &&
+                _uiState.value.passwordFieldState.isOk() &&
+                !_uiState.value.loginRequestState.isFetching
+
     fun onIntent(intent: LoginScreenUIIntent) {
         when (intent) {
-            is LoginScreenUIIntent.NavigateToRegister -> viewModelScope.launch { _effects.emit(LoginScreenUIEffect.Navigate(RegisterDestination)) }
+            is LoginScreenUIIntent.NavigateToRegister -> viewModelScope.launch { _effects.emit(LoginScreenUIEffect.Navigate(RegisterDestination, popUpTo = AuthDestination)) }
+            is LoginScreenUIIntent.NavigateToPasswordRecovery -> viewModelScope.launch { _effects.emit(LoginScreenUIEffect.Navigate(PasswordRecoveryDestination, popUpTo = AuthDestination)) }
 
             is LoginScreenUIIntent.Validate -> processValidateIntent(intent)
             is LoginScreenUIIntent.Input -> processInputIntent(intent)
 
-            is LoginScreenUIIntent.SendLogin -> launchSendLogin(intent.login, intent.password)
+            is LoginScreenUIIntent.SendLogin -> launchSendLogin(
+                login = uiState.value.loginFieldState.value,
+                password = uiState.value.passwordFieldState.value
+            )
         }
     }
 }

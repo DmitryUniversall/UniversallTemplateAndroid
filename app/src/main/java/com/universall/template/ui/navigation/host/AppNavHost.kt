@@ -6,7 +6,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.compose.navigation
 import androidx.navigation.compose.rememberNavController
+import com.universall.auth_impl.ui.navigation.AuthDestination
 import com.universall.auth_impl.ui.navigation.LoginDestination
 import com.universall.auth_impl.ui.navigation.RegisterDestination
 import com.universall.auth_impl.ui.screens.login_screen.LoginScreen
@@ -29,12 +31,17 @@ fun AppNavHost(
             InitScreen(innerPadding = innerPadding, navController = navController)
         }
 
-        composable(LoginDestination.route) {
-            LoginScreen(innerPadding = innerPadding, navController = navController)
-        }
+        navigation(
+            route = AuthDestination.route,
+            startDestination = LoginDestination.route
+        ) {
+            composable(LoginDestination.route) {
+                LoginScreen(innerPadding = innerPadding, navController = navController)
+            }
 
-        composable(RegisterDestination.route) {
-            RegisterScreen(innerPadding = innerPadding, navController = navController)
+            composable(RegisterDestination.route) {
+                RegisterScreen(innerPadding = innerPadding, navController = navController)
+            }
         }
     }
 }

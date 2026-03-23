@@ -175,7 +175,6 @@ object AppButtonDefaults {
     @Composable
     fun text(): AppButtonStyle {
         val colors = MaterialTheme.colorScheme
-        val spacing = Locals.spacing
 
         val buttonColors = AppButtonColors.Builder(
             container = Color.Transparent,
@@ -190,7 +189,7 @@ object AppButtonDefaults {
             shape = DefaultShape,
             minWidth = 64.dp,
             minHeight = 48.dp,
-            contentPadding = PaddingValues(horizontal = spacing.xs, vertical = spacing.sm),
+            contentPadding = PaddingValues(0.dp),
             elevation = 0.dp,
             pressedElevation = 0.dp,
             borderWidth = 0.dp,

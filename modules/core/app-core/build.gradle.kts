@@ -34,6 +34,10 @@ android {
 dependencies {
     implementation(project(":modules:core:core"))
 
+    // UI
     implementation(libs.androidx.compose.ui.text.google.fonts)
+    implementation(libs.phosphor.icon)
+
+    // Crypto
     implementation(libs.google.crypto.tink)
 }

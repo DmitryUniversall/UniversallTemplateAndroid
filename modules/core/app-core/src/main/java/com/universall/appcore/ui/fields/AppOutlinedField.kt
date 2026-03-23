@@ -1,19 +1,38 @@
 package com.universall.appcore.ui.fields
 
 import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.TextFieldColors
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.text.input.VisualTransformation
+import androidx.compose.ui.unit.dp
+import com.adamglin.PhosphorIcons
+import com.adamglin.phosphoricons.Regular
+import com.adamglin.phosphoricons.regular.Check
 import com.universall.appcore.ui.text.AppText
 import com.universall.appcore.ui.text.AppTextStyle
 import com.universall.appcore.ui.text.generics.AppTextDefaults
 import com.universall.appcore.ui.text.generics.components.TextBodySmall
+import com.universall.appcore.ui.theme.locals.Locals
 import com.universall.appcore.utils.isNullOrEmpty
+
+@Composable
+private fun FieldSuccessIcon() {
+    val extraColors = Locals.extraColors
+
+    Icon(
+        modifier = Modifier.size(16.dp),
+        imageVector = PhosphorIcons.Regular.Check,
+        contentDescription = null,
+        tint = extraColors.success
+    )
+}
 
 @Composable
 fun AppOutlinedField(
@@ -56,7 +75,7 @@ fun AppOutlinedField(
         leadingIcon = leadingIcon,
         trailingIcon = trailingIcon,
         prefix = prefix?.let { @Composable { AppText(text = it) } },
-        suffix = suffix?.let { @Composable { AppText(text = it) } },
+        suffix = suffix?.let { @Composable { AppText(text = it) } } ?: if (state.isOk()) (@Composable { FieldSuccessIcon() }) else null,
         supportingText = if (state.errorMessage.isNullOrEmpty()) null else (@Composable {
             TextBodySmall(
                 text = state.errorMessage!!.asString(),

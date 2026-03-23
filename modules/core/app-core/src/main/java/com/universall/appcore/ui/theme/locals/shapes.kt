@@ -2,9 +2,14 @@ package com.universall.appcore.ui.theme.locals
 
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.staticCompositionLocalOf
+import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.graphics.Shape
 
 data class Shapes(
+    // Rectangle
+    val rectangle: Shape,
+
+    // Rounded
     // All corners
     val roundedXXS: Shape,
     val roundedXS: Shape,
@@ -57,6 +62,10 @@ data class Shapes(
 ) {
     companion object {
         fun default(dimens: Dimens) = Shapes(
+            // Rectangle
+            rectangle = RectangleShape,
+
+            // Rounded
             // All corners
             roundedXXS = RoundedCornerShape(dimens.xxs),
             roundedXS = RoundedCornerShape(dimens.xs),

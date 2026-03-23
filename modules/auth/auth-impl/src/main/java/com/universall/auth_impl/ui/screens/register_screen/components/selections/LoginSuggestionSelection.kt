@@ -1,4 +1,4 @@
-package com.universall.auth_impl.ui.screens.login_screen.components.selections
+package com.universall.auth_impl.ui.screens.register_screen.components.selections
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -13,11 +13,11 @@ import com.universall.appcore.ui.buttons.generics.components.TextButton
 import com.universall.appcore.ui.text.generics.components.TextBodyMedium
 import com.universall.appcore.ui.theme.locals.Locals
 import com.universall.auth_impl.R
-import com.universall.auth_impl.ui.screens.login_screen.LoginScreenUIIntent
+import com.universall.auth_impl.ui.screens.register_screen.RegisterScreenUIIntent
 
 @Composable
-internal fun RegisterSuggestionSelection(
-    onIntent: (LoginScreenUIIntent) -> Unit
+internal fun LoginSuggestionSelection(
+    onIntent: (RegisterScreenUIIntent) -> Unit
 ) {
     val colors = MaterialTheme.colorScheme
     val spacing = Locals.spacing
@@ -31,14 +31,17 @@ internal fun RegisterSuggestionSelection(
             verticalAlignment = Alignment.CenterVertically
         ) {
             TextBodyMedium(
-                text = stringResource(R.string.have_no_account),
+                text = stringResource(R.string.already_have_an_account),
                 color = colors.onBackground
             )
 
             TextButton(
-                text = stringResource(R.string.register_suggestion),
+                text = stringResource(R.string.sign_in_suggestion),
                 textColor = colors.primary,
-                onClick = { onIntent(LoginScreenUIIntent.NavigateToRegister) }
+
+                onClick = {
+                    onIntent(RegisterScreenUIIntent.NavigateToLogin)
+                }
             )
         }
     }

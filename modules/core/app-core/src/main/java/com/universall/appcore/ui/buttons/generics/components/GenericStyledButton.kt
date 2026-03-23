@@ -31,8 +31,8 @@ internal fun GenericStyledButton(
 
     ProvideTextStyle(finalTextStyle.textStyle) {
         AppButton(
-            onClick = onClick,
             modifier = modifier,
+            onClick = onClick,
             enabled = enabled,
             style = finalButtonStyle,
             leading = leading,

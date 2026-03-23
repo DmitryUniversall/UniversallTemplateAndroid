@@ -12,6 +12,7 @@ import com.universall.appcore.utils.logError
 import com.universall.appcore.utils.logWarn
 import com.universall.auth_api.domain.usecases.LocalLogoutUseCase
 import com.universall.auth_api.domain.usecases.RestoreAuthStateUseCase
+import com.universall.auth_impl.ui.navigation.LoginDestination
 import com.universall.core.utils.messageOrDefault
 import com.universall.server_tools_api.domain.usecases.PingServerUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -61,7 +62,7 @@ class InitScreenViewModel @Inject constructor(
 
         val newRestoreState = restoreAuthStateResult.fold(
             onSuccess = {
-                _effects.emit(InitUIEffect.Navigate(AuthDestination))
+                _effects.emit(InitUIEffect.Navigate(LoginDestination))
                 _uiState.value.restoreAuthRequestState.toSuccess(Unit)
             },
             onFailure = { error ->

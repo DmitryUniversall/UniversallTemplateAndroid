@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="empty_field_error">Field should not be empty</string>
+    <string name="value_too_short_error">Value too short</string>
+    <string name="value_too_long_error">Value too long</string>
+</resources>

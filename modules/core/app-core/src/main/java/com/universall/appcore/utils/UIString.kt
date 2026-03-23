@@ -1,6 +1,5 @@
 package com.universall.appcore.utils
 
-import android.content.Context
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
 
@@ -15,13 +14,6 @@ sealed interface UIString {
         fun empty(): UIString = of("")
     }
 
-    fun asString(context: Context): String {
-        return when (this) {
-            is DynamicString -> value
-            is StringRes -> context.getString(resId, *args.toTypedArray())
-        }
-    }
-
     @Composable
     fun asString(): String {
         return when (this) {
@@ -30,12 +22,11 @@ sealed interface UIString {
         }
     }
 
-    @Composable
-    fun isEmpty(): Boolean = this.asString().isEmpty()
+    fun isEmpty(): Boolean = this is DynamicString && this.value.isEmpty()
 }
 
-@Composable
-fun UIString?.isNullOrEmpty(): Boolean = this == null || this.asString().isEmpty()
+fun UIString?.isNullOrEmpty(): Boolean =
+    this == null || this.isEmpty()
 
 @Composable
 inline fun UIString.asStringOrIfEmpty(defaultValue: () -> String): String =

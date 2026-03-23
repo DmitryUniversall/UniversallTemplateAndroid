@@ -8,6 +8,7 @@ import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
 import com.google.crypto.tink.Aead
 import com.universall.auth_api.domain.entities.LocalAuthInfo
+import com.universall.auth_impl.data.dto.LocalAuthInfoDTO
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.firstOrNull
@@ -34,7 +35,7 @@ internal class AuthLocalDataSource @Inject constructor(
         try {
             val encrypted = Base64.decode(b64Encoded, Base64.NO_WRAP)
             val decrypted = aead.decrypt(encrypted, null)
-            json.decodeFromString<LocalAuthInfo>(decrypted.decodeToString())
+            json.decodeFromString<LocalAuthInfoDTO>(decrypted.decodeToString()).toEntity()
         } catch (e: Exception) {
             Log.e(this::class.simpleName, "Failed to load auth info: ${e.message}")
             return@map null
@@ -46,7 +47,7 @@ internal class AuthLocalDataSource @Inject constructor(
     }
 
     suspend fun saveAuthInfo(info: LocalAuthInfo) {
-        val json = json.encodeToString(info)
+        val json = json.encodeToString(LocalAuthInfoDTO.fromEntity(info))
         val encrypted = aead.encrypt(json.toByteArray(), null)
         val b64Encoded = Base64.encodeToString(encrypted, Base64.NO_WRAP)
 

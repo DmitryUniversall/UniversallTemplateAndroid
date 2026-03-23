@@ -10,11 +10,15 @@ import com.universall.appcore.ui.state.toRefreshing
 import com.universall.appcore.ui.state.toSuccess
 import com.universall.appcore.utils.UIString
 import com.universall.appcore.utils.logError
+import com.universall.appcore.utils.logInfo
 import com.universall.appcore.utils.logWarn
+import com.universall.auth_api.domain.entities.AuthState
 import com.universall.auth_api.domain.usecases.LocalLogoutUseCase
 import com.universall.auth_api.domain.usecases.RestoreAuthStateUseCase
 import com.universall.core.utils.messageOrDefault
+import com.universall.init_impl.R
 import com.universall.navigation_impl.destinations.init.InitDestination
+import com.universall.navigation_impl.destinations.main.MainScreenDestination
 import com.universall.server_tools_api.domain.usecases.PingServerUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -62,15 +66,26 @@ internal class InitScreenViewModel @Inject constructor(
         val restoreAuthStateResult = restoreAuthStateUseCase.invoke()
 
         val newRestoreState = restoreAuthStateResult.fold(
-            onSuccess = {
-                _effects.emit(InitScreenUIEffect.Navigate(AuthDestination, popUpTo = InitDestination, inclusive = true))
+            onSuccess = { authState ->
+                this.logInfo { "Restored auth state: ${authState::class.simpleName}" }
+
+                // TODO: When non-auth error happens, should it cause auth state to be TemporarilyUnauthenticated?
+                // TODO: Or just handle it as error?
+
+                when (authState) {
+                    is AuthState.Authenticated -> _effects.emit(InitScreenUIEffect.Navigate(MainScreenDestination, popUpTo = InitDestination, inclusive = true))
+                    is AuthState.TemporarilyUnauthenticated -> _uiState.value.restoreAuthRequestState.toError(UIString.of(authState.reason))
+                    is AuthState.Unauthenticated -> _effects.emit(InitScreenUIEffect.Navigate(AuthDestination, popUpTo = InitDestination, inclusive = true))
+                    is AuthState.Unknown -> _uiState.value.restoreAuthRequestState.toError(UIString.resource(R.string.unknown_error))
+                }
+
                 _uiState.value.restoreAuthRequestState.toSuccess(Unit)
             },
             onFailure = { error ->
                 this.logError(error) { "Unexpected error occurred" }
 
                 _uiState.value.restoreAuthRequestState.toError(
-                    errorMessage = UIString.of(error.messageOrDefault("")),
+                    errorMessage = error.message?.let { UIString.of(it) } ?: UIString.resource(R.string.unknown_error),
                     throwable = error
                 )
             }

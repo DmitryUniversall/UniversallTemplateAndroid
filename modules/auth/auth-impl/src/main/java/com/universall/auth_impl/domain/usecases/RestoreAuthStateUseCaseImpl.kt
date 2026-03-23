@@ -8,6 +8,7 @@ import com.universall.auth_api.domain.repositories.AuthRepository
 import com.universall.auth_api.domain.usecases.RefreshUseCase
 import com.universall.auth_api.domain.usecases.RestoreAuthStateUseCase
 import jakarta.inject.Inject
+import kotlinx.coroutines.flow.first
 import kotlin.coroutines.cancellation.CancellationException
 
 internal class RestoreAuthStateUseCaseImpl @Inject constructor(
@@ -18,6 +19,12 @@ internal class RestoreAuthStateUseCaseImpl @Inject constructor(
 
     override suspend fun invoke(): Result<AuthState> {
         this.logInfo { "Restoring auth state" }
+
+        val currentState = authRepository.authStateFlow.first()
+        if (currentState !is AuthState.Unknown) {
+            this.logInfo { "Auth state already restored. Current: ${currentState::class.simpleName}" }
+            return Result.success(currentState)
+        }
 
         val authInfo = authRepository.getLocalAuthInfo()
         if (authInfo == null) {

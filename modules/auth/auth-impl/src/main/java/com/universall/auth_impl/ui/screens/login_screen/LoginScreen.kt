@@ -21,7 +21,6 @@ import com.universall.appcore.ui.add
 import com.universall.appcore.ui.clearFocusOnTap
 import com.universall.appcore.ui.theme.locals.Locals
 import com.universall.auth_impl.R
-import com.universall.auth_impl.ui.navigation.LoginDestination
 import com.universall.auth_impl.ui.screens.login_screen.components.selections.LoginErrorSelection
 import com.universall.auth_impl.ui.screens.login_screen.components.selections.LoginForgotPasswordSelection
 import com.universall.auth_impl.ui.screens.login_screen.components.selections.LoginFormSelection

@@ -1,7 +1,7 @@
 package com.universall.appcore.serialization.di
 
+import com.universall.appcore.serialization.CoreJsonHolder
 import com.universall.appcore.serialization.di.qualifiers.CoreJson
-import com.universall.appcore.serialization.impl.CoreJsonHolder
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -11,7 +11,7 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-object CoreSerializationModule {
+internal object CoreSerializationModule {
     @Provides
     @Singleton
     @CoreJson

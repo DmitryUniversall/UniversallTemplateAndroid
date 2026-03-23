@@ -11,7 +11,7 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class SessionsNetworkDataSource @Inject constructor(
+internal class SessionsNetworkDataSource @Inject constructor(
     @param:AuthenticatedApiClient private val authenticatedApiClient: ApiClient
 ) {
     private val authFeaturePath = "/auth"

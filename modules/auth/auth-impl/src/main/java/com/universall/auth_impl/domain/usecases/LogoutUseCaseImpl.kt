@@ -6,7 +6,7 @@ import com.universall.auth_api.domain.repositories.SessionsRepository
 import com.universall.auth_api.domain.usecases.LogoutUseCase
 import jakarta.inject.Inject
 
-class LogoutUseCaseImpl @Inject constructor(
+internal class LogoutUseCaseImpl @Inject constructor(
     private val authRepository: AuthRepository,
     private val sessionsRepository: SessionsRepository
 ) : LogoutUseCase {

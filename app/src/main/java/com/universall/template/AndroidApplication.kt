@@ -5,7 +5,7 @@ import com.google.crypto.tink.config.TinkConfig
 import dagger.hilt.android.HiltAndroidApp
 
 @HiltAndroidApp
-class AndroidApplication : Application() {
+internal class AndroidApplication : Application() {
     override fun onCreate() {
         super.onCreate()
 

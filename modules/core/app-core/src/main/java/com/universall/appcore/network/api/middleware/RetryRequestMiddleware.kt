@@ -2,7 +2,7 @@ package com.universall.appcore.network.api.middleware
 
 import com.universall.appcore.BuildConfig
 import com.universall.appcore.network.api.base.ApiRequestContext
-import com.universall.appcore.network.impl.api.base.middleware.ApiClientMiddleware
+import com.universall.appcore.network.api.base.middleware.ApiClientMiddleware
 import com.universall.core.utils.retrying
 import io.ktor.client.request.HttpRequestBuilder
 import io.ktor.client.statement.HttpResponse

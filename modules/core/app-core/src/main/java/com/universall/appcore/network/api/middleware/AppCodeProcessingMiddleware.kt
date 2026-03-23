@@ -30,7 +30,7 @@ import com.universall.appcore.network.exceptions.UnprocessableEntityHttpExceptio
 import com.universall.appcore.network.exceptions.WrongAuthCredentialsHttpException
 import com.universall.appcore.network.api.base.ApiRequestContext
 import com.universall.appcore.network.api.base.ApiResponseContext
-import com.universall.appcore.network.impl.api.base.middleware.ApiClientMiddleware
+import com.universall.appcore.network.api.base.middleware.ApiClientMiddleware
 import io.ktor.client.request.HttpRequestBuilder
 
 class AppCodeProcessingMiddleware : ApiClientMiddleware<HttpRequestBuilder, ApiResponseContext<*>> {

@@ -12,9 +12,9 @@ import com.universall.appcore.utils.logError
 import com.universall.appcore.utils.logWarn
 import com.universall.auth_api.domain.schemas.LoginSchema
 import com.universall.auth_api.domain.usecases.LoginUseCase
-import com.universall.auth_impl.ui.navigation.AuthDestination
-import com.universall.auth_impl.ui.navigation.PasswordRecoveryDestination
-import com.universall.auth_impl.ui.navigation.RegisterDestination
+import com.universall.auth_api.ui.navigation.AuthDestination
+import com.universall.auth_api.ui.navigation.PasswordRecoveryDestination
+import com.universall.auth_api.ui.navigation.RegisterDestination
 import com.universall.core.utils.messageOrDefault
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow

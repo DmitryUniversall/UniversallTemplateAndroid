@@ -8,7 +8,7 @@ import com.universall.auth_api.domain.usecases.UpdateTokenPairUseCase
 import kotlinx.coroutines.flow.first
 import javax.inject.Inject
 
-class UpdateTokenPairUseCaseImpl @Inject constructor(
+internal class UpdateTokenPairUseCaseImpl @Inject constructor(
     private val authRepository: AuthRepository,
 ) : UpdateTokenPairUseCase {
     override suspend fun invoke(tokenPair: AuthTokenPair): Result<Unit> {

@@ -7,7 +7,7 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class SessionsRepositoryImpl @Inject constructor(
+internal class SessionsRepositoryImpl @Inject constructor(
     private val networkDataSource: SessionsNetworkDataSource
 ) : SessionsRepository {
     override suspend fun getActiveSessions(): Result<List<AuthSession>> {

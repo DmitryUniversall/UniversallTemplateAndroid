@@ -35,7 +35,7 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-abstract class AuthDomainBindingModule {
+internal abstract class AuthDomainBindingModule {
     @Binds
     @Singleton
     abstract fun bindGetActiveSessionsUseCase(impl: GetActiveSessionsUseCaseImpl): GetActiveSessionsUseCase

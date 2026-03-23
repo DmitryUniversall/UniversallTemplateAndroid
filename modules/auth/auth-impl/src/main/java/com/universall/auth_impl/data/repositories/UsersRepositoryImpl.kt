@@ -7,7 +7,7 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class UsersRepositoryImpl @Inject constructor(
+internal class UsersRepositoryImpl @Inject constructor(
     private val networkDataSource: UsersNetworkDataSource
 ) : UsersRepository {
     override suspend fun getMe(): Result<User> {

@@ -25,7 +25,7 @@ typealias HttpClientConfigBlock = @JvmSuppressWildcards HttpClientConfig<*>.() -
 
 @Module
 @InstallIn(SingletonComponent::class)
-object CoreNetworkModule {
+internal object CoreNetworkModule {
     @Provides
     @Singleton
     @CoreHttpClientConfig

@@ -4,8 +4,10 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -19,9 +21,6 @@ import com.universall.appcore.ui.add
 import com.universall.appcore.ui.clearFocusOnTap
 import com.universall.appcore.ui.theme.locals.Locals
 import com.universall.auth_impl.R
-import com.universall.auth_impl.ui.navigation.LoginDestination
-import com.universall.auth_impl.ui.navigation.RegisterDestination
-import com.universall.auth_impl.ui.screens.login_screen.LoginScreenUIEffect
 import com.universall.auth_impl.ui.screens.register_screen.components.selections.LoginSuggestionSelection
 import com.universall.auth_impl.ui.screens.register_screen.components.selections.RegisterErrorSelection
 import com.universall.auth_impl.ui.screens.register_screen.components.selections.RegisterFormSelection
@@ -85,6 +84,8 @@ internal fun RegisterScreen(
                 firstNameFieldState = uiState.firstNameFieldState,
                 lastNameFieldState = uiState.lastNameFieldState
             )
+
+            Spacer(modifier = Modifier.size(spacing.lg))
 
             LoginSuggestionSelection(
                 onIntent = viewModel::onIntent

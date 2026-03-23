@@ -10,7 +10,7 @@ import com.universall.auth_api.domain.usecases.RestoreAuthStateUseCase
 import jakarta.inject.Inject
 import kotlin.coroutines.cancellation.CancellationException
 
-class RestoreAuthStateUseCaseImpl @Inject constructor(
+internal class RestoreAuthStateUseCaseImpl @Inject constructor(
     private val authRepository: AuthRepository,
     private val refreshUseCase: RefreshUseCase
 ) : RestoreAuthStateUseCase {

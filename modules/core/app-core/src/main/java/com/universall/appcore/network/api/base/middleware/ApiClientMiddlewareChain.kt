@@ -1,13 +1,11 @@
 package com.universall.appcore.network.api.base.middleware
 
 import com.universall.appcore.network.api.base.ApiRequestContext
-import com.universall.appcore.network.impl.api.base.middleware.ApiClientMiddleware
 
 
 class ApiClientMiddlewareChain<FinalOut>(
-    private val middlewares: List<ApiClientMiddleware<*, *>>  // [Validator, Parser, Ktor]
+    private val middlewares: List<ApiClientMiddleware<*, *>>
 ) {
-
     @Suppress("UNCHECKED_CAST")
     suspend fun execute(
         initialRequest: Any,
@@ -40,7 +38,7 @@ class ApiClientMiddlewareChain<FinalOut>(
             fun <ChainFinalT> fromChain(other: ApiClientMiddlewareChain<*>): Builder<ChainFinalT> {
                 // Since the Chain stores them in execution order [Shell -> Core],
                 // and our Builder stores them in addition order [Core -> Shell],
-                // we reverse them back to add them correctly.
+                // we reverse them back to add correctly
                 return Builder(other.middlewares.reversed().toMutableList())
             }
         }

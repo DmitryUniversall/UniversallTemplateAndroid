@@ -4,7 +4,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class LoginRequestDTO(
+internal data class LoginRequestDTO(
     @SerialName("email")
     val login: String,
 

@@ -11,7 +11,7 @@ import kotlinx.coroutines.withContext
 import javax.inject.Singleton
 
 @Singleton
-class UsersNetworkDataSource @Inject constructor(
+internal class UsersNetworkDataSource @Inject constructor(
     @param:AuthenticatedApiClient private val authenticatedApiClient: ApiClient
 ) {
     private val usersPathSegment = "users"

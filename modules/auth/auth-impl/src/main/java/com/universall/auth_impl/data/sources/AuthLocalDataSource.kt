@@ -17,7 +17,7 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class AuthLocalDataSource @Inject constructor(
+internal class AuthLocalDataSource @Inject constructor(
     @param:ApplicationContext private val context: Context,
     private val aead: Aead,
     private val json: Json

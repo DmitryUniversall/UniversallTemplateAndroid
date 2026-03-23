@@ -12,7 +12,7 @@ import com.universall.auth_impl.domain.utils.network.middleware.AutoRefreshToken
 import io.ktor.client.HttpClient
 import kotlinx.serialization.json.Json
 
-class AuthenticatedApiClientImpl(
+internal class AuthenticatedApiClientImpl(
     httpClient: HttpClient,
     json: Json,
     private val getTokenPairUseCase: GetTokenPairUseCase,

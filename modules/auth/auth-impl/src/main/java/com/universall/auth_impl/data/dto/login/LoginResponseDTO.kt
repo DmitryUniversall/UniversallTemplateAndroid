@@ -8,7 +8,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class LoginResponseDTO(
+internal data class LoginResponseDTO(
     @SerialName("user")
     val user: UserPrivateDTO,
 

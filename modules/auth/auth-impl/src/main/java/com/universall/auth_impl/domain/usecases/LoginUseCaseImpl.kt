@@ -7,7 +7,7 @@ import com.universall.auth_api.domain.schemas.LoginSchema
 import com.universall.auth_api.domain.usecases.LoginUseCase
 import jakarta.inject.Inject
 
-class LoginUseCaseImpl @Inject constructor(
+internal class LoginUseCaseImpl @Inject constructor(
     private val authRepository: AuthRepository
 ) : LoginUseCase {
     override suspend fun invoke(schema: LoginSchema): Result<Pair<AuthContext, AuthTokenPair>> {

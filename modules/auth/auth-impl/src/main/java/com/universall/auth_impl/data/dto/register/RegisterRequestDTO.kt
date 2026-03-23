@@ -4,7 +4,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class RegisterRequestDTO(
+internal data class RegisterRequestDTO(
     @SerialName("username")
     val username: String,
 

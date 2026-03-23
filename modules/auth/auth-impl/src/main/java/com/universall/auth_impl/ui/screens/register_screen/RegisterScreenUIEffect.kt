@@ -1,6 +1,6 @@
 package com.universall.auth_impl.ui.screens.register_screen
 
-import com.universall.appcore.ui.navigation.AppDestination
+import com.universall.core.ui.navigation.AppDestination
 
 internal sealed interface RegisterScreenUIEffect {
     data class Navigate(

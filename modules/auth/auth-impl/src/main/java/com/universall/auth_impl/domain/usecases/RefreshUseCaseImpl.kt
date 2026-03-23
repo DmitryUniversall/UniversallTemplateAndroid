@@ -12,7 +12,7 @@ import com.universall.core.exceptions.UnauthenticatedAppError
 import jakarta.inject.Inject
 import kotlinx.coroutines.sync.Mutex
 
-class RefreshUseCaseImpl @Inject constructor(
+internal class RefreshUseCaseImpl @Inject constructor(
     private val authRepository: AuthRepository,
     private val getTokenPairUseCase: GetTokenPairUseCase,
     private val updateTokenPairUseCase: UpdateTokenPairUseCase

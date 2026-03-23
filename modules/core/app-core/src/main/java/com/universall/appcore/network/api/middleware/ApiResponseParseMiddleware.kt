@@ -3,7 +3,7 @@ package com.universall.appcore.network.api.middleware
 import com.universall.appcore.dto.ApiResponseDTO
 import com.universall.appcore.network.api.base.ApiRequestContext
 import com.universall.appcore.network.api.base.ApiResponseContext
-import com.universall.appcore.network.impl.api.base.middleware.ApiClientMiddleware
+import com.universall.appcore.network.api.base.middleware.ApiClientMiddleware
 import com.universall.core.entities.ApiResponse
 import io.ktor.client.request.HttpRequestBuilder
 import io.ktor.client.statement.HttpResponse

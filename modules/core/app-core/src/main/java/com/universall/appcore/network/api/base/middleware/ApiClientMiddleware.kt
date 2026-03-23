@@ -1,4 +1,4 @@
-package com.universall.appcore.network.impl.api.base.middleware
+package com.universall.appcore.network.api.base.middleware
 
 import com.universall.appcore.network.api.base.ApiRequestContext
 

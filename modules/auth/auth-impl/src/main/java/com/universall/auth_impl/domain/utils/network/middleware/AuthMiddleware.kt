@@ -1,7 +1,7 @@
 package com.universall.auth_impl.domain.utils.network.middleware
 
 import com.universall.appcore.network.api.base.ApiRequestContext
-import com.universall.appcore.network.impl.api.base.middleware.ApiClientMiddleware
+import com.universall.appcore.network.api.base.middleware.ApiClientMiddleware
 import com.universall.auth_api.domain.usecases.GetTokenPairUseCase
 import com.universall.core.exceptions.UnauthenticatedAppError
 import io.ktor.client.request.HttpRequestBuilder
@@ -9,7 +9,7 @@ import io.ktor.client.request.headers
 import io.ktor.client.statement.HttpResponse
 import io.ktor.http.HttpHeaders
 
-class AuthMiddleware(
+internal class AuthMiddleware(
     private val getTokenPairUseCase: GetTokenPairUseCase
 ) : ApiClientMiddleware<HttpRequestBuilder, HttpResponse> {
     private val authTokenType = "Bearer"

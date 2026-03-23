@@ -3,14 +3,14 @@ package com.universall.auth_impl.domain.utils.network.middleware
 import com.universall.appcore.network.exceptions.InvalidAuthHttpException
 import com.universall.appcore.network.api.base.ApiRequestContext
 import com.universall.appcore.network.api.base.ApiResponseContext
-import com.universall.appcore.network.impl.api.base.middleware.ApiClientMiddleware
+import com.universall.appcore.network.api.base.middleware.ApiClientMiddleware
 import com.universall.appcore.utils.logInfo
 import com.universall.appcore.utils.logWarn
 import com.universall.auth_api.domain.entities.AuthTokenPair
 import com.universall.auth_api.domain.usecases.RefreshUseCase
 import io.ktor.client.request.HttpRequestBuilder
 
-class AutoRefreshTokensMiddleware(
+internal class AutoRefreshTokensMiddleware(
     private val refreshUseCase: RefreshUseCase
 ) : ApiClientMiddleware<HttpRequestBuilder, ApiResponseContext<*>> {
     private suspend fun tryToRefreshTokens(): Result<AuthTokenPair> = refreshUseCase.invoke()

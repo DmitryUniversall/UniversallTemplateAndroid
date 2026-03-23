@@ -18,7 +18,10 @@ dependencies {
     implementation(project(":modules:core:core"))
     implementation(project(":modules:core:app-core"))
 
+    // Crypto
     implementation(libs.google.crypto.tink)
+
+    // Local storage
     implementation(libs.androidx.datastore)
     implementation(libs.androidx.datastore.preferences)
 }

@@ -22,7 +22,7 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class AuthNetworkDataSource @Inject constructor(
+internal class AuthNetworkDataSource @Inject constructor(
     private val apiClient: ApiClient
 ) {
     private val authFeaturePathSegment = "auth"

@@ -5,7 +5,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-class GetCurrentAuthContextResponseDTO(
+internal class GetCurrentAuthContextResponseDTO(
     @SerialName("context")
     val context: AuthContextDTO
 )

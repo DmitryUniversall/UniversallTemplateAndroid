@@ -7,7 +7,7 @@ import com.universall.auth_api.domain.usecases.GetTokenPairUseCase
 import jakarta.inject.Inject
 import kotlinx.coroutines.flow.first
 
-class GetTokenPairUseCaseImpl @Inject constructor(
+internal class GetTokenPairUseCaseImpl @Inject constructor(
     private val authRepository: AuthRepository
 ) : GetTokenPairUseCase {
     override suspend fun invoke(): Result<AuthTokenPair?> = runCatching {

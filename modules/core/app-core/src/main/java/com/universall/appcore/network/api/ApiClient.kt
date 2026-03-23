@@ -8,7 +8,6 @@ import com.universall.appcore.network.api.middleware.ApiResponseParseMiddleware
 import com.universall.appcore.network.api.middleware.AppCodeProcessingMiddleware
 import com.universall.appcore.network.api.middleware.KtorExecuteMiddleware
 import com.universall.appcore.network.api.middleware.RetryRequestMiddleware
-import com.universall.appcore.network.di.qualifiers.CoreHttpClient
 import io.ktor.client.HttpClient
 import io.ktor.client.request.HttpRequestBuilder
 import kotlinx.serialization.json.Json

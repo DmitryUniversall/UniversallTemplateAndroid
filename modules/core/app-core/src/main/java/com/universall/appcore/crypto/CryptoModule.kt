@@ -14,7 +14,7 @@ import jakarta.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-object CryptoModule {
+internal object CryptoModule {
     @Provides
     @Singleton
     fun provideAead(@ApplicationContext context: Context): Aead {

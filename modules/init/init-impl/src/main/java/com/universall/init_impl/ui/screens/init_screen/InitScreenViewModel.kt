@@ -2,6 +2,7 @@ package com.universall.init_impl.ui.screens.init_screen
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.universall.app_navigation.destinations.auth.AuthDestination
 import com.universall.appcore.ui.state.isFetching
 import com.universall.appcore.ui.state.toError
 import com.universall.appcore.ui.state.toLoading
@@ -12,7 +13,6 @@ import com.universall.appcore.utils.logError
 import com.universall.appcore.utils.logWarn
 import com.universall.auth_api.domain.usecases.LocalLogoutUseCase
 import com.universall.auth_api.domain.usecases.RestoreAuthStateUseCase
-import com.universall.auth_api.ui.navigation.AuthDestination
 import com.universall.core.utils.messageOrDefault
 import com.universall.server_tools_api.domain.usecases.PingServerUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel

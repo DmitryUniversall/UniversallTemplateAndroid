@@ -1,6 +1,6 @@
 package com.universall.init_impl.ui.screens.init_screen
 
-import com.universall.core.ui.navigation.AppDestination
+import com.universall.appcore.ui.navigation.AppDestination
 
 internal sealed interface InitScreenUIEffect {
     data class Navigate(

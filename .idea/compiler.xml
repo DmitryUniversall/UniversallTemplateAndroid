@@ -5,6 +5,7 @@
       <module name="UniversallTemplate.app-core" target="21" />
       <module name="UniversallTemplate.common" target="21" />
       <module name="UniversallTemplate.modules.app-core" target="21" />
+      <module name="UniversallTemplate.modules.navigation.navigation-impl" target="21" />
       <module name="UniversallTemplate.modules.server-tools-api" target="21" />
     </bytecodeTargetLevel>
   </component>

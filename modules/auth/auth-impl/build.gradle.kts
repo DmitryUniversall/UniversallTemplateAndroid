@@ -18,6 +18,8 @@ dependencies {
     implementation(project(":modules:core:core"))
     implementation(project(":modules:core:app-core"))
 
+    implementation(project(":modules:navigation:app-navigation"))
+
     // Crypto
     implementation(libs.google.crypto.tink)
 

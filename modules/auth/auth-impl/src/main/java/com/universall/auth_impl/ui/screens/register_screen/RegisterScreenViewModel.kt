@@ -2,6 +2,8 @@ package com.universall.auth_impl.ui.screens.register_screen
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.universall.app_navigation.destinations.auth.AuthDestination
+import com.universall.app_navigation.destinations.auth.LoginDestination
 import com.universall.appcore.ui.fields.validators.validateStringLength
 import com.universall.appcore.ui.state.isFetching
 import com.universall.appcore.ui.state.toError
@@ -12,8 +14,6 @@ import com.universall.appcore.utils.logError
 import com.universall.appcore.utils.logWarn
 import com.universall.auth_api.domain.schemas.RegisterSchema
 import com.universall.auth_api.domain.usecases.RegisterUseCase
-import com.universall.auth_api.ui.navigation.AuthDestination
-import com.universall.auth_api.ui.navigation.LoginDestination
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow

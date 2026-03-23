@@ -39,8 +39,9 @@
             <option value="$PROJECT_DIR$/modules/core/app-core" />
             <option value="$PROJECT_DIR$/modules/core/core" />
             <option value="$PROJECT_DIR$/modules/init" />
-            <option value="$PROJECT_DIR$/modules/init/init-api" />
             <option value="$PROJECT_DIR$/modules/init/init-impl" />
+            <option value="$PROJECT_DIR$/modules/navigation" />
+            <option value="$PROJECT_DIR$/modules/navigation/app-navigation" />
             <option value="$PROJECT_DIR$/modules/server-tools" />
             <option value="$PROJECT_DIR$/modules/server-tools/server-tools-api" />
             <option value="$PROJECT_DIR$/modules/server-tools/server-tools-impl" />

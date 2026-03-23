@@ -1,11 +1,5 @@
 @file:Suppress("UnstableApiUsage")
 
-include(":modules:init:init-api")
-
-
-include(":modules:init:init-impl")
-
-
 pluginManagement {
     repositories {
         google {
@@ -38,10 +32,16 @@ include(":app")
 include(":modules:core:core")
 include(":modules:core:app-core")
 
-// Auth
-include(":modules:auth:auth-api")
-include(":modules:auth:auth-impl")
+// Navigation
+include(":modules:navigation:app-navigation")
 
 // Server tools
 include(":modules:server-tools:server-tools-api")
 include(":modules:server-tools:server-tools-impl")
+
+// Init
+include(":modules:init:init-impl")
+
+// Auth
+include(":modules:auth:auth-api")
+include(":modules:auth:auth-impl")

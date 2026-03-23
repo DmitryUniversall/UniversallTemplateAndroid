@@ -7,6 +7,7 @@ import androidx.compose.animation.core.rememberInfiniteTransition
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.gestures.PressGestureScope
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.material3.MaterialTheme
@@ -98,3 +99,13 @@ fun Modifier.clearFocusOnTap(): Modifier {
         detectTapGestures(onTap = { focusManager.clearFocus() })
     }
 }
+
+@Composable
+fun Modifier.onPressed(
+    block: suspend PressGestureScope.(Offset) -> Unit
+): Modifier =
+    this.pointerInput(Unit) {
+        detectTapGestures(
+            onPress = block
+        )
+    }

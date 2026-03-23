@@ -3,12 +3,17 @@ package com.universall.auth_impl.ui.screens.login_screen.components.selections
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.input.ImeAction
 import com.universall.appcore.ui.fields.AppOutlinedField
 import com.universall.appcore.ui.fields.FieldState
+import com.universall.appcore.ui.fields.generics.PasswordOutlinedField
 import com.universall.appcore.ui.state.ResourceState
 import com.universall.appcore.ui.state.isFetching
 import com.universall.appcore.ui.theme.locals.Locals
@@ -27,6 +32,8 @@ internal fun LoginFormSelection(
 
     val fieldShape = shapes.roundedSM
 
+    val focusManager = LocalFocusManager.current
+
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(spacing.sm)
@@ -39,10 +46,11 @@ internal fun LoginFormSelection(
             state = loginFieldState,
             enabled = loginFieldState.enabled && !loginRequestState.isFetching,
             onValueChange = { onIntent(LoginScreenUIIntent.Input.InputLogin(it)) },
-            onUnfocused = { onIntent(LoginScreenUIIntent.Validate.ValidateLoginField) }
+            onUnfocused = { onIntent(LoginScreenUIIntent.Validate.ValidateLoginField) },
+            keyboardOptions = KeyboardOptions(imeAction = ImeAction.Next)
         )
 
-        AppOutlinedField(
+        PasswordOutlinedField(
             modifier = Modifier.fillMaxWidth(),
             shape = fieldShape,
             label = stringResource(R.string.password_field),
@@ -50,7 +58,9 @@ internal fun LoginFormSelection(
             state = passwordFieldState,
             enabled = loginFieldState.enabled && !loginRequestState.isFetching,
             onValueChange = { onIntent(LoginScreenUIIntent.Input.InputPassword(it)) },
-            onUnfocused = { onIntent(LoginScreenUIIntent.Validate.ValidatePasswordField) }
+            onUnfocused = { onIntent(LoginScreenUIIntent.Validate.ValidatePasswordField) },
+            keyboardOptions = KeyboardOptions(imeAction = ImeAction.Done),
+            keyboardActions = KeyboardActions(onDone = { focusManager.clearFocus() })
         )
     }
 }

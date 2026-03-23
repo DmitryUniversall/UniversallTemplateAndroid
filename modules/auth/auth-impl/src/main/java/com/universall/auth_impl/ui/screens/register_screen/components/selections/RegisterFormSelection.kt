@@ -3,12 +3,17 @@ package com.universall.auth_impl.ui.screens.register_screen.components.selection
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.input.ImeAction
 import com.universall.appcore.ui.fields.AppOutlinedField
 import com.universall.appcore.ui.fields.FieldState
+import com.universall.appcore.ui.fields.generics.PasswordOutlinedField
 import com.universall.appcore.ui.state.ResourceState
 import com.universall.appcore.ui.state.isFetching
 import com.universall.appcore.ui.theme.locals.Locals
@@ -30,6 +35,8 @@ internal fun RegisterFormSelection(
 
     val fieldShape = shapes.roundedSM
 
+    val focusManager = LocalFocusManager.current
+
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(spacing.sm)
@@ -42,10 +49,11 @@ internal fun RegisterFormSelection(
             state = loginFieldState,
             enabled = loginFieldState.enabled && !registerRequestState.isFetching,
             onValueChange = { onIntent(RegisterScreenUIIntent.Input.InputLogin(it)) },
-            onUnfocused = { onIntent(RegisterScreenUIIntent.Validate.ValidateLoginField) }
+            onUnfocused = { onIntent(RegisterScreenUIIntent.Validate.ValidateLoginField) },
+            keyboardOptions = KeyboardOptions(imeAction = ImeAction.Next)
         )
 
-        AppOutlinedField(
+        PasswordOutlinedField(
             modifier = Modifier.fillMaxWidth(),
             shape = fieldShape,
             label = stringResource(R.string.password_field),
@@ -53,7 +61,8 @@ internal fun RegisterFormSelection(
             state = passwordFieldState,
             enabled = loginFieldState.enabled && !registerRequestState.isFetching,
             onValueChange = { onIntent(RegisterScreenUIIntent.Input.InputPassword(it)) },
-            onUnfocused = { onIntent(RegisterScreenUIIntent.Validate.ValidatePasswordField) }
+            onUnfocused = { onIntent(RegisterScreenUIIntent.Validate.ValidatePasswordField) },
+            keyboardOptions = KeyboardOptions(imeAction = ImeAction.Next)
         )
 
         AppOutlinedField(
@@ -64,7 +73,8 @@ internal fun RegisterFormSelection(
             state = usernameFieldState,
             enabled = usernameFieldState.enabled && !registerRequestState.isFetching,
             onValueChange = { onIntent(RegisterScreenUIIntent.Input.InputUsername(it)) },
-            onUnfocused = { onIntent(RegisterScreenUIIntent.Validate.ValidateUsernameField) }
+            onUnfocused = { onIntent(RegisterScreenUIIntent.Validate.ValidateUsernameField) },
+            keyboardOptions = KeyboardOptions(imeAction = ImeAction.Next)
         )
 
         AppOutlinedField(
@@ -75,7 +85,8 @@ internal fun RegisterFormSelection(
             state = firstNameFieldState,
             enabled = firstNameFieldState.enabled && !registerRequestState.isFetching,
             onValueChange = { onIntent(RegisterScreenUIIntent.Input.InputFirstName(it)) },
-            onUnfocused = { onIntent(RegisterScreenUIIntent.Validate.ValidateFirstNameField) }
+            onUnfocused = { onIntent(RegisterScreenUIIntent.Validate.ValidateFirstNameField) },
+            keyboardOptions = KeyboardOptions(imeAction = ImeAction.Next)
         )
 
         AppOutlinedField(
@@ -86,7 +97,9 @@ internal fun RegisterFormSelection(
             state = lastNameFieldState,
             enabled = lastNameFieldState.enabled && !registerRequestState.isFetching,
             onValueChange = { onIntent(RegisterScreenUIIntent.Input.InputLastName(it)) },
-            onUnfocused = { onIntent(RegisterScreenUIIntent.Validate.ValidateLastNameField) }
+            onUnfocused = { onIntent(RegisterScreenUIIntent.Validate.ValidateLastNameField) },
+            keyboardOptions = KeyboardOptions(imeAction = ImeAction.Done),
+            keyboardActions = KeyboardActions(onDone = { focusManager.clearFocus() })
         )
     }
 }

@@ -43,13 +43,15 @@ dependencies {
 
     implementation(project(":modules:navigation:navigation-impl"))
 
+    implementation(project(":modules:server-tools:server-tools-api"))
+    implementation(project(":modules:server-tools:server-tools-impl"))
+
     implementation(project(":modules:init:init-impl"))
 
     implementation(project(":modules:auth:auth-api"))
     implementation(project(":modules:auth:auth-impl"))
 
-    implementation(project(":modules:server-tools:server-tools-api"))
-    implementation(project(":modules:server-tools:server-tools-impl"))
+    implementation(project(":modules:main:main"))
 
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.compose.ui.text.google.fonts)

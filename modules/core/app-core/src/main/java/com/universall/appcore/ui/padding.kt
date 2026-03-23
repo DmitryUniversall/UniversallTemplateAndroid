@@ -87,6 +87,17 @@ import com.universall.appcore.ui.theme.locals.Locals
 
 
 @Composable
+fun PaddingValues.add(padding: PaddingValues): PaddingValues {
+    val layoutDirection = LocalLayoutDirection.current
+    return PaddingValues(
+        start = this.calculateStartPadding(layoutDirection) + padding.calculateStartPadding(layoutDirection),
+        top = this.calculateTopPadding() + padding.calculateTopPadding(),
+        end = this.calculateEndPadding(layoutDirection) + padding.calculateEndPadding(layoutDirection),
+        bottom = this.calculateBottomPadding() + padding.calculateBottomPadding()
+    )
+}
+
+@Composable
 fun PaddingValues.add(all: Dp = 0.dp): PaddingValues {
     val layoutDirection = LocalLayoutDirection.current
     return PaddingValues(

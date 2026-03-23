@@ -2,9 +2,6 @@ package com.universall.auth_impl.ui.screens.login_screen
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.universall.navigation_impl.destinations.auth.AuthDestination
-import com.universall.navigation_impl.destinations.auth.PasswordRecoveryDestination
-import com.universall.navigation_impl.destinations.auth.RegisterDestination
 import com.universall.appcore.ui.fields.validators.validateStringLength
 import com.universall.appcore.ui.state.isFetching
 import com.universall.appcore.ui.state.toError
@@ -16,6 +13,10 @@ import com.universall.appcore.utils.logWarn
 import com.universall.auth_api.domain.schemas.LoginSchema
 import com.universall.auth_api.domain.usecases.LoginUseCase
 import com.universall.core.utils.messageOrDefault
+import com.universall.navigation_impl.destinations.auth.AuthDestination
+import com.universall.navigation_impl.destinations.auth.PasswordRecoveryDestination
+import com.universall.navigation_impl.destinations.auth.RegisterDestination
+import com.universall.navigation_impl.destinations.main.MainScreenDestination
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -47,7 +48,10 @@ internal class LoginScreenViewModel @Inject constructor(
             state.copy(
                 loginRequestState = loginUseCase.invoke(schema)
                     .fold(
-                        onSuccess = { state.loginRequestState.toSuccess(Unit) },
+                        onSuccess = {
+                            _effects.emit(LoginScreenUIEffect.Navigate(MainScreenDestination, popUpTo = AuthDestination, inclusive = true))
+                            state.loginRequestState.toSuccess(Unit)
+                        },
                         onFailure = { error ->
                             this.logError(error) { "Unexpected error occurred" }
                             state.loginRequestState.toError(UIString.of(error.messageOrDefault("Unknown auth error")), error)
@@ -98,7 +102,7 @@ internal class LoginScreenViewModel @Inject constructor(
     fun onIntent(intent: LoginScreenUIIntent) {
         when (intent) {
             is LoginScreenUIIntent.NavigateToRegister -> viewModelScope.launch { _effects.emit(LoginScreenUIEffect.Navigate(RegisterDestination, popUpTo = AuthDestination)) }
-            is LoginScreenUIIntent.NavigateToPasswordRecovery -> viewModelScope.launch { _effects.emit(LoginScreenUIEffect.Navigate(PasswordRecoveryDestination, popUpTo = AuthDestination)) }
+            is LoginScreenUIIntent.NavigateToPasswordRecovery -> viewModelScope.launch { _effects.emit(LoginScreenUIEffect.Navigate(PasswordRecoveryDestination)) }
 
             is LoginScreenUIIntent.Validate -> processValidateIntent(intent)
             is LoginScreenUIIntent.Input -> processInputIntent(intent)

@@ -40,6 +40,8 @@
             <option value="$PROJECT_DIR$/modules/core/core" />
             <option value="$PROJECT_DIR$/modules/init" />
             <option value="$PROJECT_DIR$/modules/init/init-impl" />
+            <option value="$PROJECT_DIR$/modules/main" />
+            <option value="$PROJECT_DIR$/modules/main/main" />
             <option value="$PROJECT_DIR$/modules/navigation" />
             <option value="$PROJECT_DIR$/modules/navigation/navigation-impl" />
             <option value="$PROJECT_DIR$/modules/server-tools" />

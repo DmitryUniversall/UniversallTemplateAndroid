@@ -2,8 +2,6 @@ package com.universall.auth_impl.ui.screens.register_screen
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.universall.navigation_impl.destinations.auth.AuthDestination
-import com.universall.navigation_impl.destinations.auth.LoginDestination
 import com.universall.appcore.ui.fields.validators.validateStringLength
 import com.universall.appcore.ui.state.isFetching
 import com.universall.appcore.ui.state.toError
@@ -14,6 +12,9 @@ import com.universall.appcore.utils.logError
 import com.universall.appcore.utils.logWarn
 import com.universall.auth_api.domain.schemas.RegisterSchema
 import com.universall.auth_api.domain.usecases.RegisterUseCase
+import com.universall.navigation_impl.destinations.auth.AuthDestination
+import com.universall.navigation_impl.destinations.auth.LoginDestination
+import com.universall.navigation_impl.destinations.main.MainScreenDestination
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -45,7 +46,10 @@ internal class RegisterScreenViewModel @Inject constructor(
         _uiState.update { state ->
             state.copy(
                 registerRequestState = registerUseCase.invoke(schema).fold(
-                    onSuccess = { state.registerRequestState.toSuccess(Unit) },
+                    onSuccess = {
+                        _effects.emit(RegisterScreenUIEffect.Navigate(MainScreenDestination, popUpTo = AuthDestination, inclusive = true))
+                        state.registerRequestState.toSuccess(Unit)
+                    },
                     onFailure = { error ->
                         this.logError(error) { "Unexpected error occurred" }
                         state.registerRequestState.toError(UIString.of(error.message ?: "Unknown auth error"), error)

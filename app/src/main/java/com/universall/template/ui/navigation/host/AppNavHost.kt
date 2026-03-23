@@ -8,10 +8,10 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
 import androidx.navigation.compose.rememberNavController
-import com.universall.app_navigation.destinations.auth.AuthDestination
-import com.universall.app_navigation.destinations.auth.LoginDestination
-import com.universall.app_navigation.destinations.auth.RegisterDestination
-import com.universall.app_navigation.destinations.init.InitDestination
+import com.universall.navigation_impl.destinations.auth.AuthDestination
+import com.universall.navigation_impl.destinations.auth.LoginDestination
+import com.universall.navigation_impl.destinations.auth.RegisterDestination
+import com.universall.navigation_impl.destinations.init.InitDestination
 import com.universall.auth_impl.ui.screens.login_screen.LoginScreen
 import com.universall.auth_impl.ui.screens.register_screen.RegisterScreen
 import com.universall.init_impl.ui.screens.init_screen.InitScreen

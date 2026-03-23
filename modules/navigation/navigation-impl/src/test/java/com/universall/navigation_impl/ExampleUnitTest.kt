@@ -1,4 +1,4 @@
-package com.universall.app_navigation
+package com.universall.navigation_impl
 
 import org.junit.Test
 

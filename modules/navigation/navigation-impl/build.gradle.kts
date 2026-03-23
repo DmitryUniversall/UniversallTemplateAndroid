@@ -7,7 +7,7 @@ plugins {
 }
 
 android {
-    namespace = "com.universall.app_navigation"
+    namespace = "com.universall.navigation_impl"
 }
 
 dependencies {

@@ -2,8 +2,8 @@ package com.universall.auth_impl.ui.screens.register_screen
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.universall.app_navigation.destinations.auth.AuthDestination
-import com.universall.app_navigation.destinations.auth.LoginDestination
+import com.universall.navigation_impl.destinations.auth.AuthDestination
+import com.universall.navigation_impl.destinations.auth.LoginDestination
 import com.universall.appcore.ui.fields.validators.validateStringLength
 import com.universall.appcore.ui.state.isFetching
 import com.universall.appcore.ui.state.toError

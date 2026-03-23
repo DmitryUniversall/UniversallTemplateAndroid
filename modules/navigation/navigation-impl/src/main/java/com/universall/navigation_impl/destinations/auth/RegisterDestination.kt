@@ -1,4 +1,4 @@
-package com.universall.app_navigation.destinations.auth
+package com.universall.navigation_impl.destinations.auth
 
 import com.universall.appcore.ui.navigation.AppDestination
 

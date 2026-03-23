@@ -41,7 +41,7 @@ dependencies {
     implementation(project(":modules:core:core"))
     implementation(project(":modules:core:app-core"))
 
-    implementation(project(":modules:navigation:app-navigation"))
+    implementation(project(":modules:navigation:navigation-impl"))
 
     implementation(project(":modules:init:init-impl"))
 

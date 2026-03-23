@@ -2,9 +2,9 @@ package com.universall.auth_impl.ui.screens.login_screen
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.universall.app_navigation.destinations.auth.AuthDestination
-import com.universall.app_navigation.destinations.auth.PasswordRecoveryDestination
-import com.universall.app_navigation.destinations.auth.RegisterDestination
+import com.universall.navigation_impl.destinations.auth.AuthDestination
+import com.universall.navigation_impl.destinations.auth.PasswordRecoveryDestination
+import com.universall.navigation_impl.destinations.auth.RegisterDestination
 import com.universall.appcore.ui.fields.validators.validateStringLength
 import com.universall.appcore.ui.state.isFetching
 import com.universall.appcore.ui.state.toError

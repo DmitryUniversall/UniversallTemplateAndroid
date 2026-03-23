@@ -33,7 +33,7 @@ include(":modules:core:core")
 include(":modules:core:app-core")
 
 // Navigation
-include(":modules:navigation:app-navigation")
+include(":modules:navigation:navigation-impl")
 
 // Server tools
 include(":modules:server-tools:server-tools-api")

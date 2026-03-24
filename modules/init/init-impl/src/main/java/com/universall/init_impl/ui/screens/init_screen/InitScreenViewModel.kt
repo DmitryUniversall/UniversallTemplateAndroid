@@ -3,11 +3,11 @@ package com.universall.init_impl.ui.screens.init_screen
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.universall.navigation_impl.destinations.auth.AuthDestination
-import com.universall.appcore.ui.state.isFetching
-import com.universall.appcore.ui.state.toError
-import com.universall.appcore.ui.state.toLoading
-import com.universall.appcore.ui.state.toRefreshing
-import com.universall.appcore.ui.state.toSuccess
+import com.universall.appcore.ui.resources.isFetching
+import com.universall.appcore.ui.resources.toError
+import com.universall.appcore.ui.resources.toLoading
+import com.universall.appcore.ui.resources.toRefreshing
+import com.universall.appcore.ui.resources.toSuccess
 import com.universall.appcore.utils.UIString
 import com.universall.appcore.utils.logError
 import com.universall.appcore.utils.logInfo
@@ -54,8 +54,7 @@ internal class InitScreenViewModel @Inject constructor(
             _uiState.update { state ->
                 state.copy(
                     restoreAuthRequestState = state.restoreAuthRequestState.toError(
-                        UIString.of(error.messageOrDefault("")),
-                        error
+                        UIString.of(error.messageOrDefault(""))
                     )
                 )
             }
@@ -79,7 +78,7 @@ internal class InitScreenViewModel @Inject constructor(
                         _uiState.value.restoreAuthRequestState.toSuccess(Unit)
                     }
                     is AuthState.TemporarilyUnauthenticated -> {
-                        _uiState.value.restoreAuthRequestState.toError(UIString.of(authState.reason), throwable = authState.error)
+                        _uiState.value.restoreAuthRequestState.toError(UIString.of(authState.reason))
                     }
                     is AuthState.Unknown -> {
                         _uiState.value.restoreAuthRequestState.toError(UIString.resource(R.string.unknown_error))
@@ -90,8 +89,7 @@ internal class InitScreenViewModel @Inject constructor(
                 this.logError(error) { "Unexpected error occurred" }
 
                 _uiState.value.restoreAuthRequestState.toError(
-                    errorMessage = error.message?.let { UIString.of(it) } ?: UIString.resource(R.string.unknown_error),
-                    throwable = error
+                    errorMessage = error.message?.let { UIString.of(it) } ?: UIString.resource(R.string.unknown_error)
                 )
             }
         )
@@ -101,7 +99,7 @@ internal class InitScreenViewModel @Inject constructor(
 
     private suspend fun localLogout() {
         localLogoutUseCase.invoke()
-        restoreAuthState(refresh = true)
+        _effects.emit(InitScreenUIEffect.Navigate(AuthDestination, popUpTo = InitDestination, inclusive = true))
     }
 
     fun onIntent(intent: InitScreenUIIntent) {

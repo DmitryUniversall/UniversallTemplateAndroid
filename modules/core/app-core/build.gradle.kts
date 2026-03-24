@@ -34,8 +34,10 @@ android {
 dependencies {
     implementation(project(":modules:core:core"))
 
-    // UI
+    // Kotlin
     implementation(libs.kotlinx.collections.immutable)
+
+    // UI
     implementation(libs.androidx.compose.ui.text.google.fonts)
     implementation(libs.phosphor.icon)
 

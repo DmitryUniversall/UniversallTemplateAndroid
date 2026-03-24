@@ -11,11 +11,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
-import com.universall.appcore.ui.fields.AppOutlinedField
-import com.universall.appcore.ui.fields.FieldState
-import com.universall.appcore.ui.fields.generics.PasswordOutlinedField
-import com.universall.appcore.ui.state.ResourceState
-import com.universall.appcore.ui.state.isFetching
+import com.universall.appcore.ui.fields.fields.AppOutlinedField
+import com.universall.appcore.ui.fields.fields.generics.PasswordOutlinedField
+import com.universall.appcore.ui.fields.state.generics.TextFieldState
+import com.universall.appcore.ui.resources.ResourceState
+import com.universall.appcore.ui.resources.isFetching
 import com.universall.appcore.ui.theme.locals.Locals
 import com.universall.auth_impl.R
 import com.universall.auth_impl.ui.screens.register_screen.RegisterScreenUIIntent
@@ -24,11 +24,11 @@ import com.universall.auth_impl.ui.screens.register_screen.RegisterScreenUIInten
 internal fun RegisterFormSelection(
     onIntent: (RegisterScreenUIIntent) -> Unit,
     registerRequestState: ResourceState<Unit>,
-    loginFieldState: FieldState<String>,
-    passwordFieldState: FieldState<String>,
-    usernameFieldState: FieldState<String>,
-    firstNameFieldState: FieldState<String>,
-    lastNameFieldState: FieldState<String>,
+    loginFieldState: TextFieldState,
+    passwordFieldState: TextFieldState,
+    usernameFieldState: TextFieldState,
+    firstNameFieldState: TextFieldState,
+    lastNameFieldState: TextFieldState,
 ) {
     val shapes = Locals.shapes
     val spacing = Locals.spacing

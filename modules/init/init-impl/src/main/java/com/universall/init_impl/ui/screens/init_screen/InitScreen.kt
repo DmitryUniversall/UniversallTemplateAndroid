@@ -18,7 +18,7 @@ import androidx.compose.ui.Modifier
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.universall.appcore.ui.add
-import com.universall.appcore.ui.state.ResourceState
+import com.universall.appcore.ui.resources.ResourceState
 import com.universall.appcore.ui.theme.locals.Locals
 import com.universall.init_impl.ui.screens.init_screen.components.views.InitScreenErrorView
 import com.universall.init_impl.ui.screens.init_screen.components.views.InitScreenLoadingView

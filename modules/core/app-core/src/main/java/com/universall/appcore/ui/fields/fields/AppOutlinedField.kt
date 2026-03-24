@@ -1,4 +1,4 @@
-package com.universall.appcore.ui.fields
+package com.universall.appcore.ui.fields.fields
 
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.size
@@ -21,12 +21,16 @@ import androidx.compose.ui.unit.dp
 import com.adamglin.PhosphorIcons
 import com.adamglin.phosphoricons.Regular
 import com.adamglin.phosphoricons.regular.Check
+import com.universall.appcore.ui.fields.state.FieldState
+import com.universall.appcore.ui.fields.state.validators.isOk
 import com.universall.appcore.ui.text.AppText
 import com.universall.appcore.ui.text.AppTextStyle
 import com.universall.appcore.ui.text.generics.AppTextDefaults
 import com.universall.appcore.ui.text.generics.components.TextBodySmall
 import com.universall.appcore.ui.theme.locals.Locals
+import com.universall.appcore.utils.asString
 import com.universall.appcore.utils.isNullOrEmpty
+import com.universall.core.collections.annotations.ConventionImmutable
 
 @Composable
 private fun FieldSuccessIcon() {
@@ -41,10 +45,10 @@ private fun FieldSuccessIcon() {
 }
 
 @Composable
-fun AppOutlinedField(
+fun <@ConventionImmutable T> AppOutlinedField(
     // TODO: Make more universal, create overloads
     modifier: Modifier = Modifier,
-    state: FieldState<String>,
+    state: FieldState<T>,
     onValueChange: (String) -> Unit,
     onFocused: (() -> Unit)? = null,
     onUnfocused: (() -> Unit)? = null,
@@ -78,7 +82,7 @@ fun AppOutlinedField(
 
             wasFocused = focusState.isFocused
         },
-        value = state.value,
+        value = state.value.toString(),
         onValueChange = onValueChange,
         enabled = enabled,
         readOnly = readOnly,

@@ -1,33 +1,46 @@
-package com.universall.appcore.ui.state
+package com.universall.appcore.ui.resources
 
+import androidx.compose.runtime.Immutable
 import com.universall.appcore.utils.UIString
+import com.universall.core.collections.annotations.ConventionImmutable
 
 private const val MAX_STATE_SEARCH_DEPTH = 32
 
+@Immutable
+sealed interface ResourceState<@ConventionImmutable out T> {
+    // You MUST use @Immutable types for T
 
-// TODO: Make it stable and immutable
-sealed class ResourceState<out T> {
-    object Idle : ResourceState<Nothing>()
+    @Immutable
+    object Idle : ResourceState<Nothing>
 
-    // Fetching states
-    sealed class Fetching<T>(open val lastResultState: ResultState<T>? = null) : ResourceState<T>()
-    data class Loading<T>(override val lastResultState: ResultState<T>? = null) : Fetching<T>()
-    data class Refreshing<T>(override val lastResultState: ResultState<T>? = null) : Fetching<T>()
+    @Immutable
+    sealed interface Fetching<T> : ResourceState<T> {
+        val lastResultState: ResultState<T>?
+    }
 
-    // Result states
-    sealed class ResultState<T> : ResourceState<T>()
-    data class Success<T>(val data: T) : ResultState<T>()
-    data class Error<T>(
+    @Immutable
+    class Loading<T> internal constructor(
+        override val lastResultState: ResultState<T>? = null
+    ) : Fetching<T>
+
+    @Immutable
+    class Refreshing<T> internal constructor(
+        override val lastResultState: ResultState<T>? = null
+    ) : Fetching<T>
+
+    @Immutable
+    sealed interface ResultState<T> : ResourceState<T>
+
+    @Immutable
+    class Success<T> internal constructor(
+        val data: T
+    ) : ResultState<T>
+
+    @Immutable
+    class Error<T> internal constructor(
         val errorMessage: UIString,
-        val throwable: Throwable? = null,
         val lastResultState: ResultState<T>? = null
-    ) : ResultState<T>()
-}
-
-fun <T> ResourceState<T>.currentOrPreviousResult(): ResourceState.ResultState<T>? = when (this) {
-    is ResourceState.ResultState -> this
-    is ResourceState.Fetching -> this.lastResultState
-    is ResourceState.Idle -> null
+    ) : ResultState<T>
 }
 
 private fun <T> ResourceState<T>.anyNonErrorResultOrNull(): ResourceState.ResultState<T>? {
@@ -45,6 +58,12 @@ private fun <T> ResourceState<T>.anyNonErrorResultOrNull(): ResourceState.Result
     }
 
     return null
+}
+
+private fun <T> ResourceState<T>.currentOrPreviousResult(): ResourceState.ResultState<T>? = when (this) {
+    is ResourceState.ResultState -> this
+    is ResourceState.Fetching -> this.lastResultState
+    is ResourceState.Idle -> null
 }
 
 fun <T> ResourceState<T>.anySuccessOrNull(): ResourceState.Success<T>? {  // TODO: Track visited states?
@@ -99,17 +118,15 @@ val ResourceState<*>.hasError: Boolean
         is ResourceState.Refreshing -> anyErrorOrNull() != null
     }
 
-fun <T> ResourceState<T>.toIdle(): ResourceState.Idle = ResourceState.Idle
 fun <T> ResourceState<T>.toSuccess(data: T): ResourceState.Success<T> = ResourceState.Success(data)
 fun <T> ResourceState<T>.toRefreshing(): ResourceState.Refreshing<T> = ResourceState.Refreshing(lastResultState = this.currentOrPreviousResult())
 fun <T> ResourceState<T>.toLoading(): ResourceState.Loading<T> = ResourceState.Loading(lastResultState = this.currentOrPreviousResult())
-fun <T> ResourceState<T>.toError(errorMessage: UIString, throwable: Throwable? = null, keepOnlyLastError: Boolean = true): ResourceState.Error<T> =
+fun <T> ResourceState<T>.toError(errorMessage: UIString, keepOnlyLastError: Boolean = true): ResourceState.Error<T> =
     // Setting keepOnlyLastError=false will create endless(limited by MAX_STATE_SEARCH_DEPTH) chain of errors
     // If MAX_STATE_SEARCH_DEPTH overflows, Success result can be deleted (replaced by errors)
 
     ResourceState.Error(
         errorMessage = errorMessage,
-        throwable = throwable,
         lastResultState = if (keepOnlyLastError) this.anyNonErrorResultOrNull() else this.currentOrPreviousResult()
     )
 

@@ -9,8 +9,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import com.universall.appcore.ui.buttons.generics.components.TextButton
 import com.universall.appcore.ui.muted
-import com.universall.appcore.ui.state.ResourceState
-import com.universall.appcore.ui.state.isFetching
+import com.universall.appcore.ui.resources.ResourceState
+import com.universall.appcore.ui.resources.isFetching
 import com.universall.appcore.ui.text.generics.AppTextDefaults
 import com.universall.auth_impl.R
 import com.universall.auth_impl.ui.screens.login_screen.LoginScreenUIIntent

@@ -1,6 +1,6 @@
 package com.universall.init_impl.ui.screens.init_screen
 
-import com.universall.appcore.ui.state.ResourceState
+import com.universall.appcore.ui.resources.ResourceState
 
 internal data class InitScreenUIState(
     val restoreAuthRequestState: ResourceState<Unit>

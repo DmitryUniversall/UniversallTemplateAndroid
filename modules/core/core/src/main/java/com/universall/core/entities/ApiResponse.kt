@@ -1,6 +1,9 @@
 package com.universall.core.entities
 
-data class ApiResponse<T>(
+import com.universall.core.collections.annotations.ConventionImmutable
+
+@ConventionImmutable
+data class ApiResponse<@ConventionImmutable T>(
     val ok: Boolean,
     val appCode: Int,
     val message: String,

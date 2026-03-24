@@ -2,11 +2,13 @@ package com.universall.auth_impl.ui.screens.register_screen
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.universall.appcore.ui.fields.validators.validateStringLength
-import com.universall.appcore.ui.state.isFetching
-import com.universall.appcore.ui.state.toError
-import com.universall.appcore.ui.state.toLoading
-import com.universall.appcore.ui.state.toSuccess
+import com.universall.appcore.ui.fields.state.validators.setNewValue
+import com.universall.appcore.ui.fields.state.validators.validate
+import com.universall.appcore.ui.fields.state.validators.validateStringLength
+import com.universall.appcore.ui.resources.isFetching
+import com.universall.appcore.ui.resources.toError
+import com.universall.appcore.ui.resources.toLoading
+import com.universall.appcore.ui.resources.toSuccess
 import com.universall.appcore.utils.UIString
 import com.universall.appcore.utils.logError
 import com.universall.appcore.utils.logWarn
@@ -52,7 +54,7 @@ internal class RegisterScreenViewModel @Inject constructor(
                     },
                     onFailure = { error ->
                         this.logError(error) { "Unexpected error occurred" }
-                        state.registerRequestState.toError(UIString.of(error.message ?: "Unknown auth error"), error)
+                        state.registerRequestState.toError(UIString.of(error.message ?: "Unknown auth error"))
                     }
                 )
             )
@@ -118,14 +120,6 @@ internal class RegisterScreenViewModel @Inject constructor(
             is RegisterScreenUIIntent.Input.InputLastName -> _uiState.update { it.copy(lastNameFieldState = it.lastNameFieldState.setNewValue(intent.value)) }
         }
     }
-
-    fun isSendButtonEnabled(): Boolean =
-        _uiState.value.loginFieldState.isOk() &&
-                _uiState.value.passwordFieldState.isOk() &&
-                _uiState.value.usernameFieldState.isOk() &&
-                _uiState.value.firstNameFieldState.isOk() &&
-                _uiState.value.lastNameFieldState.isOk() &&
-                !_uiState.value.registerRequestState.isFetching
 
     fun onIntent(intent: RegisterScreenUIIntent) {
         when (intent) {

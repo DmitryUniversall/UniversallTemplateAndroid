@@ -1,7 +1,7 @@
-package com.universall.appcore.ui.fields.validators
+package com.universall.appcore.ui.fields.state.validators
 
 import com.universall.appcore.R
-import com.universall.appcore.ui.fields.FieldState
+import com.universall.appcore.ui.fields.state.FieldState
 import com.universall.appcore.utils.UIString
 
 fun FieldState.Builder<String>.validateStringLength(minLength: Long? = null, maxLength: Long? = null): UIString? {

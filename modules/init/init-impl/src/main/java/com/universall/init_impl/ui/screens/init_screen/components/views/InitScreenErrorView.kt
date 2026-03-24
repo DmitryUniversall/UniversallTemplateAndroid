@@ -10,7 +10,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import com.universall.appcore.ui.buttons.generics.components.TertiaryButton
 import com.universall.appcore.ui.muted
-import com.universall.appcore.ui.state.ResourceState
+import com.universall.appcore.ui.resources.ResourceState
 import com.universall.appcore.ui.text.generics.components.TextBodyLarge
 import com.universall.appcore.ui.text.generics.components.TextBodyMedium
 import com.universall.appcore.ui.text.generics.components.TextDisplaySmall

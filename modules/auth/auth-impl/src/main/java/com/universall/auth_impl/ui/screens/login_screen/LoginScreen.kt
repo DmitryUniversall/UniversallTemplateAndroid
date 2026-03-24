@@ -107,7 +107,7 @@ internal fun LoginScreen(
 
             LoginSendButtonSelection(
                 onIntent = viewModel::onIntent,
-                isSendButtonEnabled = viewModel.isSendButtonEnabled(),
+                isSendButtonEnabled = uiState.isSendButtonEnabled,
                 loginRequestState = uiState.loginRequestState
             )
         }

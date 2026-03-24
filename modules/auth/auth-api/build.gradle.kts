@@ -17,6 +17,7 @@ kotlin {
 dependencies {
     implementation(project(":modules:core:core"))
 
+    implementation(libs.kotlinx.collections.immutable)
     implementation(libs.kotlinx.coroutines.core)
     implementation(libs.javax.inject)
 }

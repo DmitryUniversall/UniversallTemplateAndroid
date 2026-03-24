@@ -2,11 +2,13 @@ package com.universall.auth_impl.ui.screens.login_screen
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.universall.appcore.ui.fields.validators.validateStringLength
-import com.universall.appcore.ui.state.isFetching
-import com.universall.appcore.ui.state.toError
-import com.universall.appcore.ui.state.toLoading
-import com.universall.appcore.ui.state.toSuccess
+import com.universall.appcore.ui.fields.state.validators.setNewValue
+import com.universall.appcore.ui.fields.state.validators.validate
+import com.universall.appcore.ui.fields.state.validators.validateStringLength
+import com.universall.appcore.ui.resources.isFetching
+import com.universall.appcore.ui.resources.toError
+import com.universall.appcore.ui.resources.toLoading
+import com.universall.appcore.ui.resources.toSuccess
 import com.universall.appcore.utils.UIString
 import com.universall.appcore.utils.logError
 import com.universall.appcore.utils.logWarn
@@ -54,7 +56,7 @@ internal class LoginScreenViewModel @Inject constructor(
                         },
                         onFailure = { error ->
                             this.logError(error) { "Unexpected error occurred" }
-                            state.loginRequestState.toError(UIString.of(error.messageOrDefault("Unknown auth error")), error)
+                            state.loginRequestState.toError(UIString.of(error.messageOrDefault("Unknown auth error")))
                         }
                     )
             )
@@ -93,11 +95,6 @@ internal class LoginScreenViewModel @Inject constructor(
             is LoginScreenUIIntent.Input.InputPassword -> _uiState.update { it.copy(passwordFieldState = it.passwordFieldState.setNewValue(intent.value)) }
         }
     }
-
-    fun isSendButtonEnabled(): Boolean =
-        _uiState.value.loginFieldState.isOk() &&
-                _uiState.value.passwordFieldState.isOk() &&
-                !_uiState.value.loginRequestState.isFetching
 
     fun onIntent(intent: LoginScreenUIIntent) {
         when (intent) {

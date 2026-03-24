@@ -1,4 +1,4 @@
-package com.universall.appcore.ui.fields.generics
+package com.universall.appcore.ui.fields.fields.generics
 
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.size
@@ -23,8 +23,8 @@ import com.adamglin.PhosphorIcons
 import com.adamglin.phosphoricons.Regular
 import com.adamglin.phosphoricons.regular.Eye
 import com.adamglin.phosphoricons.regular.EyeClosed
-import com.universall.appcore.ui.fields.AppOutlinedField
-import com.universall.appcore.ui.fields.FieldState
+import com.universall.appcore.ui.fields.fields.AppOutlinedField
+import com.universall.appcore.ui.fields.state.generics.TextFieldState
 import com.universall.appcore.ui.onPressed
 import com.universall.appcore.ui.text.AppTextStyle
 import com.universall.appcore.ui.text.generics.AppTextDefaults
@@ -54,7 +54,7 @@ private fun ShowPasswordIcon(
 @Composable
 fun PasswordOutlinedField(
     modifier: Modifier = Modifier,
-    state: FieldState<String>,
+    state: TextFieldState,
     onValueChange: (String) -> Unit,
     onFocused: (() -> Unit)? = null,
     onUnfocused: (() -> Unit)? = null,
@@ -66,7 +66,7 @@ fun PasswordOutlinedField(
     prefix: @Composable (() -> Unit)? = null,
     suffix: @Composable (() -> Unit)? = null,
     leadingIcon: @Composable (() -> Unit)? = null,
-    keyboardOptions: KeyboardOptions = KeyboardOptions(imeAction = ImeAction.Done, keyboardType= KeyboardType.Password, autoCorrectEnabled = false),
+    keyboardOptions: KeyboardOptions = KeyboardOptions(imeAction = ImeAction.Done, keyboardType = KeyboardType.Password, autoCorrectEnabled = false),
     keyboardActions: KeyboardActions = KeyboardActions.Default,
     singleLine: Boolean = true,
     maxLines: Int = if (singleLine) 1 else Int.MAX_VALUE,

@@ -9,8 +9,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.universall.appcore.ui.buttons.generics.components.PrimaryButton
-import com.universall.appcore.ui.state.ResourceState
-import com.universall.appcore.ui.state.isFetching
+import com.universall.appcore.ui.resources.ResourceState
+import com.universall.appcore.ui.resources.isFetching
 import com.universall.appcore.ui.text.AppText
 import com.universall.appcore.ui.theme.locals.Locals
 import com.universall.auth_impl.R

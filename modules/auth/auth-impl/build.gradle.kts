@@ -20,6 +20,9 @@ dependencies {
 
     implementation(project(":modules:navigation:navigation-impl"))
 
+    // Kotlin
+    implementation(libs.kotlinx.collections.immutable)
+
     // Crypto
     implementation(libs.google.crypto.tink)
 

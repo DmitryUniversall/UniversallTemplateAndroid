@@ -102,7 +102,7 @@ internal fun RegisterScreen(
 
             RegisterSendButtonSelection(
                 onIntent = viewModel::onIntent,
-                isSendButtonEnabled = viewModel.isSendButtonEnabled(),
+                isSendButtonEnabled = uiState.isSendButtonEnabled,
                 registerRequestState = uiState.registerRequestState
             )
         }

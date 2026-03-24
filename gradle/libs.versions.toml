@@ -24,6 +24,7 @@ googleCryptoTink = "1.20.0"
 datastore = "1.2.1"
 phosphorIcon = "1.0.0"
 logbackAndroid = "3.0.0"
+kotlinxCollectionsImmutable = "0.4.0"
 
 [libraries]
 # Build
@@ -31,6 +32,7 @@ gradle-plugin-android = { module = "com.android.tools.build:gradle", version.ref
 
 # Kotlin
 kotlinx-coroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "kotlinxCoroutinesCore" }
+kotlinx-collections-immutable = { group = "org.jetbrains.kotlinx", name = "kotlinx-collections-immutable", version.ref = "kotlinxCollectionsImmutable"}
 
 # Android core
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }

@@ -20,7 +20,8 @@ data class FieldState<T>(
             fun <T> from(state: FieldState<T>): Builder<T> = Builder(
                 value = state.value,
                 errorMessage = state.errorMessage,
-                enabled = state.enabled
+                enabled = state.enabled,
+                validated = state.validated
             )
         }
 
@@ -39,5 +40,5 @@ data class FieldState<T>(
     fun isOk(): Boolean =
         this.validated && this.errorMessage.isNullOrEmpty()
 
-    fun setNewValue(value: T) = this.copy(value = value, validated = false)
+    fun setNewValue(value: T) = copy(value = value, errorMessage = null, validated = false)
 }

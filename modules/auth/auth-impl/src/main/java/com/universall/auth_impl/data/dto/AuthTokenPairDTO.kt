@@ -5,7 +5,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class AuthTokenPairDTO(
+internal data class AuthTokenPairDTO(
     @SerialName("accessToken")
     val accessToken: String,
 

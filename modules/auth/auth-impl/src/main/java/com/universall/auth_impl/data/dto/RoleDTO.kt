@@ -4,9 +4,8 @@ import com.universall.auth_api.domain.entities.Role
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
-
 @Serializable
-class RoleDTO(
+internal class RoleDTO(
     @SerialName("id")
     val id: Long,
 

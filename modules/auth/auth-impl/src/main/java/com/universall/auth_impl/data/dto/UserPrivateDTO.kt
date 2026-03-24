@@ -1,14 +1,12 @@
 package com.universall.auth_impl.data.dto
 
 import com.universall.auth_api.domain.entities.User
-import kotlinx.serialization.Contextual
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import java.time.LocalDateTime
 
-
 @Serializable
-data class UserPrivateDTO(
+internal data class UserPrivateDTO(
     @SerialName("id")
     val id: Long,
 
@@ -22,6 +20,6 @@ data class UserPrivateDTO(
     fun toEntity(): User = User(
         id = id,
         login = login,
-        createdAt = LocalDateTime.now()  // TODO
+        createdAt = LocalDateTime.now()  // TODO: Implement in server side
     )
 }

@@ -5,7 +5,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class AccessInfoDTO(
+internal data class AccessInfoDTO(
     @SerialName("authorities")
     val authorities: List<AuthorityDTO> = emptyList(),
 

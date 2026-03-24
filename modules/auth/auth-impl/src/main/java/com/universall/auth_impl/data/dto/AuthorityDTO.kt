@@ -4,9 +4,8 @@ import com.universall.auth_api.domain.entities.Authority
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
-
 @Serializable
-class AuthorityDTO(
+internal class AuthorityDTO(
     @SerialName("id")
     val id: Long,
 

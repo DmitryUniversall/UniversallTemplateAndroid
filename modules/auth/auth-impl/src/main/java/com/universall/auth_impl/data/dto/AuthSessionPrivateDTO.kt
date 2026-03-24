@@ -7,7 +7,7 @@ import kotlinx.serialization.Serializable
 import java.time.LocalDateTime
 
 @Serializable
-data class AuthSessionPrivateDTO(
+internal data class AuthSessionPrivateDTO(
     @SerialName("uuid")
     val uuid: String,
 

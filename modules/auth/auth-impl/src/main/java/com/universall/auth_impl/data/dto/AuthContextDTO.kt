@@ -5,7 +5,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class AuthContextDTO(
+internal data class AuthContextDTO(
     @SerialName("session")
     val session: AuthSessionPrivateDTO,
 

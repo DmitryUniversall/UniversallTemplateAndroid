@@ -49,7 +49,7 @@ internal class InitScreenViewModel @Inject constructor(
         _uiState.update { it.copy(restoreAuthRequestState = if (refresh) it.restoreAuthRequestState.toRefreshing() else it.restoreAuthRequestState.toLoading()) }
 
         pingServerUseCase.invoke().exceptionOrNull()?.let { error ->
-            this.logError(error) { "Unexpected error occurred" }
+            this.logError(error) { "Unexpected error occurred: Server unreachable" }
 
             _uiState.update { state ->
                 state.copy(
@@ -69,17 +69,22 @@ internal class InitScreenViewModel @Inject constructor(
             onSuccess = { authState ->
                 this.logInfo { "Restored auth state: ${authState::class.simpleName}" }
 
-                // TODO: When non-auth error happens, should it cause auth state to be TemporarilyUnauthenticated?
-                // TODO: Or just handle it as error?
-
                 when (authState) {
-                    is AuthState.Authenticated -> _effects.emit(InitScreenUIEffect.Navigate(MainScreenDestination, popUpTo = InitDestination, inclusive = true))
-                    is AuthState.TemporarilyUnauthenticated -> _uiState.value.restoreAuthRequestState.toError(UIString.of(authState.reason))
-                    is AuthState.Unauthenticated -> _effects.emit(InitScreenUIEffect.Navigate(AuthDestination, popUpTo = InitDestination, inclusive = true))
-                    is AuthState.Unknown -> _uiState.value.restoreAuthRequestState.toError(UIString.resource(R.string.unknown_error))
+                    is AuthState.Authenticated -> {
+                        _effects.emit(InitScreenUIEffect.Navigate(MainScreenDestination, popUpTo = InitDestination, inclusive = true))
+                        _uiState.value.restoreAuthRequestState.toSuccess(Unit)
+                    }
+                    is AuthState.Unauthenticated -> {
+                        _effects.emit(InitScreenUIEffect.Navigate(AuthDestination, popUpTo = InitDestination, inclusive = true))
+                        _uiState.value.restoreAuthRequestState.toSuccess(Unit)
+                    }
+                    is AuthState.TemporarilyUnauthenticated -> {
+                        _uiState.value.restoreAuthRequestState.toError(UIString.of(authState.reason), throwable = authState.error)
+                    }
+                    is AuthState.Unknown -> {
+                        _uiState.value.restoreAuthRequestState.toError(UIString.resource(R.string.unknown_error))
+                    }
                 }
-
-                _uiState.value.restoreAuthRequestState.toSuccess(Unit)
             },
             onFailure = { error ->
                 this.logError(error) { "Unexpected error occurred" }

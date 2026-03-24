@@ -7,6 +7,7 @@ import com.universall.auth_api.domain.entities.AuthState
 import com.universall.auth_api.domain.repositories.AuthRepository
 import com.universall.auth_api.domain.usecases.RefreshUseCase
 import com.universall.auth_api.domain.usecases.RestoreAuthStateUseCase
+import com.universall.core.utils.messageOrDefault
 import jakarta.inject.Inject
 import kotlinx.coroutines.flow.first
 import kotlin.coroutines.cancellation.CancellationException
@@ -53,6 +54,13 @@ internal class RestoreAuthStateUseCaseImpl @Inject constructor(
                 AuthState.Authenticated(
                     context = authContext,
                     tokenPair = tokenPair
+                )
+            }
+            // Treat any other error as non-auth error and set TemporarilyUnauthenticated state
+            .recoverCatching { error ->
+                AuthState.TemporarilyUnauthenticated(
+                    reason = error.messageOrDefault("Unknown auth error"),
+                    error = error
                 )
             }
             // Finally update auth state

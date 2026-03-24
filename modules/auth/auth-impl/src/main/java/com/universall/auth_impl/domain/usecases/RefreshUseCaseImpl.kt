@@ -9,6 +9,7 @@ import com.universall.auth_api.domain.usecases.GetTokenPairUseCase
 import com.universall.auth_api.domain.usecases.RefreshUseCase
 import com.universall.auth_api.domain.usecases.UpdateTokenPairUseCase
 import com.universall.core.exceptions.UnauthenticatedAppError
+import com.universall.core.utils.messageOrDefault
 import jakarta.inject.Inject
 import kotlinx.coroutines.sync.Mutex
 
@@ -52,7 +53,7 @@ internal class RefreshUseCaseImpl @Inject constructor(
                     }
 
                     // Unknown error happened; This doesn't mean that tokens are invalid (can be network error)
-                    authRepository.setAuthState(AuthState.TemporarilyUnauthenticated(reason = error.message ?: "Failed to refresh auth tokens"))
+                    authRepository.setAuthState(AuthState.TemporarilyUnauthenticated(reason = error.messageOrDefault("Failed to refresh auth tokens"), error = error))
                 }
         } finally {
             refreshMutex.unlock()

@@ -9,7 +9,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
-class ServerToolsNetworkDataSource @Inject constructor(
+internal class ServerToolsNetworkDataSource @Inject constructor(
     private val apiClient: ApiClient
 ) {
     private val serverToolsFeaturePathSegment = "tools"

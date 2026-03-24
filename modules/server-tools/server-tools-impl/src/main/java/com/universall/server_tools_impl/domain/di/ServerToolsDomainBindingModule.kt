@@ -10,7 +10,7 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-abstract class ServerToolsDomainBindingModule {
+internal abstract class ServerToolsDomainBindingModule {
     @Binds
     @Singleton
     abstract fun bindPingServerUseCase(impl: PingServerUseCaseImpl): PingServerUseCase

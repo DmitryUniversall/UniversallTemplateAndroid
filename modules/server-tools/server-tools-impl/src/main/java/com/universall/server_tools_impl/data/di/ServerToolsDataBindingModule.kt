@@ -10,7 +10,7 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-abstract class ServerToolsDataBindingModule {
+internal abstract class ServerToolsDataBindingModule {
     @Binds
     @Singleton
     abstract fun bindServerToolsRepository(impl: ServerToolsRepositoryImpl): ServerToolsRepository

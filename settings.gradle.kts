@@ -1,9 +1,8 @@
 @file:Suppress("UnstableApiUsage")
 
-include(":modules:main:main")
-
-
 pluginManagement {
+    includeBuild("build-logic")
+
     repositories {
         google {
             content {
@@ -17,7 +16,6 @@ pluginManagement {
     }
 }
 
-
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
@@ -26,9 +24,12 @@ dependencyResolutionManagement {
     }
 }
 
+plugins {
+    id("org.gradle.toolchains.foojay-resolver-convention") version "1.0.0"
+}
+
 rootProject.name = "UniversallTemplate"
 
-includeBuild("build-logic")
 include(":app")
 
 // Core
@@ -48,3 +49,6 @@ include(":modules:init:init-impl")
 // Auth
 include(":modules:auth:auth-api")
 include(":modules:auth:auth-impl")
+
+// Main screen
+include(":modules:main:main")

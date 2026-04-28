@@ -1,3 +1,7 @@
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+
+fun asGradlePluginRef(plugin: Provider<PluginDependency>) = plugin.map { "${it.pluginId}:${it.pluginId}.gradle.plugin:${it.version}" }!!
+
 plugins {
     `kotlin-dsl`
 }
@@ -17,39 +21,13 @@ java {
 
 kotlin {
     compilerOptions {
-        jvmTarget = org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_11
+        jvmTarget = JvmTarget.JVM_11
     }
 }
 
 dependencies {
-    compileOnly(libs.gradle.plugin.android)
-}
+    implementation(libs.android.gradle.plugin)
 
-gradlePlugin {
-    plugins {
-        register("ConventionAndroidCore") {
-            id = "convention.android.core"
-            implementationClass = "com.universall.convention.plugins.AndroidCoreConventionPlugin"
-        }
-
-        register("ConventionAndroidLibrary") {
-            id = "convention.android.library"
-            implementationClass = "com.universall.convention.plugins.AndroidLibraryConventionPlugin"
-        }
-
-        register("ConventionAndroidCompose") {
-            id = "convention.android.compose"
-            implementationClass = "com.universall.convention.plugins.AndroidComposeConventionPlugin"
-        }
-
-        register("ConventionAndroidHilt") {
-            id = "convention.android.hilt"
-            implementationClass = "com.universall.convention.plugins.AndroidHiltConventionPlugin"
-        }
-
-        register("ConventionNetworkKtor") {
-            id = "convention.network.ktor"
-            implementationClass = "com.universall.convention.plugins.NetworkKtorConventionPlugin"
-        }
-    }
+    implementation(asGradlePluginRef(libs.plugins.kotlin.compose))
+    implementation(asGradlePluginRef(libs.plugins.kotlin.serialization))
 }

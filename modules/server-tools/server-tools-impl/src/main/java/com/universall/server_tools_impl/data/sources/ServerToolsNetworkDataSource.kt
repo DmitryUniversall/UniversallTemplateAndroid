@@ -1,6 +1,5 @@
 package com.universall.server_tools_impl.data.sources
 
-import com.universall.appcore.network.api.ApiClient
 import com.universall.appcore.network.api.base.ApiRequestContext
 import io.ktor.client.plugins.timeout
 import io.ktor.http.HttpMethod

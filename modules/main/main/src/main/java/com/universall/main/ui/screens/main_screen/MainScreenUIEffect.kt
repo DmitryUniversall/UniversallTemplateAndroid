@@ -1,6 +1,6 @@
 package com.universall.main.ui.screens.main_screen
 
-import com.universall.appcore.ui.navigation.AppDestination
+import com.universall.appcore.appcore.navigation.AppDestination
 import com.universall.main.ui.navigation.MainScreenPagerNavRoute
 
 internal sealed interface MainScreenUIEffect {

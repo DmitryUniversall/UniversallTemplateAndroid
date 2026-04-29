@@ -17,9 +17,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.navigation.NavController
-import com.universall.appcore.ui.add
-import com.universall.appcore.ui.clearFocusOnTap
-import com.universall.appcore.ui.theme.locals.Locals
+import com.universall.appcore.appcore.ui.utils.add
+import com.universall.appcore.appcore.ui.utils.clearFocusOnTap
+import com.universall.appcore.appcore.ui.theme.locals.Locals
 import com.universall.auth_impl.R
 import com.universall.auth_impl.ui.screens.login_screen.components.selections.LoginErrorSelection
 import com.universall.auth_impl.ui.screens.login_screen.components.selections.LoginForgotPasswordSelection

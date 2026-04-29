@@ -1,8 +1,8 @@
 package com.universall.auth_impl.domain.usecases
 
-import com.universall.appcore.network.exceptions.InvalidAuthHttpException
-import com.universall.appcore.utils.logInfo
-import com.universall.appcore.utils.logWarn
+import com.universall.appcore.appcore.network.exceptions.InvalidAuthHttpException
+import com.universall.appcore.appcore.logs.logInfo
+import com.universall.appcore.appcore.logs.logWarn
 import com.universall.auth_api.domain.entities.AuthState
 import com.universall.auth_api.domain.repositories.AuthRepository
 import com.universall.auth_api.domain.usecases.RefreshUseCase

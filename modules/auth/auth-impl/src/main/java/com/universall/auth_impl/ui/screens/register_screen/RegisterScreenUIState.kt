@@ -1,13 +1,13 @@
 package com.universall.auth_impl.ui.screens.register_screen
 
-import com.universall.appcore.ui.fields.state.generics.TextFieldState
-import com.universall.appcore.ui.fields.state.validators.isOk
-import com.universall.appcore.ui.resources.ResourceState
-import com.universall.appcore.ui.resources.isFetching
+import com.universall.appcore.appcore.ui.fields.state.TextFieldState
+import com.universall.appcore.base.ui.fields.isOk
+import com.universall.appcore.appcore.ui.state.RequestState
+import com.universall.appcore.appcore.ui.state.isFetching
 
 internal data class RegisterScreenUIState(
     // Network
-    val registerRequestState: ResourceState<Unit>,
+    val registerRequestState: RequestState<Unit>,
 
     // Fields
     val loginFieldState: TextFieldState,
@@ -18,7 +18,7 @@ internal data class RegisterScreenUIState(
 ) {
     companion object {
         fun empty(): RegisterScreenUIState = RegisterScreenUIState(
-            registerRequestState = ResourceState.Idle,
+            registerRequestState = RequestState.Idle,
             loginFieldState = TextFieldState(""),
             passwordFieldState = TextFieldState(""),
             usernameFieldState = TextFieldState(""),

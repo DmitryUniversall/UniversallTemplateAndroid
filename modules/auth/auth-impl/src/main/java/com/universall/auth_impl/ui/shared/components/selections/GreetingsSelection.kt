@@ -8,9 +8,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
-import com.universall.appcore.ui.text.generics.components.TextBodyMedium
-import com.universall.appcore.ui.text.generics.components.TextDisplayLarge
-import com.universall.appcore.ui.theme.locals.Locals
+import com.universall.appcore.appcore.ui.text.components.TextBodyMedium
+import com.universall.appcore.appcore.ui.text.components.TextDisplayLarge
+import com.universall.appcore.appcore.ui.theme.locals.Locals
 
 @Composable
 internal fun GreetingsSelection(

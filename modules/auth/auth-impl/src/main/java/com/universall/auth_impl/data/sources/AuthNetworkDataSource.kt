@@ -1,7 +1,6 @@
 package com.universall.auth_impl.data.sources
 
 import android.os.Build
-import com.universall.appcore.network.api.ApiClient
 import com.universall.auth_api.domain.schemas.LoginSchema
 import com.universall.auth_api.domain.schemas.RegisterSchema
 import com.universall.auth_impl.data.dto.get_actual_auth_context.GetCurrentAuthContextResponseDTO

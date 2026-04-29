@@ -7,18 +7,18 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import com.universall.appcore.ui.buttons.generics.components.TextButton
-import com.universall.appcore.ui.muted
-import com.universall.appcore.ui.resources.ResourceState
-import com.universall.appcore.ui.resources.isFetching
-import com.universall.appcore.ui.text.generics.AppTextDefaults
+import com.universall.appcore.appcore.ui.buttons.components.TextButton
+import com.universall.appcore.appcore.ui.utils.muted
+import com.universall.appcore.appcore.ui.state.RequestState
+import com.universall.appcore.appcore.ui.state.isFetching
+import com.universall.appcore.appcore.ui.text.AppTextDefaults
 import com.universall.auth_impl.R
 import com.universall.auth_impl.ui.screens.login_screen.LoginScreenUIIntent
 
 @Composable
 internal fun LoginForgotPasswordSelection(
     onIntent: (LoginScreenUIIntent) -> Unit,
-    loginRequestState: ResourceState<Unit>
+    loginRequestState: RequestState<Unit>
 ) {
     val colors = MaterialTheme.colorScheme
 

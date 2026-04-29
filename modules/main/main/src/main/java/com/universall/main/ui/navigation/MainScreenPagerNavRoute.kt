@@ -1,6 +1,6 @@
 package com.universall.main.ui.navigation
 
-import com.universall.appcore.ui.navigation.pager_nav_host.PagerNavRoute
+import com.universall.appcore.appcore.ui.pager_nav_host.PagerNavRoute
 
 internal sealed interface MainScreenPagerNavRoute : PagerNavRoute {
     object HomePageNavRoute : MainScreenPagerNavRoute {

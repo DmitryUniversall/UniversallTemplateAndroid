@@ -1,13 +1,13 @@
 package com.universall.auth_impl.ui.screens.login_screen
 
-import com.universall.appcore.ui.fields.state.generics.TextFieldState
-import com.universall.appcore.ui.fields.state.validators.isOk
-import com.universall.appcore.ui.resources.ResourceState
-import com.universall.appcore.ui.resources.isFetching
+import com.universall.appcore.appcore.ui.fields.state.TextFieldState
+import com.universall.appcore.base.ui.fields.isOk
+import com.universall.appcore.appcore.ui.state.RequestState
+import com.universall.appcore.appcore.ui.state.isFetching
 
 internal data class LoginScreenUIState(
     // Network
-    val loginRequestState: ResourceState<Unit>,
+    val loginRequestState: RequestState<Unit>,
 
     // Fields
     val loginFieldState: TextFieldState,
@@ -15,7 +15,7 @@ internal data class LoginScreenUIState(
 ) {
     companion object {
         fun empty(): LoginScreenUIState = LoginScreenUIState(
-            loginRequestState = ResourceState.Idle,
+            loginRequestState = RequestState.Idle,
             loginFieldState = TextFieldState(""),
             passwordFieldState = TextFieldState("")
         )

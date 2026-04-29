@@ -8,11 +8,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import com.universall.appcore.ui.buttons.generics.components.PrimaryButton
-import com.universall.appcore.ui.resources.ResourceState
-import com.universall.appcore.ui.resources.isFetching
-import com.universall.appcore.ui.text.AppText
-import com.universall.appcore.ui.theme.locals.Locals
+import com.universall.appcore.appcore.ui.buttons.components.PrimaryButton
+import com.universall.appcore.appcore.ui.state.RequestState
+import com.universall.appcore.appcore.ui.state.isFetching
+import com.universall.appcore.base.ui.text.AppText
+import com.universall.appcore.appcore.ui.theme.locals.Locals
 import com.universall.auth_impl.R
 import com.universall.auth_impl.ui.screens.register_screen.RegisterScreenUIIntent
 
@@ -20,7 +20,7 @@ import com.universall.auth_impl.ui.screens.register_screen.RegisterScreenUIInten
 internal fun RegisterSendButtonSelection(
     onIntent: (RegisterScreenUIIntent) -> Unit,
     isSendButtonEnabled: Boolean,
-    registerRequestState: ResourceState<Unit>
+    registerRequestState: RequestState<Unit>
 ) {
     val spacing = Locals.spacing
 

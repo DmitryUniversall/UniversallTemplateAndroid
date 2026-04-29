@@ -11,9 +11,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.navigation.NavController
-import com.universall.appcore.ui.add
-import com.universall.appcore.ui.navigation.pager_nav_host.PagerNavHost
-import com.universall.appcore.ui.navigation.pager_nav_host.rememberPagerNavHostState
+import com.universall.appcore.appcore.ui.utils.add
+import com.universall.appcore.appcore.ui.pager_nav_host.PagerNavHost
+import com.universall.appcore.appcore.ui.pager_nav_host.rememberPagerNavHostState
 import com.universall.main.ui.navigation.MainScreenPagerNavRoute
 import com.universall.main.ui.screens.main_screen.components.nav.bottom_nav_bar.MainScreenBottomNavBar
 import com.universall.main.ui.screens.main_screen.views.home_view.HomeView

@@ -11,19 +11,19 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
-import com.universall.appcore.ui.fields.fields.AppOutlinedField
-import com.universall.appcore.ui.fields.fields.generics.PasswordOutlinedField
-import com.universall.appcore.ui.fields.state.generics.TextFieldState
-import com.universall.appcore.ui.resources.ResourceState
-import com.universall.appcore.ui.resources.isFetching
-import com.universall.appcore.ui.theme.locals.Locals
+import com.universall.appcore.base.ui.fields.AppOutlinedField
+import com.universall.appcore.appcore.ui.fields.components.PasswordOutlinedField
+import com.universall.appcore.appcore.ui.fields.state.TextFieldState
+import com.universall.appcore.appcore.ui.state.RequestState
+import com.universall.appcore.appcore.ui.state.isFetching
+import com.universall.appcore.appcore.ui.theme.locals.Locals
 import com.universall.auth_impl.R
 import com.universall.auth_impl.ui.screens.register_screen.RegisterScreenUIIntent
 
 @Composable
 internal fun RegisterFormSelection(
     onIntent: (RegisterScreenUIIntent) -> Unit,
-    registerRequestState: ResourceState<Unit>,
+    registerRequestState: RequestState<Unit>,
     loginFieldState: TextFieldState,
     passwordFieldState: TextFieldState,
     usernameFieldState: TextFieldState,

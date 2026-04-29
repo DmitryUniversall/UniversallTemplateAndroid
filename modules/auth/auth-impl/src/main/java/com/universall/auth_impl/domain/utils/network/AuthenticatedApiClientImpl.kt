@@ -1,6 +1,5 @@
 package com.universall.auth_impl.domain.utils.network
 
-import com.universall.appcore.network.api.ApiClient
 import com.universall.appcore.network.api.base.ApiResponseContext
 import com.universall.appcore.network.api.base.middleware.ApiClientMiddlewareChain
 import com.universall.appcore.network.api.middleware.AppCodeProcessingMiddleware

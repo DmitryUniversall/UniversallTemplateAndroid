@@ -8,17 +8,17 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
-import com.universall.appcore.ui.muted
-import com.universall.appcore.ui.resources.ResourceState
-import com.universall.appcore.ui.resources.isError
-import com.universall.appcore.ui.resources.whenHasAnyError
-import com.universall.appcore.ui.text.generics.components.TextBodyMedium
-import com.universall.appcore.utils.asStringOrIfEmpty
+import com.universall.appcore.appcore.ui.utils.muted
+import com.universall.appcore.appcore.ui.state.RequestState
+import com.universall.appcore.appcore.ui.state.isError
+import com.universall.appcore.appcore.ui.state.whenHasAnyError
+import com.universall.appcore.appcore.ui.text.components.TextBodyMedium
+import com.universall.appcore.appcore.ui.utils.asStringOrIfEmpty
 import com.universall.auth_impl.R
 
 @Composable
 internal fun RegisterErrorSelection(
-    registerRequestState: ResourceState<Unit>
+    registerRequestState: RequestState<Unit>
 ) {
     val colors = MaterialTheme.colorScheme
 

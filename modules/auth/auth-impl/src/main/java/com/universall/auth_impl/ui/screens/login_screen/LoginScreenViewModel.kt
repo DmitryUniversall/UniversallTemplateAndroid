@@ -2,16 +2,16 @@ package com.universall.auth_impl.ui.screens.login_screen
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.universall.appcore.ui.fields.state.validators.setNewValue
-import com.universall.appcore.ui.fields.state.validators.validate
-import com.universall.appcore.ui.fields.state.validators.validateStringLength
-import com.universall.appcore.ui.resources.isFetching
-import com.universall.appcore.ui.resources.toError
-import com.universall.appcore.ui.resources.toLoading
-import com.universall.appcore.ui.resources.toSuccess
-import com.universall.appcore.utils.UIString
-import com.universall.appcore.utils.logError
-import com.universall.appcore.utils.logWarn
+import com.universall.appcore.base.ui.fields.setNewValue
+import com.universall.appcore.base.ui.fields.validate
+import com.universall.appcore.appcore.ui.fields.validators.validateStringLength
+import com.universall.appcore.appcore.ui.state.isFetching
+import com.universall.appcore.appcore.ui.state.toError
+import com.universall.appcore.appcore.ui.state.toLoading
+import com.universall.appcore.appcore.ui.state.toSuccess
+import com.universall.appcore.appcore.ui.utils.UIString
+import com.universall.appcore.appcore.logs.logError
+import com.universall.appcore.appcore.logs.logWarn
 import com.universall.auth_api.domain.schemas.LoginSchema
 import com.universall.auth_api.domain.usecases.LoginUseCase
 import com.universall.core.utils.messageOrDefault

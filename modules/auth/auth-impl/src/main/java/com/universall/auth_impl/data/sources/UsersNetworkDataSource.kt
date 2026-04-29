@@ -1,6 +1,5 @@
 package com.universall.auth_impl.data.sources
 
-import com.universall.appcore.network.api.ApiClient
 import com.universall.auth_api.domain.di.qualifiers.AuthenticatedApiClient
 import com.universall.auth_impl.data.dto.get_me.GetMeResponseDTO
 import io.ktor.http.HttpMethod

@@ -29,7 +29,7 @@ import com.adamglin.PhosphorIcons
 import com.adamglin.phosphoricons.Regular
 import com.adamglin.phosphoricons.regular.House
 import com.adamglin.phosphoricons.regular.User
-import com.universall.appcore.ui.theme.locals.Locals
+import com.universall.appcore.appcore.ui.theme.locals.Locals
 import com.universall.main.ui.navigation.MainScreenPagerNavRoute
 import com.universall.main.ui.screens.main_screen.MainScreenUIIntent
 
